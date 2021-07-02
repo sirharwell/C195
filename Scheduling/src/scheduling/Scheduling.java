@@ -30,29 +30,29 @@ public class Scheduling extends Application {
         
         
         DBConnection.startConnection();
-        Connection conn = DBConnection.getConnection();
-        DBQuery.setStatement(conn);
-        Statement statement = DBQuery.getStatement();
+        //Connection conn = DBConnection.getConnection();
+        //DBQuery.setStatement(conn);
+       // Statement statement = DBQuery.getStatement();
         
         //Raw SQL insert
-        String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES('US', '2020-02-22 00:00:00', 'admin', 'admin')";
+        //String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES('US', '2020-02-22 00:00:00', 'admin', 'admin')";
         
         //Execute SQL Statement
         
-        statement.execute(insertStatement);
-        if(statement.getUpdateCount() > 0)
-            System.out.println(statement.getUpdateCount() + " rows affected");
-        else
-            System.out.println("No Change!?");
+       // statement.execute(insertStatement);
+        //if(statement.getUpdateCount() > 0)
+        //    System.out.println(statement.getUpdateCount() + " rows affected");
+        //else
+        //    System.out.println("No Change!?");
         
-        DBCountries.checkDateConversion();
+        //DBCountries.checkDateConversion();
         launch(args); 
         DBConnection.closeConnetion();
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/SchedulingJFX.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Scheduler");

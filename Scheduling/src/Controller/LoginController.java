@@ -22,7 +22,7 @@ import javafx.scene.control.TableView;
  *
  * @author 18018
  */
-public class SchedulingJFXController implements Initializable {
+public class LoginController implements Initializable {
     
     public TableColumn idCol;
     public TableColumn nameCol;
@@ -43,10 +43,10 @@ public class SchedulingJFXController implements Initializable {
 
     @FXML
         private void handleLogin(ActionEvent event) {
-        ObservableList<Countries> countrylist = DBCountries.getAllCountries();
-        for(Countries C : countrylist){
-            System.out.println("Poopoo");
-        }
+       // ObservableList<Countries> countrylist = DBCountries.getAllCountries();
+       // for(Countries C : countrylist){
+          System.out.println("PeePee");
+      //  }
     }
     
     
