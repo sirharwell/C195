@@ -7,6 +7,7 @@ package Controller;
 
 import DBAccess.DBCountries;
 import Model.Countries;
+import java.awt.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -30,6 +32,14 @@ public class LoginController implements Initializable {
 
     @FXML
     private Button Login;
+    
+    @FXML
+    private TextField Username;
+    
+    @FXML
+    private PasswordField Password;
+    
+    
 
     /**
      * Initializes the controller class.
@@ -43,8 +53,9 @@ public class LoginController implements Initializable {
 
     @FXML
         private void handleLogin(ActionEvent event) {
-       // ObservableList<Countries> countrylist = DBCountries.getAllCountries();
-       // for(Countries C : countrylist){
+            String username = Username.getText();
+            String password = Password.getText();
+            boolean validUserPass = Userdatabase.login(username, password);
           System.out.println("PeePee");
       //  }
     }

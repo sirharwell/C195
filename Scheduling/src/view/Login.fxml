@@ -7,18 +7,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="Controller.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
    <children>
-      <PasswordField layoutX="226.0" layoutY="290.0" />
-      <TextField layoutX="226.0" layoutY="216.0" />
-      <Text layoutX="272.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="57.13671875" />
-      <Text layoutX="272.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="57.13671875" />
+      <TextField fx:id="Username" alignment="CENTER" layoutX="226.0" layoutY="216.0" promptText="Username" />
+      <PasswordField fx:id="Password" alignment="CENTER" layoutX="226.0" layoutY="247.0" promptText="Password" />
       <Text layoutX="214.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scheduler">
          <font>
             <Font size="40.0" />
          </font>
       </Text>
-      <Button fx:id="Login" alignment="CENTER" layoutX="274.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleLogin" text="Log-In" />
+      <Button fx:id="Login" alignment="CENTER" layoutX="275.0" layoutY="278.0" mnemonicParsing="false" onAction="#handleLogin" text="Log-In" />
    </children>
 </AnchorPane>
