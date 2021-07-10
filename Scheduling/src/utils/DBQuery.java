@@ -6,6 +6,7 @@
 package utils;
 
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -16,14 +17,14 @@ import java.sql.SQLException;
  */
 public class DBQuery {
     
-    private static Statement statement;
+    private static PreparedStatement statement;
     // Create Statement Object
-    public static void setStatement(Connection conn)throws SQLException {
-        statement = conn.createStatement();
+    public static void setPreparedStatement(Connection conn, String sqlStatement)throws SQLException {
+        statement = conn.prepareStatement(sqlStatement);
     }
     
     //Return Statement object
-    public static Statement getStatement() {
+    public static PreparedStatement getPreparedStatement() {
         return statement;
     }
 }

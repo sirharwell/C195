@@ -17,6 +17,11 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Scanner;
 
 /**
  *
@@ -28,56 +33,27 @@ public class Scheduling extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException  {
-        
-        
-        DBConnection.startConnection();
         Connection conn = DBConnection.getConnection();
-        DBQuery.setStatement(conn);
-        Statement statement = DBQuery.getStatement();
-        
-        //Raw SQL insert
-        //String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES('US', '2020-02-22 00:00:00', 'admin', 'admin')";
-        /*
-        String countryName = "Canada";
-        String createDate = "2021-7-9 15:17:00";
+        String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES(?, ?, ?, ?)";
+        DBQuery.setPreparedStatement(conn, insertStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+
+        String countryName;
+        String createDate = "2020-03-28 00:00:000";
         String createdBy = "admin";
         String lastUpdateBy = "admin";
         
-        String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy)" + 
-                "VALUES(" +
-                "'" + countryName + "'," +
-                "'" + createDate + "'," +
-                "'" + createdBy + "'," +
-                "'" + lastUpdateBy + "'," +
-                ")"; */
+        Scanner keyboard = new Scanner(System.in);
+        countryName = keyboard.nextLine();
         
-        //update statement
-        //String updateStatement = "UPDATE country SET country = 'Japan' WHERE country = 'Canada'";
+        //key value mapping. 
+        ps.setString(1, countryName);
+        ps.setString(2, createDate);
+        ps.setString(3, createdBy);
+        ps.setString(4, lastUpdateBy);
         
-        //delete statement
-        //String deleteStatement = "DELETE FROM country where country = 'Japan'"                    
-
-        //retrieve
-        String selectStatement = "SELECT * FORM country";
-        statement.execute(selectStatement);
-        ResultSet rs = statement.getResultSet();
+        ps.execute();
         
-        //Forward Scroll ResultSet
-        while(rs.next()){
-            int countryId = rs.GetInt("countryId");
-            String 
-        }
-            )
-        
-        //Execute SQL Statement
-        
-       // statement.execute(insertStatement);
-        //if(statement.getUpdateCount() > 0)
-        //    System.out.println(statement.getUpdateCount() + " rows affected");
-        //else
-        //    System.out.println("No Change!?");
-        
-        //DBCountries.checkDateConversion();
         launch(args); 
         DBConnection.closeConnetion();
     }
