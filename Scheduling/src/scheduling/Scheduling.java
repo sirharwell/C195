@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import utils.DBConnection;
 import utils.DBQuery;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Statement;
 
@@ -51,9 +52,22 @@ public class Scheduling extends Application {
                 ")"; */
         
         //update statement
-        String updateStatement = "UPDATE country SET country = 'Japan' WHERE country = 'Canada'";
-                    
+        //String updateStatement = "UPDATE country SET country = 'Japan' WHERE country = 'Canada'";
+        
+        //delete statement
+        //String deleteStatement = "DELETE FROM country where country = 'Japan'"                    
 
+        //retrieve
+        String selectStatement = "SELECT * FORM country";
+        statement.execute(selectStatement);
+        ResultSet rs = statement.getResultSet();
+        
+        //Forward Scroll ResultSet
+        while(rs.next()){
+            int countryId = rs.GetInt("countryId");
+            String 
+        }
+            )
         
         //Execute SQL Statement
         
