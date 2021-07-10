@@ -30,12 +30,30 @@ public class Scheduling extends Application {
         
         
         DBConnection.startConnection();
-        //Connection conn = DBConnection.getConnection();
-        //DBQuery.setStatement(conn);
-       // Statement statement = DBQuery.getStatement();
+        Connection conn = DBConnection.getConnection();
+        DBQuery.setStatement(conn);
+        Statement statement = DBQuery.getStatement();
         
         //Raw SQL insert
         //String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES('US', '2020-02-22 00:00:00', 'admin', 'admin')";
+        /*
+        String countryName = "Canada";
+        String createDate = "2021-7-9 15:17:00";
+        String createdBy = "admin";
+        String lastUpdateBy = "admin";
+        
+        String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy)" + 
+                "VALUES(" +
+                "'" + countryName + "'," +
+                "'" + createDate + "'," +
+                "'" + createdBy + "'," +
+                "'" + lastUpdateBy + "'," +
+                ")"; */
+        
+        //update statement
+        String updateStatement = "UPDATE country SET country = 'Japan' WHERE country = 'Canada'";
+                    
+
         
         //Execute SQL Statement
         
