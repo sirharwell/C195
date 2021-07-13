@@ -17,14 +17,14 @@ import java.sql.SQLException;
  */
 public class DBQuery {
     
-    private static PreparedStatement statement;
+    private static Statement statement;
     // Create Statement Object
-    public static void setPreparedStatement(Connection conn, String sqlStatement)throws SQLException {
-        statement = conn.prepareStatement(sqlStatement);
+    public static void setStatement(Connection conn)throws SQLException {
+        statement = conn.createStatement();
     }
     
     //Return Statement object
-    public static PreparedStatement getPreparedStatement() {
+    public static Statement getStatement() {
         return statement;
     }
 }

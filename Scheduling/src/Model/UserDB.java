@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import utils.DBConnection;
+import utils.DBQuery;
 
 
 /**
@@ -18,39 +19,29 @@ import utils.DBConnection;
  */
 public class UserDB {
     
-    private static User currentUser;
-    private static User getCurrentUser() {
-        return currentUser;    }
-    private static Statement statement;
-     // Create Statement Object
-    public static void setStatement(Connection conn)throws SQLException {
-        statement = conn.createStatement();
-    }
-    
-    //Return Statement object
-    public static Statement getStatement() {
-        return statement;
-    }
     //try to login
     public static Boolean login(String username, String password) {
-     try {
-            Statement statement = DBConnection.getConnection().createStatement();
-            String query = "SELECT * FROM user WHERE userName='" + username + "' AND password='" + password + "'";
+     try {  
+            Connection conn = DBConnection.getConnection();
+            DBQuery.setStatement(conn);
+            Statement statement = DBQuery.getStatement();
+            String query = "SELECT * FROM users WHERE User_Name='" + username + "' AND Password='" + password + "'";
             ResultSet results = statement.executeQuery(query);
-            /*if(results.next()) {
-                currentUser = new User();
-                currentUser.setUsername(results.getString("userName"));
-                statement.close();
-                Logger.log(username, true);
+            if(results.next()) {
+               // currentUser = new User();
+               // currentUser.setUsername(results.getString("userName"));
+               // statement.close();
+                //Logger.log(username, true);
                 return true;
             } else {
-                Logger.log(username, false);
+                //Logger.log(username, false);
                 return false;
-            } */
+            } 
         } catch (SQLException e) {
             System.out.println("SQLException: " + e.getMessage());
             return false;
         } 
+        //return null;
         }
 
 

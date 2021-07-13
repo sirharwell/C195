@@ -7,7 +7,8 @@ package Controller;
 
 import DBAccess.DBCountries;
 import Model.Countries;
-import java.awt.TextField;
+import Model.UserDB;
+import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
@@ -15,9 +16,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import Model.User;
 
 /**
  * FXML Controller class
@@ -26,6 +29,7 @@ import javafx.scene.control.TableView;
  */
 public class LoginController implements Initializable {
     
+    @FXML
     public TableColumn idCol;
     public TableColumn nameCol;
     public TableView dataTable;
@@ -34,10 +38,10 @@ public class LoginController implements Initializable {
     private Button Login;
     
     @FXML
-    private TextField Username;
+    private TextField usernameText;
     
     @FXML
-    private PasswordField Password;
+    private PasswordField passwordText;
     
     
 
@@ -53,10 +57,16 @@ public class LoginController implements Initializable {
 
     @FXML
         private void handleLogin(ActionEvent event) {
-            String username = Username.getText();
-            String password = Password.getText();
-            boolean validUserPass = Userdatabase.login(username, password);
-          System.out.println("PeePee");
+            String username = usernameText.getText();
+            String password = passwordText.getText();
+            boolean validUserPass = UserDB.login(username, password);
+            
+            if(validUserPass){
+                System.out.println("PeePee");
+            }
+            else {
+                System.out.println("poop");
+            }
       //  }
     }
     

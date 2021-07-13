@@ -33,27 +33,8 @@ public class Scheduling extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException  {
+        DBConnection.startConnection();
         Connection conn = DBConnection.getConnection();
-        String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES(?, ?, ?, ?)";
-        DBQuery.setPreparedStatement(conn, insertStatement);
-        PreparedStatement ps = DBQuery.getPreparedStatement();
-
-        String countryName;
-        String createDate = "2020-03-28 00:00:000";
-        String createdBy = "admin";
-        String lastUpdateBy = "admin";
-        
-        Scanner keyboard = new Scanner(System.in);
-        countryName = keyboard.nextLine();
-        
-        //key value mapping. 
-        ps.setString(1, countryName);
-        ps.setString(2, createDate);
-        ps.setString(3, createdBy);
-        ps.setString(4, lastUpdateBy);
-        
-        ps.execute();
-        
         launch(args); 
         DBConnection.closeConnetion();
     }
