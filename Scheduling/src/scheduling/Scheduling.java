@@ -6,6 +6,7 @@
 package scheduling;
 
 import DBAccess.DBCountries;
+import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +22,8 @@ import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 /**
@@ -38,14 +41,27 @@ public class Scheduling extends Application {
         launch(args); 
         DBConnection.closeConnetion();
     }
-
+    
+  
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        Boolean en = Locale.getDefault().getLanguage().equals("en");
+        if(en = true){
+        /*Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Scheduler");
-        stage.show();
+        stage.show();*/
+        System.out.println("peepee");
+        }
+        else{ 
+            /*Parent root = FXMLLoader.load(getClass().getResource("/view/Login_French.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Scheduler");
+            stage.show();*/
+            System.out.println("poop");
+        
     }
-    
+    }
 }

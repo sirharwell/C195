@@ -19,6 +19,12 @@ import utils.DBQuery;
  */
 public class UserDB {
     
+    private static User currentUser;
+    
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+    
     //try to login
     public static Boolean login(String username, String password) {
      try {  
@@ -28,9 +34,9 @@ public class UserDB {
             String query = "SELECT * FROM users WHERE User_Name='" + username + "' AND Password='" + password + "'";
             ResultSet results = statement.executeQuery(query);
             if(results.next()) {
-               // currentUser = new User();
-               // currentUser.setUsername(results.getString("userName"));
-               // statement.close();
+                currentUser = new User();
+                currentUser.setUsername(results.getString("userName"));
+                statement.close();
                 //Logger.log(username, true);
                 return true;
             } else {

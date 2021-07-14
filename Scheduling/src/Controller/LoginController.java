@@ -21,6 +21,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Model.User;
+import java.util.Locale;
+import javafx.scene.control.Alert;
 
 /**
  * FXML Controller class
@@ -43,17 +45,15 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField passwordText;
     
-    
-
-    /**
+        /**
      * Initializes the controller class.
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        //todo
+    }  
 
     @FXML
         private void handleLogin(ActionEvent event) {
@@ -65,7 +65,11 @@ public class LoginController implements Initializable {
                 System.out.println("PeePee");
             }
             else {
-                System.out.println("poop");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Error");
+                alert.setHeaderText("Invalid Usernamer or Password");
+                alert.setContentText("(maybe both?)");
+                alert.showAndWait();
             }
       //  }
     }
