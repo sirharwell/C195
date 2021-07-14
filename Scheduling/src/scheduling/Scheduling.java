@@ -26,6 +26,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+
 /**
  *
  * @author 18018
@@ -45,23 +46,22 @@ public class Scheduling extends Application {
   
     @Override
     public void start(Stage stage) throws Exception {
-        Boolean en = Locale.getDefault().getLanguage().equals("en");
-        if(en = true){
-        /*Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        Locale locale = Locale.getDefault();
+        String locales = locale.toString();
+        if(locales.contains("en")){
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Scheduler");
-        stage.show();*/
+        stage.show();
         System.out.println("peepee");
         }
-        else{ 
-            /*Parent root = FXMLLoader.load(getClass().getResource("/view/Login_French.fxml"));
+        else{
+            Parent root = FXMLLoader.load(getClass().getResource("/view/Login_French.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("Scheduler");
-            stage.show();*/
-            System.out.println("poop");
-        
+            stage.setTitle("Planificateur");
+            stage.show();        
     }
     }
 }
