@@ -54,7 +54,6 @@ public class Scheduling extends Application {
         stage.setScene(scene);
         stage.setTitle("Scheduler");
         stage.show();
-        System.out.println("peepee");
         }
         else{
             Parent root = FXMLLoader.load(getClass().getResource("/view/Login_French.fxml"));

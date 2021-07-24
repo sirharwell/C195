@@ -21,8 +21,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Model.User;
+import java.io.IOException;
 import java.util.Locale;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -56,13 +61,19 @@ public class LoginController implements Initializable {
     }  
 
     @FXML
-        private void handleLogin(ActionEvent event) {
+        private void handleLogin(ActionEvent event) throws IOException {
             String username = usernameText.getText();
             String password = passwordText.getText();
             boolean validUserPass = UserDB.login(username, password);
             
             if(validUserPass){
-                System.out.println("PeePee");
+                ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+                Parent root = FXMLLoader.load(getClass().getResource("/view/Main.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Main");
+                stage.show(); 
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

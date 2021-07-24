@@ -26,7 +26,7 @@ public class Logger {
              PrintWriter pwVariable = new PrintWriter(bwVariable)) {
             pwVariable.println(ZonedDateTime.now() + " " + username + (success ? " Success" : " Failure"));
         } catch (IOException e) {
-            System.out.println("Logger Error: " + e.getMessage());
+            System.out.println("Logg Error: " + e.getMessage());
         }
     }
     
