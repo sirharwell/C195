@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import utils.DBConnection;
 import utils.DBQuery;
-
+import utils.Logger;
 
 /**
  *
@@ -35,12 +35,12 @@ public class UserDB {
             ResultSet results = statement.executeQuery(query);
             if(results.next()) {
                 currentUser = new User();
-                currentUser.setUsername(results.getString("userName"));
+                currentUser.setUsername(results.getString("User_Name"));
                 statement.close();
-                //Logger.log(username, true);
+                Logger.log(username, true);
                 return true;
             } else {
-                //Logger.log(username, false);
+                Logger.log(username, false);
                 return false;
             } 
         } catch (SQLException e) {
