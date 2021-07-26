@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import DBAccess.DBCountries;
+import utils.DBCountries;
 import Model.Countries;
 import Model.UserDB;
 import javafx.scene.control.TextField;
