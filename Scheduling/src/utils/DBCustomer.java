@@ -67,16 +67,16 @@ public class DBCustomer {
     }
     
     // Saves new Customer to Database
-    public static boolean saveCustomer(String name, String address, String zip, String phone) {
+    public static boolean saveCustomer(String customerName, String address, String postalCode, String phone) {
         try {
             Connection conn = DBConnection.getConnection();
             DBQuery.setStatement(conn);
             Statement statement = DBQuery.getStatement();
-            String queryOne = "INSERT INTO address SET address='" + address + "', phone='" + phone + "', Postal_Code='" + zip;
+            String queryOne = "INSERT INTO address SET address='" + address + "', phone='" + phone + "', Postal_Code='" + postalCode;
             int updateOne = statement.executeUpdate(queryOne);
             if(updateOne == 1) {
                 int addressId = allCustomers.size() + 1;
-                String queryTwo = "INSERT INTO customer SET customerName='" + name + "', addressId=" + addressId;
+                String queryTwo = "INSERT INTO customer SET customerName='" + customerName + "', addressId=" + addressId;
                 int updateTwo = statement.executeUpdate(queryTwo);
                 if(updateTwo == 1) {
                     return true;

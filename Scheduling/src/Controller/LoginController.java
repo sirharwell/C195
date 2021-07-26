@@ -82,7 +82,7 @@ public class LoginController implements Initializable {
                 alert.setContentText("(maybe both?)");
                 alert.showAndWait();
             }
-      //  }
+    
     }
     
     

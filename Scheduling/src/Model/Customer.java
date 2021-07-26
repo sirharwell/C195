@@ -21,12 +21,12 @@ public class Customer {
     
     public Customer() {}
     
-    public Customer(int id, String name, String address, String phone, String zip) {
+    public Customer(int id, String customerName, String address, String phone, String postalCode) {
         setCustId(id);
-        setCustName(name);
+        setCustName(customerName);
         setCustAddress(address);
         setCustPhone(phone);
-        setCustZip(zip);
+        setCustZip(postalCode );
     }
     
     public int getCustId() {
