@@ -53,13 +53,26 @@ public class MainController implements Initializable {
     private ObservableList<String> countries = FXCollections.observableArrayList(
     "USA", "UK", "Canada");
     
-    private ObservableList<String> states = FXCollections.observableArrayList(
+     private ObservableList<String> allStates = FXCollections.observableArrayList(
     "Alabama","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming","Hawaii","Alaska","Northwest Territories","Alberta","British Columbia","Manitoba","New Brunswick","Nova Scotia","Prince Edward Island","Ontario","Québec","Saskatchewan","Nunavut","Yukon","Newfoundland and Labrador","England","Wales","Scotland","Northern Ireland");
+    
+    
+    private ObservableList<String> states = FXCollections.observableArrayList(
+    "Alabama","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming","Hawaii","Alaska");
+    
+    private ObservableList<String> canadastates = FXCollections.observableArrayList(
+    "Northwest Territories","Alberta","British Columbia","Manitoba","New Brunswick","Nova Scotia","Prince Edward Island","Ontario","Québec","Saskatchewan","Nunavut","Yukon","Newfoundland and Labrador");
+    
+    private ObservableList<String> ukstates = FXCollections.observableArrayList(
+    "England","Wales","Scotland","Northern Ireland");
+   
+        
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         country.setItems(countries);
-        state.setItems(states);
+        country.getSelectionModel().getSelectedItem();
         nameUpdate.setItems(states);
         nameDelete.setItems(states);
         country.setPromptText("Country");
@@ -67,6 +80,24 @@ public class MainController implements Initializable {
         nameUpdate.setPromptText("Select who to update");
         nameDelete.setPromptText("Select who to delete");
     }
+    
+    
+    public void onPull(ActionEvent actionEvent){
+        StringBuilder sb = new StringBuilder(" ");
+        
+        String countryChoice = countries.getSelectionModel().getSelectedItem();
+        if(countryChoice == null){
+            state.setItems(allStates);}
+            else if(countryChoice == "USA"){
+                    state.setItems(states);
+                    }
+            else if(countryChoice == "UK"){
+                    state.setItems(ukstates);
+                    }
+                    else{
+                    state.setItems(canadastates);
+                    }
+        }
 
  @FXML
         private void handleNew(ActionEvent event) throws IOException {

@@ -52,7 +52,7 @@
                         </textFill>
                      </Label>
                      <Button fx:id="Update" layoutX="86.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleUpdate" text="Update" />
-                     <ComboBox fx:id="country" layoutX="36.0" layoutY="202.0" prefWidth="150.0" />
+                     <ComboBox fx:id="country" layoutX="36.0" layoutY="202.0" onAction="#onPull" prefWidth="150.0" />
                      <ComboBox fx:id="state" layoutX="37.0" layoutY="237.0" prefWidth="150.0" />
                      <ComboBox fx:id="nameUpdate" layoutX="39.0" layoutY="353.0" prefWidth="150.0" />
                      <ComboBox fx:id="nameDelete" layoutX="36.0" layoutY="458.0" prefWidth="150.0" />
