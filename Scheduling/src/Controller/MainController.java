@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import utils.DBAppointments;
 import Model.Customer;
 import Model.UserDB;
+import java.util.Objects;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -45,10 +46,10 @@ public class MainController implements Initializable {
     public TableColumn idCol;
     public TableColumn nameCol;
     public TableView dataTable;
-    private TextField Customer_Name;
-    private TextField Address;
-    private TextField Postal_Code;
-    private TextField Phone;
+    public TextField Customer_Name;
+    public TextField Address;
+    public TextField Postal_Code;
+    public TextField Phone;
     
     private ObservableList<String> countries = FXCollections.observableArrayList(
     "USA", "UK", "Canada");
@@ -85,7 +86,7 @@ public class MainController implements Initializable {
     public void onPull(ActionEvent actionEvent){
         StringBuilder sb = new StringBuilder(" ");
         
-        String countryChoice = countries.getSelectionModel().getSelectedItem();
+        Object countryChoice = country.getSelectionModel().getSelectedItem();
         if(countryChoice == null){
             state.setItems(allStates);}
             else if(countryChoice == "USA"){
@@ -99,27 +100,52 @@ public class MainController implements Initializable {
                     }
         }
 
+            public boolean validateEverything(String customerName, String address, String postalCode, String phone, Object countryChoice, Object stateChoice) {
+        if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phone.isEmpty() || Objects.isNull(countryChoice) || Objects.isNull(stateChoice) ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
  @FXML
-        private void handleNew(ActionEvent event) throws IOException {
+        public void handleNew(ActionEvent event) throws IOException {
+            StringBuilder sb = new StringBuilder(" ");
             String customerName = Customer_Name.getText();
             String address = Address.getText();
             String postalCode = Postal_Code.getText();
             String phone = Phone.getText();
+            Object countryChoice = country.getSelectionModel().getSelectedItem();
+            Object stateChoice = state.getSelectionModel().getSelectedItem();
+                       
+            
+            if(validateEverything(customerName, address, postalCode, phone, countryChoice, stateChoice)){
+                System.out.println("works");
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Issue adding a customer");
+                alert.setHeaderText("Please fill in all prompts");
+                alert.setContentText("Including the drop downs");
+                alert.showAndWait();
+            }
             
             
         }
         
+
+        
   @FXML
-        private void handleUpdate(ActionEvent event) throws IOException {
+        public void handleUpdate(ActionEvent event) throws IOException {
             String customerName = Customer_Name.getText();
             String address = Address.getText();
             String postalCode = Postal_Code.getText();
             String phone = Phone.getText();
-            
+
             
         }
   @FXML
-        private void handleDelete(ActionEvent event) throws IOException {
+        public void handleDelete(ActionEvent event) throws IOException {
             String customerName = Customer_Name.getText();
             String address = Address.getText();
             String postalCode = Postal_Code.getText();
