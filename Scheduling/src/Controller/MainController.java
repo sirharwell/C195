@@ -74,7 +74,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         country.setItems(countries);
         country.getSelectionModel().getSelectedItem();
-        nameUpdate.setItems(states);
+        nameUpdate.setItems(Customer.customers);
         nameDelete.setItems(states);
         country.setPromptText("Country");
         state.setPromptText("State/Territory");
@@ -126,10 +126,12 @@ public class MainController implements Initializable {
             newCustomer.setCustCountry(countryChoice);
             newCustomer.setCustState(stateChoice);
                                                     
-                       
+            newCustomer.setCustId(Customer.getCustomerCount());
+            
             
             if(validateEverything(customerName, address, postalCode, phone, countryChoice, stateChoice)){
-                System.out.println("works");
+                Customer.addCustomer(newCustomer);
+                System.out.println(Customer.customers);
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

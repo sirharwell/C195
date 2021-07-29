@@ -5,22 +5,22 @@
  */
 package Model;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
  * @author 18018
  */
 public class Customer {
-    private final SimpleIntegerProperty custId = new SimpleIntegerProperty();
-    private final SimpleStringProperty custName = new SimpleStringProperty();
-    private final SimpleStringProperty custAddress = new SimpleStringProperty();
-    private final SimpleStringProperty custZip = new SimpleStringProperty();
-    private final SimpleStringProperty custPhone = new SimpleStringProperty();
-    private final SimpleObjectProperty custCountry = new SimpleObjectProperty();
-    private final SimpleObjectProperty custState = new SimpleObjectProperty();
+    private int custId;
+    private String custName;
+    private String custAddress;
+    private String custZip;
+    private String custPhone;
+    private Object custCountry;
+    private Object custState;
 
     
     public Customer() {}
@@ -35,60 +35,75 @@ public class Customer {
         setCustState(stateChoice);
     }
     
+    public static final ObservableList<Customer> customers = FXCollections.observableArrayList();
+    
+    public static void addCustomer(Customer newCustomer){
+        customers.add(newCustomer);
+    }
+    
     public int getCustId() {
-        return custId.get();
+        return custId;
     }
     
     public String getCustName() {
-        return custName.get();
+        return custName;
     }
     
     public String getCustAddress() {
-        return custAddress.get();
+        return custAddress;
     }
     
     
     public String getCustPhone() {
-        return custPhone.get();
+        return custPhone;
     }
     
     public String getCustZip() {
-        return custZip.get();
+        return custZip;
     }
     
     public Object getCustCountry() {
-        return custCountry.get();
+        return custCountry;
     }
         
     public Object getCustState() {
-        return custState.get();
+        return custState;
     }
     
     public void setCustId(int custId) {
-        this.custId.set(custId);
+        this.custId = custId;
     }
     
     public void setCustName(String custName) {
-        this.custName.set(custName);
+        this.custName = custName;
     }
     
     public void setCustAddress(String custAddress) {
-        this.custAddress.set(custAddress);
+        this.custAddress = custAddress;
     }
     
     public void setCustPhone(String custPhone) {
-        this.custPhone.set(custPhone);
+        this.custPhone = custPhone;
     }   
     
     public void setCustZip(String custZip) {
-        this.custZip.set(custZip);
+        this.custZip = custZip;
     }
     
     public void setCustCountry(Object custCountry) {
-        this.custCountry.set(custCountry);
+        this.custCountry = custCountry;
     }
         
     public void setCustState(Object custState) {
-        this.custState.set(custState);
+        this.custState =  custState;
+    }
+    
+    public static int getCustomerCount(){
+        return customers.size();
+    }
+    
+    @Override
+    public String toString(){
+        return(String.valueOf(custName) + " " + String.valueOf(custId) + " " + String.valueOf(custName) + " " + String.valueOf(custAddress) + " " + String.valueOf(custZip) + " " + String.valueOf(custCountry) + " " + String.valueOf(custState) );
     }
 }
