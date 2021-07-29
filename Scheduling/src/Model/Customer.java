@@ -30,7 +30,7 @@ public class Customer {
         setCustName(customerName);
         setCustAddress(address);
         setCustPhone(phone);
-        setCustZip(postalCode );
+        setCustZip(postalCode);
         setCustCountry(countryChoice);
         setCustState(stateChoice);
     }

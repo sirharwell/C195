@@ -117,6 +117,15 @@ public class MainController implements Initializable {
             String phone = Phone.getText();
             Object countryChoice = country.getSelectionModel().getSelectedItem();
             Object stateChoice = state.getSelectionModel().getSelectedItem();
+            
+            Customer newCustomer = new Customer();
+            newCustomer.setCustName(customerName);
+            newCustomer.setCustAddress(address);
+            newCustomer.setCustPhone(phone);
+            newCustomer.setCustZip(postalCode);
+            newCustomer.setCustCountry(countryChoice);
+            newCustomer.setCustState(stateChoice);
+                                                    
                        
             
             if(validateEverything(customerName, address, postalCode, phone, countryChoice, stateChoice)){
