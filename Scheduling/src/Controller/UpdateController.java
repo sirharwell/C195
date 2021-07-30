@@ -67,13 +67,19 @@ public class UpdateController {
         
     
     
-
+    //@Override
     public void initialize(URL url, ResourceBundle rb) {
-        updateCountry.setItems(countries);
-        updateCountry.setPromptText("Country");
-        updateState.setPromptText("State/Territory");
-        UpdateCID.setText(String.valueOf(Customer.customers));
 
+    }
+    
+    public void populateFields(Customer customer) {
+        UpdateCID.setText(String.valueOf(customer.getCustId()));
+        UpdateCN.setText(customer.getCustName());
+        UpdateAdd.setText(customer.getCustAddress());
+        updateState.getSelectionModel().select(customer.getCustState());
+        updateCountry.getSelectionModel().select(customer.getCustCountry());
+        UpdatePC.setText(customer.getCustZip());
+        UpdatePh.setText(customer.getCustPhone());
     }
         
     public void onUpdatePull(ActionEvent actionEvent){
