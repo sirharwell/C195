@@ -104,6 +104,7 @@ public class Customer {
     
     @Override
     public String toString(){
-        return(String.valueOf(custName) + " " + String.valueOf(custId) + " " + String.valueOf(custName) + " " + String.valueOf(custAddress) + " " + String.valueOf(custZip) + " " + String.valueOf(custCountry) + " " + String.valueOf(custState) );
+        return(String.valueOf(custName));
+                //+ " " + String.valueOf(custId) + " " + String.valueOf(custName) + " " + String.valueOf(custAddress) + " " + String.valueOf(custZip) + " " + String.valueOf(custCountry) + " " + String.valueOf(custState) );
     }
 }

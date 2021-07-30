@@ -50,6 +50,8 @@ public class MainController implements Initializable {
     public TextField Address;
     public TextField Postal_Code;
     public TextField Phone;
+
+                                    
     
     private ObservableList<String> countries = FXCollections.observableArrayList(
     "USA", "UK", "Canada");
@@ -73,13 +75,13 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         country.setItems(countries);
-        country.getSelectionModel().getSelectedItem();
         nameUpdate.setItems(Customer.customers);
-        nameDelete.setItems(states);
+        nameDelete.setItems(Customer.customers);
         country.setPromptText("Country");
         state.setPromptText("State/Territory");
         nameUpdate.setPromptText("Select who to update");
         nameDelete.setPromptText("Select who to delete");
+
     }
     
     
@@ -99,6 +101,7 @@ public class MainController implements Initializable {
                     state.setItems(canadastates);
                     }
         }
+    
 
             public boolean validateEverything(String customerName, String address, String postalCode, String phone, Object countryChoice, Object stateChoice) {
         if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phone.isEmpty() || Objects.isNull(countryChoice) || Objects.isNull(stateChoice) ) {
@@ -107,6 +110,7 @@ public class MainController implements Initializable {
             return true;
         }
     }
+
     
  @FXML
         public void handleNew(ActionEvent event) throws IOException {
@@ -148,10 +152,26 @@ public class MainController implements Initializable {
         
   @FXML
         public void handleUpdate(ActionEvent event) throws IOException {
-            String customerName = Customer_Name.getText();
-            String address = Address.getText();
-            String postalCode = Postal_Code.getText();
-            String phone = Phone.getText();
+            
+            Object editCustomer = nameUpdate.getSelectionModel().getSelectedItem();
+            if(editCustomer == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Issue editing a customer");
+                alert.setHeaderText("Please make a selection");
+                alert.setContentText("I can't help you if you don't know what you want.");
+                alert.showAndWait();
+        }
+            else{
+                
+                Parent root = FXMLLoader.load(getClass().getResource("/view/Update.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Update");
+                stage.show();
+                
+                System.out.println(editCustomer);
+                    }
 
             
         }
