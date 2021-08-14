@@ -74,114 +74,25 @@ public class MainController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        country.setItems(countries);
-        nameUpdate.setItems(Customer.customers);
-        nameDelete.setItems(Customer.customers);
-        country.setPromptText("Country");
-        state.setPromptText("State/Territory");
-        nameUpdate.setPromptText("Select who to update");
-        nameDelete.setPromptText("Select who to delete");
+
 
     }
     
     
-    public void onPull(ActionEvent actionEvent){
-        StringBuilder sb = new StringBuilder(" ");
-        
-        Object countryChoice = country.getSelectionModel().getSelectedItem();
-        if(countryChoice == null){
-            state.setItems(allStates);}
-            else if(countryChoice == "USA"){
-                    state.setItems(states);
-                    }
-            else if(countryChoice == "UK"){
-                    state.setItems(ukstates);
-                    }
-                    else{
-                    state.setItems(canadastates);
-                    }
-        }
     
-
-            public boolean validateEverything(String customerName, String address, String postalCode, String phone, Object countryChoice, Object stateChoice) {
-        if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phone.isEmpty() || Objects.isNull(countryChoice) || Objects.isNull(stateChoice) ) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 
     
  @FXML
         public void handleNew(ActionEvent event) throws IOException {
-            StringBuilder sb = new StringBuilder(" ");
-            String customerName = Customer_Name.getText();
-            String address = Address.getText();
-            String postalCode = Postal_Code.getText();
-            String phone = Phone.getText();
-            Object countryChoice = country.getSelectionModel().getSelectedItem();
-            Object stateChoice = state.getSelectionModel().getSelectedItem();
-            
-            Customer newCustomer = new Customer();
-            newCustomer.setCustName(customerName);
-            newCustomer.setCustAddress(address);
-            newCustomer.setCustPhone(phone);
-            newCustomer.setCustZip(postalCode);
-            newCustomer.setCustCountry(countryChoice);
-            newCustomer.setCustState(stateChoice);
-                                                    
-            newCustomer.setCustId(Customer.getCustomerCount());
-            
-            
-            if(validateEverything(customerName, address, postalCode, phone, countryChoice, stateChoice)){
-                Customer.addCustomer(newCustomer);
-                System.out.println(Customer.customers);
-            }
-            else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Issue adding a customer");
-                alert.setHeaderText("Please fill in all prompts");
-                alert.setContentText("Including the drop downs");
-                alert.showAndWait();
-            }
-            
-            
-        }
-        
-
-        
-  @FXML
-        public void handleUpdate(ActionEvent event) throws IOException {
-            
-            Object editCustomer = nameUpdate.getSelectionModel().getSelectedItem();
-            if(editCustomer == null){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Issue editing a customer");
-                alert.setHeaderText("Please make a selection");
-                alert.setContentText("I can't help you if you don't know what you want.");
-                alert.showAndWait();
-        }
-            else{
-                
-                Parent root = FXMLLoader.load(getClass().getResource("/view/Update.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/view/Customer.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Update");
-                stage.show();
-                
-                System.out.println(editCustomer);
-                    }
+                stage.setTitle("Customer");
+                stage.show();   
+        }
+        
 
-            
-        }
-  @FXML
-        public void handleDelete(ActionEvent event) throws IOException {
-            String customerName = Customer_Name.getText();
-            String address = Address.getText();
-            String postalCode = Postal_Code.getText();
-            String phone = Phone.getText();
-            
-            
-        }
+        
+
 }

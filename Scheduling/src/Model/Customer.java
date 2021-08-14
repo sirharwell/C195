@@ -19,13 +19,13 @@ public class Customer {
     private String custAddress;
     private String custZip;
     private String custPhone;
-    private Object custCountry;
-    private Object custState;
+    private String custCountry;
+    private String custState;
 
     
     public Customer() {}
     
-    public Customer(int id, String customerName, String address, String phone, String postalCode, Object countryChoice, Object stateChoice) {
+    public Customer(int id, String customerName, String address, String phone, String postalCode, String countryChoice, String stateChoice) {
         setCustId(id);
         setCustName(customerName);
         setCustAddress(address);
@@ -62,11 +62,11 @@ public class Customer {
         return custZip;
     }
     
-    public Object getCustCountry() {
+    public String getCustCountry() {
         return custCountry;
     }
         
-    public Object getCustState() {
+    public String getCustState() {
         return custState;
     }
     
@@ -90,11 +90,11 @@ public class Customer {
         this.custZip = custZip;
     }
     
-    public void setCustCountry(Object custCountry) {
+    public void setCustCountry(String custCountry) {
         this.custCountry = custCountry;
     }
         
-    public void setCustState(Object custState) {
+    public void setCustState(String custState) {
         this.custState =  custState;
     }
     

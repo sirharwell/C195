@@ -56,8 +56,8 @@ public class DBCustomer {
                     results.getString("address"),
                     results.getString("phone"),
                     results.getString("zipCode"),
-                    results.getObject("country"),
-                    results.getObject("state"));
+                    results.getString("country"),
+                    results.getString("state"));
                 allCustomers.add(customer);
             }
             statement.close();
