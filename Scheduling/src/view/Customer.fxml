@@ -54,7 +54,7 @@
                   <TextField fx:id="UpdateAdd" alignment="CENTER" layoutX="156.0" layoutY="166.0" />
                   <TextField fx:id="UpdatePC" alignment="CENTER" layoutX="156.0" layoutY="201.0" />
                   <TextField fx:id="UpdatePh" alignment="CENTER" layoutX="156.0" layoutY="237.0" />
-                  <Button fx:id="FinalUpdate" layoutX="23.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleUpdate" prefHeight="147.0" prefWidth="304.0" text="Update Customer">
+                  <Button fx:id="FinalUpdate" layoutX="23.0" layoutY="359.0" mnemonicParsing="false" onAction="#saveUpdate" prefHeight="147.0" prefWidth="304.0" text="Update Customer">
                               <font>
                                  <Font size="32.0" />
                               </font>
@@ -118,7 +118,7 @@
                   <Color red="0.624" green="0.624" blue="0.624" fx:id="x21111111" />
                   </textFill>
                   </Label>
-                           <ComboBox fx:id="nameUpdate" layoutX="112.0" layoutY="41.0" prefWidth="150.0" />
+                           <ComboBox fx:id="nameUpdate" layoutX="112.0" layoutY="50.0" onAction="#handleUpdate" prefWidth="150.0" />
                     </children>
                   </AnchorPane>
                 </content>

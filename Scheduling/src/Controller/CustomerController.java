@@ -110,6 +110,23 @@ public class CustomerController implements Initializable {
                     }
         }
     
+        public void onUpdatePull(ActionEvent actionEvent){
+        StringBuilder sb = new StringBuilder(" ");
+        
+        String newCountry = country.getSelectionModel().getSelectedItem();
+        if(newCountry == null){
+            updateState.setItems(allStates);}
+            else if(newCountry == "USA"){
+                    updateState.setItems(states);
+                    }
+            else if(newCountry == "UK"){
+                    updateState.setItems(ukstates);
+                    }
+                    else{
+                    updateState.setItems(canadastates);
+                    }
+        }
+    
 
             public boolean validateEverything(String customerName, String address, String postalCode, String phone, String countryChoice, String stateChoice) {
         if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phone.isEmpty() || countryChoice.isEmpty() || stateChoice.isEmpty() ) {
@@ -156,20 +173,13 @@ public class CustomerController implements Initializable {
             
         }
         
-
+ private Customer editCustomer;
         
   @FXML
         public void handleUpdate(ActionEvent event) throws IOException {
             
-            Customer editCustomer = nameUpdate.getSelectionModel().getSelectedItem();
-            if(editCustomer == null){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Issue editing a customer");
-                alert.setHeaderText("Please make a selection");
-                alert.setContentText("I can't help you if you don't know what you want.");
-                alert.showAndWait();
-        }
-            else{
+            editCustomer = nameUpdate.getSelectionModel().getSelectedItem();
+
                 UpdateCID.setText(String.valueOf(editCustomer.getCustId()));
                 UpdateCN.setText(editCustomer.getCustName());
                 UpdateAdd.setText(editCustomer.getCustAddress());
@@ -179,10 +189,16 @@ public class CustomerController implements Initializable {
                 UpdatePh.setText(editCustomer.getCustPhone());
                 
                 System.out.println(editCustomer);
-                    }
+  
 
             
         }
+        
+        @FXML
+        public void saveUpdate(ActionEvent event) throws IOException {
+            System.out.println("Customer");
+        }
+        
   @FXML
         public void handleDelete(ActionEvent event) throws IOException {
             String customerName = Customer_Name.getText();
