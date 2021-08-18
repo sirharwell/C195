@@ -21,7 +21,7 @@
             <items>
               <AnchorPane>
                 <children>
-                  <Label alignment="CENTER" layoutX="52.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="New Customer" textAlignment="CENTER" wrapText="false">
+                  <Label alignment="CENTER" layoutX="76.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="New Customer" textAlignment="CENTER" wrapText="false">
                     <font>
                       <Font size="18.0" fx:id="x1" />
                     </font>
@@ -29,13 +29,16 @@
                       <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
                     </textFill>
                   </Label>
-                     <TextField fx:id="Customer_Name" alignment="CENTER" layoutX="37.0" layoutY="58.0" promptText="Name" />
-                     <TextField fx:id="Address" alignment="CENTER" layoutX="37.0" layoutY="96.0" promptText="Address" />
-                     <TextField fx:id="Postal_Code" alignment="CENTER" layoutX="37.0" layoutY="133.0" promptText="Zip Code" />
-                     <TextField fx:id="Phone" alignment="CENTER" layoutX="37.0" layoutY="169.0" promptText="Phone" />
-                     <Button fx:id="New" layoutX="50.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleNew" prefHeight="25.0" prefWidth="124.0" text="Add New Customer" />
-                     <ComboBox fx:id="country" layoutX="36.0" layoutY="210.0" onAction="#onPull" prefWidth="150.0" />
-                     <ComboBox fx:id="state" layoutX="37.0" layoutY="245.0" prefWidth="150.0" />
+                     <TextField fx:id="Customer_Name" alignment="CENTER" layoutX="61.0" layoutY="58.0" promptText="Name" />
+                     <TextField fx:id="Address" alignment="CENTER" layoutX="61.0" layoutY="96.0" promptText="Address" />
+                     <TextField fx:id="Postal_Code" alignment="CENTER" layoutX="61.0" layoutY="132.0" promptText="Zip Code" />
+                     <TextField fx:id="Phone" alignment="CENTER" layoutX="61.0" layoutY="169.0" promptText="Phone" />
+                     <Button fx:id="New" layoutX="16.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleNew" prefHeight="221.0" prefWidth="237.0" text="Add New Customer">
+                        <font>
+                           <Font size="21.0" />
+                        </font></Button>
+                     <ComboBox fx:id="country" layoutX="60.0" layoutY="210.0" onAction="#onPull" prefWidth="150.0" />
+                     <ComboBox fx:id="state" layoutX="60.0" layoutY="245.0" prefWidth="150.0" />
                      </children>
               </AnchorPane>
               <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
@@ -133,7 +136,10 @@
                            <Color red="0.624" green="0.624" blue="0.624" fx:id="x21" />
                         </textFill>
                      </Label>
-                     <Button fx:id="Delete" layoutX="61.0" layoutY="492.0" mnemonicParsing="false" onAction="#handleDelete" text="Delete Customer" />
+                     <Button fx:id="Delete" layoutX="13.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="382.0" prefWidth="245.0" text="Delete Customer">
+                        <font>
+                           <Font size="27.0" />
+                        </font></Button>
                      <ComboBox fx:id="nameDelete" layoutX="61.0" layoutY="51.0" prefWidth="150.0" />
                 </children>
               </AnchorPane>
