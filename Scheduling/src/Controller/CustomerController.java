@@ -22,10 +22,12 @@ import utils.DBAppointments;
 import Model.Customer;
 import Model.UserDB;
 import java.util.Objects;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import utils.DBCustomer;
+import static java.util.Objects.isNull;
 
 
 
@@ -129,7 +131,7 @@ public class CustomerController implements Initializable {
     
 
             public boolean validateEverything(String customerName, String address, String postalCode, String phone, String countryChoice, String stateChoice) {
-        if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phone.isEmpty() || countryChoice.isEmpty() || stateChoice.isEmpty() ) {
+        if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phone.isEmpty() || countryChoice == null || stateChoice == null ) {
             return false;
         } else {
             return true;
@@ -160,6 +162,12 @@ public class CustomerController implements Initializable {
             
             if(validateEverything(customerName, address, postalCode, phone, countryChoice, stateChoice)){
                 Customer.addCustomer(newCustomer);
+                ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Customer Added");
+                alert.setHeaderText("Customer saved successfully");
+                alert.showAndWait();
+                
                 System.out.println(Customer.customers);
             }
             else {
@@ -196,16 +204,43 @@ public class CustomerController implements Initializable {
         
         @FXML
         public void saveUpdate(ActionEvent event) throws IOException {
-            System.out.println("Customer");
+            StringBuilder sb = new StringBuilder(" ");
+            String customerName = UpdateCN.getText();
+            String address = UpdateAdd.getText();
+            String postalCode = UpdatePC.getText();
+            String phone = UpdatePh.getText();
+            String countryChoice = updateCountry.getSelectionModel().getSelectedItem();
+            String stateChoice = updateState.getSelectionModel().getSelectedItem();
+            
+            
+            
+            editCustomer.setCustName(customerName);
+            editCustomer.setCustAddress(address);
+            editCustomer.setCustPhone(phone);
+            editCustomer.setCustZip(postalCode);
+            editCustomer.setCustCountry(countryChoice);
+            editCustomer.setCustState(stateChoice);
+            
+            ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Customer Updated");
+                alert.setHeaderText("Customer saved successfully");
+                alert.showAndWait();
+            
         }
         
   @FXML
         public void handleDelete(ActionEvent event) throws IOException {
-            String customerName = Customer_Name.getText();
-            String address = Address.getText();
-            String postalCode = Postal_Code.getText();
-            String phone = Phone.getText();
-            
-            
+            editCustomer = nameDelete.getSelectionModel().getSelectedItem();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Customer Delete");
+            alert.setHeaderText("Confirm deletion");
+            alert.setContentText("Are you sure you want to delete " + editCustomer);
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() == ButtonType.OK) {
+                Customer.removeCustomer(editCustomer);
+                ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+            }
         }
 }

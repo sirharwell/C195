@@ -40,6 +40,9 @@ public class Customer {
     public static void addCustomer(Customer newCustomer){
         customers.add(newCustomer);
     }
+    public static void removeCustomer(Customer editCustomer){
+        customers.remove(editCustomer);
+    }
     
     public int getCustId() {
         return custId;
