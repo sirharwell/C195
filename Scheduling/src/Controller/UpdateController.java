@@ -63,6 +63,9 @@ public class UpdateController {
     
     private ObservableList<String> ukstates = FXCollections.observableArrayList(
     "England","Wales","Scotland","Northern Ireland");
+    
+    private ObservableList<String> blank = FXCollections.observableArrayList(
+    " ");
    
         
     

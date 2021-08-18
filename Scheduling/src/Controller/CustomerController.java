@@ -78,15 +78,21 @@ public class CustomerController implements Initializable {
     
     private ObservableList<String> ukstates = FXCollections.observableArrayList(
     "England","Wales","Scotland","Northern Ireland");
+    
+
    
         
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         country.setItems(countries);
+        updateCountry.setItems(countries);
+        try {
         nameUpdate.setItems(Customer.customers);
-        nameDelete.setItems(Customer.customers);
+        nameDelete.setItems(Customer.customers);}
+        catch (NullPointerException e) {}
         country.setPromptText("Country");
         state.setPromptText("State/Territory");
         nameUpdate.setPromptText("Who to update");
@@ -115,7 +121,7 @@ public class CustomerController implements Initializable {
         public void onUpdatePull(ActionEvent actionEvent){
         StringBuilder sb = new StringBuilder(" ");
         
-        String newCountry = country.getSelectionModel().getSelectedItem();
+        String newCountry = updateCountry.getSelectionModel().getSelectedItem();
         if(newCountry == null){
             updateState.setItems(allStates);}
             else if(newCountry == "USA"){
