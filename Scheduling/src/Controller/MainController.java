@@ -26,6 +26,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import utils.DBCustomer;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 
 
@@ -70,11 +72,13 @@ public class MainController implements Initializable {
     "England","Wales","Scotland","Northern Ireland");
    
         
+    @FXML
+    private TableView<Customer> customerTable;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        customerTable.setItems(DBCustomer.getAllCustomers());
 
     }
     

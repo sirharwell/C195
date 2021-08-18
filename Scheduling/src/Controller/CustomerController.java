@@ -45,6 +45,7 @@ public class CustomerController implements Initializable {
     public Button New;
     public Button Update;
     public Button Delete;
+    public Button Back;
     public TableColumn idCol;
     public TableColumn nameCol;
     public TableView dataTable;
@@ -201,8 +202,7 @@ public class CustomerController implements Initializable {
                 updateCountry.getSelectionModel().select(editCustomer.getCustCountry());
                 UpdatePC.setText(editCustomer.getCustZip());
                 UpdatePh.setText(editCustomer.getCustPhone());
-                
-                System.out.println(editCustomer);
+
   
 
             
@@ -249,4 +249,10 @@ public class CustomerController implements Initializable {
                 ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
             }
         }
+        
+        @FXML
+        public void handleBack(ActionEvent event)throws IOException {
+        ((Stage)(((Button)event.getSource()).getScene().getWindow())).close(); 
+        }
+        
 }

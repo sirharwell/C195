@@ -12,13 +12,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import Model.Customer;
 /**
  *
  * @author 18018
  */
 public class DBCustomer {
     
-    private static ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
+    private static ObservableList<Customer> customers = FXCollections.observableArrayList();
     
     public static Customer getCustomer(int id) {
         try {
@@ -41,27 +42,27 @@ public class DBCustomer {
     
     // Returns all Customers in Database
     public static ObservableList<Customer> getAllCustomers() {
-        allCustomers.clear();
         try {
             Connection conn = DBConnection.getConnection();
             DBQuery.setStatement(conn);
             Statement statement = DBQuery.getStatement();
-            String query = "SELECT customer.customerId, customer.customerName, address.address, address.phone, address.postalCode"
-                + " FROM customer INNER JOIN address ON customer.addressId = address.addressId ";
-            ResultSet results = statement.executeQuery(query);
-            while(results.next()) {
-                Customer customer = new Customer(
-                    results.getInt("custId"), 
-                    results.getString("custName"), 
-                    results.getString("address"),
-                    results.getString("phone"),
-                    results.getString("zipCode"),
-                    results.getString("country"),
-                    results.getString("state"));
-                allCustomers.add(customer);
+            String query = "SELECT * FROM customers";
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()) {
+
+            Customer newCustomer = new Customer();
+            newCustomer.setCustName(rs.getString("Customer_Name"));
+            newCustomer.setCustAddress(rs.getString("Address"));
+            newCustomer.setCustPhone(rs.getString("Phone"));
+            newCustomer.setCustZip(rs.getString("Postal_Code"));
+            newCustomer.setCustCountry(rs.getString("Address"));
+            newCustomer.setCustState(rs.getString("Address"));                                        
+            newCustomer.setCustId(rs.getInt("Customer_ID"));
+            Customer.addCustomer(newCustomer);         
+
             }
             statement.close();
-            return allCustomers;
+            return customers;
         } catch (SQLException e) {
             System.out.println("SQLException: " + e.getMessage());
             return null;
@@ -77,7 +78,7 @@ public class DBCustomer {
             String queryOne = "INSERT INTO address SET address='" + address + "', phone='" + phone + "', Postal_Code='" + postalCode;
             int updateOne = statement.executeUpdate(queryOne);
             if(updateOne == 1) {
-                int addressId = allCustomers.size() + 1;
+                int addressId = customers.size() + 1;
                 String queryTwo = "INSERT INTO customer SET customerName='" + customerName + "', addressId=" + addressId;
                 int updateTwo = statement.executeUpdate(queryTwo);
                 if(updateTwo == 1) {
