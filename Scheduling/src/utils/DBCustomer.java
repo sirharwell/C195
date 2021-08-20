@@ -51,22 +51,47 @@ public class DBCustomer {
             return null;
         }
     }
-    
+    /*
+        String countryName = "Canada";
+        String createDate = "2021-7-9 15:17:00";
+        String createdBy = "admin";
+        String lastUpdateBy = "admin";
+        
+        String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy)" + 
+                "VALUES(" +
+                "'" + countryName + "'," +
+                "'" + createDate + "'," +
+                "'" + createdBy + "'," +
+                "'" + lastUpdateBy + "'," +
+                ")"; */
     // Saves new Customer to Database
-    public static boolean saveCustomer(String customerName, String address, String postalCode, String phone) {
+    private Customer editCustomer;
+    
+    public static boolean saveCustomer() {
         try {
             Connection conn = DBConnection.getConnection();
             DBQuery.setStatement(conn);
             Statement statement = DBQuery.getStatement();
-            String queryOne = "INSERT INTO address SET address='" + address + "', phone='" + phone + "', Postal_Code='" + postalCode;
-            int updateOne = statement.executeUpdate(queryOne);
-            if(updateOne == 1) {
-                int addressId = customers.size() + 1;
-                String queryTwo = "INSERT INTO customer SET customerName='" + customerName + "', addressId=" + addressId;
-                int updateTwo = statement.executeUpdate(queryTwo);
-                if(updateTwo == 1) {
-                    return true;
-                }
+            
+            for (int i = 0; i < Customer.customers.size(); i++) {
+                
+                editCustomer = Customer.customers.getCustId();
+                editCustomer = nameUpdate.getSelectionModel().getSelectedItem();
+
+                UpdateCID.setText(String.valueOf(editCustomer.getCustId()));
+                UpdateCN.setText(editCustomer.getCustName());
+                UpdateAdd.setText(editCustomer.getCustAddress());
+                updateState.getSelectionModel().select(editCustomer.getCustState());
+                updateCountry.getSelectionModel().select(editCustomer.getCustCountry());
+                UpdatePC.setText(editCustomer.getCustZip());
+                UpdatePh.setText(editCustomer.getCustPhone());
+            String query = "INSERT INTO customers(Customer_Name, Address, Phone, Postal_Code, Customer_ID)" + 
+                    "VALUES(" +
+                    "'" + customerName + "'" +
+                    "'" + address + " " + stateChoice + " " + countryChoice + "'" +
+                    "'" + phone + "'" +
+                    "'" + postalCode + "'" +
+                    "'" + id + "'" + ")";
             }
         } catch (SQLException e) {
             System.out.println("SQLException: " + e.getMessage());
@@ -97,20 +122,13 @@ public class DBCustomer {
     }
     
     // Delete Customer from Database
-    public static boolean deleteCustomer(int id) {
+    public static boolean deleteCustomer() throws SQLException {
         try {
             Connection conn = DBConnection.getConnection();
             DBQuery.setStatement(conn);
             Statement statement = DBQuery.getStatement();
-            String queryOne = "DELETE FROM address WHERE addressId=" + id;
-            int updateOne = statement.executeUpdate(queryOne);
-            if(updateOne == 1) {
-                String queryTwo = "DELETE FROM customer WHERE customerId=" + id;
-                int updateTwo = statement.executeUpdate(queryTwo);
-                if(updateTwo == 1) {
-                    return true;
-                }
-            }
+            String query = "DELETE * FROM customers";
+            
         } catch(SQLException e) {
             System.out.println("SQLException: " + e.getMessage());
         }
