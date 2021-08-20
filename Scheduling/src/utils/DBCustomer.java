@@ -21,24 +21,7 @@ public class DBCustomer {
     
     private static ObservableList<Customer> customers = FXCollections.observableArrayList();
     
-    public static Customer getCustomer(int id) {
-        try {
-            Connection conn = DBConnection.getConnection();
-            DBQuery.setStatement(conn);
-            Statement statement = DBQuery.getStatement();
-            String query = "SELECT * FROM customer WHERE customerId='" + id + "'";
-            ResultSet results = statement.executeQuery(query);
-            if(results.next()) {
-                Customer customer = new Customer();
-                customer.setCustName(results.getString("customerName"));
-                statement.close();
-                return customer;
-            }
-        } catch (SQLException e) {
-            System.out.println("SQLException: " + e.getMessage());
-        }
-        return null;
-    }
+ 
     
     // Returns all Customers in Database
     public static ObservableList<Customer> getAllCustomers() {

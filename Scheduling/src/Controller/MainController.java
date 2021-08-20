@@ -78,7 +78,7 @@ public class MainController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        customerTable.setItems(DBCustomer.getAllCustomers());
+        DBCustomer.getAllCustomers();
 
     }
     

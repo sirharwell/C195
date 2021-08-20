@@ -25,6 +25,9 @@ import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 
 /**
@@ -44,6 +47,19 @@ public class Scheduling extends Application {
     }
     
   
+    public void logout(Stage stage){	
+		
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("You're about to logout!");
+        alert.setContentText("Do you want to save before exiting?");
+
+        if (alert.showAndWait().get() == ButtonType.OK){
+                System.out.println("You successfully logged out");
+                stage.close();
+        } 
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         Locale locale = Locale.getDefault();
@@ -62,5 +78,9 @@ public class Scheduling extends Application {
             stage.setTitle("Planificateur");
             stage.show();        
     }
+        stage.setOnCloseRequest(event -> {
+            event.consume();
+            logout(stage);	
+        });
     }
 }
