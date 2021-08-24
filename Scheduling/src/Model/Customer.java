@@ -102,7 +102,7 @@ public class Customer {
     }
     
     public static int getCustomerCount(){
-        return customers.size();
+        return (customers.size() + 1);
     }
     
     @Override

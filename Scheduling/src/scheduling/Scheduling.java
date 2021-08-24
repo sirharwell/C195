@@ -51,42 +51,6 @@ public class Scheduling extends Application {
         launch(args); 
         DBConnection.closeConnetion();
     }
-    
-    private Customer editCustomer;
-    
-    private void committedCustomer(){
-        for (int i = 0; i < Customer.customers.size(); i++){        
-        for(Customer cs : Customer.customers){
-            if(cs.getCustId() == i){
-                Customer editCustomer = cs;
-            }   
-        int id = editCustomer.getCustId();
-        String customerName = editCustomer.getCustName();
-        String address = editCustomer.getCustAddress();
-        String stateChoice = editCustomer.getCustState();
-        String countryChoice = editCustomer.getCustCountry();
-        String postalCode = editCustomer.getCustZip();
-        String phone = editCustomer.getCustPhone();
-        DBCustomer.saveCustomer(id, customerName, address, phone, postalCode, stateChoice, countryChoice);
-        }
-        };
-       
-    }
-  
-    public void logout(Stage stage) throws SQLException{	
-		
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Logout");
-        alert.setHeaderText("You're about to logout!");
-        alert.setContentText("Do you want to save before exiting?");
-
-        if (alert.showAndWait().get() == ButtonType.OK){
-                System.out.println("You successfully logged out");
-                DBCustomer.deleteCustomer();
-                //committedCustomer();
-                stage.close();
-        } 
-    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -106,13 +70,6 @@ public class Scheduling extends Application {
             stage.setTitle("Planificateur");
             stage.show();        
     }
-        stage.setOnCloseRequest(event -> {
-            try {	
-                event.consume();
-                logout(stage);
-            } catch (SQLException ex) {
-                Logger.getLogger(Scheduling.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+
     }
 }

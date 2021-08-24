@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import utils.DBAppointments;
 import Model.Customer;
 import Model.UserDB;
+import java.sql.SQLException;
 import java.util.Objects;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -71,30 +72,56 @@ public class MainController implements Initializable {
     private ObservableList<String> ukstates = FXCollections.observableArrayList(
     "England","Wales","Scotland","Northern Ireland");
    
-        
-    @FXML
-    private TableView<Customer> customerTable;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         DBCustomer.getAllCustomers();
+        
 
-    }
-    
-    
-    
-
-    
- @FXML
-        public void handleNew(ActionEvent event) throws IOException {
-                Parent root = FXMLLoader.load(getClass().getResource("/view/Customer.fxml"));
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Customer");
-                stage.show();   
         }
+    
+        
+    private Customer editCustomer;
+    
+    private void committedCustomer(){
+        for (int i = 1; i < Customer.customers.size(); i++){        
+        for(Customer cs : Customer.customers){
+            if(cs.getCustId() == i){
+                Customer editCustomer = cs;
+            }  
+        int id = cs.getCustId();
+        String customerName = cs.getCustName();
+        String address = cs.getCustAddress();
+        String stateChoice = cs.getCustState();
+        String countryChoice = cs.getCustCountry();
+        String postalCode = cs.getCustZip();
+        String phone = cs.getCustPhone();
+        DBCustomer.saveCustomer(id, customerName, address, phone, postalCode, stateChoice, countryChoice);
+        }
+        };
+       
+    }
+      
+ @FXML
+    public void handleNew(ActionEvent event) throws IOException {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/Customer.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Customer");
+            stage.show();   
+    }
+        
+         @FXML
+    public void onCommit(ActionEvent event) throws IOException {
+        //DBCustomer.deleteCustomer();
+        committedCustomer();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Changes saved");
+                alert.setHeaderText("All changes saved.");
+                alert.showAndWait();
+    }
         
 
         

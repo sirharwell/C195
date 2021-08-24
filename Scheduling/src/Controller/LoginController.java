@@ -67,7 +67,7 @@ public class LoginController implements Initializable {
             boolean validUserPass = UserDB.login(username, password);
             
             if(validUserPass){
-                ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+                ((Stage)(((Button)event.getSource()).getScene().getWindow())).hide();
                 Parent root = FXMLLoader.load(getClass().getResource("/view/Main.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);

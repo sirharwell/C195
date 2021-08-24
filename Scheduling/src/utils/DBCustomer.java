@@ -57,14 +57,14 @@ public class DBCustomer {
             Connection conn = DBConnection.getConnection();
             DBQuery.setStatement(conn);
             Statement statement = DBQuery.getStatement();
-            String query = "INSERT INTO customers(Customer_Name, Address, Phone, Postal_Code, Customer_ID)" + 
+            String query = "INSERT INTO customers(Customer_ID, Customer_Name, Address, Phone, Postal_Code)" + 
                     "VALUES(" +
-                    "'" + customerName + "'" +
-                    "'" + address + " " + stateChoice + " " + countryChoice + "'" +
-                    "'" + phone + "'" +
-                    "'" + postalCode + "'" +
-                    "'" + id + "'" + ")";
-            
+                    '"' + id + '"' +
+                    '"' + customerName + '"' +
+                    '"' + (address + " " + stateChoice + " " + countryChoice) + '"' +
+                    '"' + phone + '"' +
+                    '"' + postalCode + '"' + '"';
+            statement.execute(query);
         } catch (SQLException e) {
             System.out.println("SQLException: " + e.getMessage());
         }
