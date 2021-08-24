@@ -57,13 +57,15 @@ public class DBCustomer {
             Connection conn = DBConnection.getConnection();
             DBQuery.setStatement(conn);
             Statement statement = DBQuery.getStatement();
-            String query = "INSERT INTO customers(Customer_ID, Customer_Name, Address, Phone, Postal_Code)" + 
+            String query = "INSERT INTO customers(Customer_ID, Customer_Name, Address, Phone, Postal_Code, Division_ID)" + 
                     "VALUES(" +
-                    '"' + id + '"' +
-                    '"' + customerName + '"' +
-                    '"' + (address + " " + stateChoice + " " + countryChoice) + '"' +
-                    '"' + phone + '"' +
-                    '"' + postalCode + '"' + '"';
+                    "'" + id + "'," +
+                    "'" + customerName + "'," +
+                    "'" + address + " " + stateChoice + " " + countryChoice + "'," +
+                    "'" + phone + "'," + 
+                    "'" + postalCode + "'," +
+                    "15" +
+                    ")";
             statement.execute(query);
         } catch (SQLException e) {
             System.out.println("SQLException: " + e.getMessage());
@@ -79,7 +81,8 @@ public class DBCustomer {
             Connection conn = DBConnection.getConnection();
             DBQuery.setStatement(conn);
             Statement statement = DBQuery.getStatement();
-            String query = "DELETE * FROM customers";
+            String query = "DELETE FROM customers";
+            statement.execute(query);
             
         } catch(SQLException e) {
             System.out.println("SQLException: " + e.getMessage());

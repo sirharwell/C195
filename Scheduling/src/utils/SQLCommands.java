@@ -63,7 +63,7 @@ public class SQLCommands {
         //String deleteStatement = "DELETE FROM country where country = 'Japan'"                    
 
         //retrieve
-        //String selectStatement = "SELECT * FORM country";
+        //String selectStatement = "SELECT * FROM country";
         //statement.execute(selectStatement);
         //ResultSet rs = statement.getResultSet();
         

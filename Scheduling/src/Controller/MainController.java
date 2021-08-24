@@ -23,6 +23,8 @@ import Model.Customer;
 import Model.UserDB;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -115,7 +117,11 @@ public class MainController implements Initializable {
         
          @FXML
     public void onCommit(ActionEvent event) throws IOException {
-        //DBCustomer.deleteCustomer();
+        try {
+            DBCustomer.deleteCustomer();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         committedCustomer();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Changes saved");
