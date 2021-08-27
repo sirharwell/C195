@@ -38,8 +38,8 @@ public class DBCustomer {
             newCustomer.setCustAddress(rs.getString("Address"));
             newCustomer.setCustPhone(rs.getString("Phone"));
             newCustomer.setCustZip(rs.getString("Postal_Code"));
-            newCustomer.setCustCountry(rs.getString("Address"));
-            newCustomer.setCustState(rs.getString("Address"));                                        
+            newCustomer.setCustCountry(rs.getString("Division_ID"));
+            newCustomer.setCustState(rs.getString("Division_ID"));                                        
             newCustomer.setCustId(rs.getInt("Customer_ID"));
             Customer.addCustomer(newCustomer);         
 
