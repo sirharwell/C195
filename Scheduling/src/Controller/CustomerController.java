@@ -17,7 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-//import Model.Appointment;
+import Model.Appointments;
 import utils.DBAppointments;
 import Model.Customer;
 import Model.UserDB;

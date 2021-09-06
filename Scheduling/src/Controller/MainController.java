@@ -17,7 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-//import Model.Appointment;
+import Model.Appointments;
 import utils.DBAppointments;
 import Model.Customer;
 import Model.UserDB;
@@ -112,6 +112,16 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Customer");
+            stage.show();   
+    }
+    
+@FXML
+    public void handleAppointments(ActionEvent event) throws IOException {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Appointments");
             stage.show();   
     }
         

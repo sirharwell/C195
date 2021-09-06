@@ -4,11 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/18018/Documents/NetBeansProjects/C195/Scheduling/src/Controller/MainController.java</file>
-            <file>file:/C:/Users/18018/Documents/NetBeansProjects/C195/Scheduling/src/scheduling/Scheduling.java</file>
+            <file>file:/C:/Users/18018/Documents/NetBeansProjects/C195/Scheduling/src/Controller/AppointmentsController.java</file>
             <file>file:/C:/Users/18018/Documents/NetBeansProjects/C195/Scheduling/src/utils/DBCustomer.java</file>
-            <file>file:/C:/Users/18018/Documents/NetBeansProjects/C195/Scheduling/src/utils/SQLCommands.java</file>
             <file>file:/C:/Users/18018/Documents/NetBeansProjects/C195/Scheduling/src/Controller/CustomerController.java</file>
-            <file>file:/C:/Users/18018/Documents/NetBeansProjects/C195/Scheduling/src/utils/DBCountries.java</file>
+            <file>file:/C:/Users/18018/Documents/NetBeansProjects/C195/Scheduling/src/Model/Appointments.java</file>
             <file>file:/C:/Users/18018/Documents/NetBeansProjects/C195/Scheduling/src/Model/Customer.java</file>
         </group>
     </open-files>
