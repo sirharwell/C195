@@ -23,10 +23,12 @@ import javafx.scene.control.TableView;
 import Model.User;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.TimeZone;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -45,6 +47,8 @@ public class LoginController implements Initializable {
     private Button Login;
     
     @FXML
+    private Text Location;
+    @FXML
     private TextField usernameText;
     
     @FXML
@@ -57,7 +61,7 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //todo
+        Location.setText("You are in " + String.valueOf(TimeZone.getDefault().getID()));
     }  
 
     @FXML

@@ -27,5 +27,6 @@
             <Font size="19.0" />
          </font>
       </Text>
+      <Text fx:id="Location" layoutX="369.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

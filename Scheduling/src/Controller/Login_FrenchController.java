@@ -22,12 +22,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Model.User;
 import java.util.Locale;
+import java.util.TimeZone;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javax.tools.DocumentationTool.Location;
 
 /**
  *
@@ -40,6 +43,7 @@ public class Login_FrenchController {
     public TableColumn idCol;
     public TableColumn nameCol;
     public TableView dataTable;
+    public Text Location;
 
     @FXML
     private Button Login;
@@ -55,6 +59,10 @@ public class Login_FrenchController {
      * @param url
      * @param rb
      */
+    
+    public void initialize(URL url, ResourceBundle rb) {
+        Location.setText("Tu es dans " + String.valueOf(TimeZone.getDefault().getID()));
+    }  
 
     @FXML
         private void handleLogin(ActionEvent event) throws Exception {
