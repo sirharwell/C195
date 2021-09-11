@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -26,6 +28,8 @@ public class Appointments {
     private final SimpleStringProperty aptContact = new SimpleStringProperty();
     
     public Appointments() {}
+    
+    public static final ObservableList<Customer> appointment = FXCollections.observableArrayList();
     
     public Appointments(int id, int custId, String start, String end, String title, String description, String location, String contact) {
         setAptId(id);
