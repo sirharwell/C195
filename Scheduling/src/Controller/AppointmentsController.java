@@ -34,18 +34,18 @@ import javafx.stage.Stage;
  */
 public class AppointmentsController implements Initializable {
 
-        @FXML
-    public ComboBox<String> type;
-    public ComboBox<String> typeUpdate;
-    public ComboBox<String> startTime;
-    public ComboBox<String> startTimeUpdate;
-    public ComboBox<String> endTime;
-    public ComboBox<String> endTimeUpdate;
+    @FXML
+    public ComboBox<String> Type;
+    public ComboBox<String> TypeUpdate;
+    public ComboBox<String> StartTime;
+    public ComboBox<String> StartTimeUpdate;
+    public ComboBox<String> EndTime;
+    public ComboBox<String> EndTimeUpdate;
     public ComboBox<String> Contact;
     public ComboBox<String> ContactUpdate;
-    public ComboBox<Customer> nameNew;
-    public ComboBox<Customer> nameUpdate;
-    public ComboBox<Customer> nameDelete;
+    public ComboBox<Customer> NameNew;
+    public ComboBox<Customer> NameUpdate;
+    public ComboBox<Customer> NameDelete;
     public ComboBox<Appointments> AppointmentUpdate;
     public ComboBox<Appointments> AppointmentDelete;
     public DatePicker endDate;
@@ -68,28 +68,29 @@ public class AppointmentsController implements Initializable {
     public TextField UpdateDescription;
     public TextField UpdateLocation;
 
-    private final ObservableList<String> types = FXCollections.observableArrayList("Introductions","Retirement Planning","Portfolio Analysis","Tax Planning");
-    private final ObservableList<String> times = FXCollections.observableArrayList("9:00 AM","10:00 AM","11:00 AM","12:00 PM","1:00 PM","2:00 PM","3:00 PM","4:00 PM");
+    private ObservableList<String> types = FXCollections.observableArrayList("Introductions","Retirement Planning","Portfolio Analysis","Tax Planning");
+    private ObservableList<String> times = FXCollections.observableArrayList("00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00");
     
+    
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        startTime.setItems(times);
-        startTimeUpdate.setItems(times);
-        endTime.setItems(times);
-        endTimeUpdate.setItems(times);
-        try {
-        nameUpdate.setItems(Customer.customers);
-        nameDelete.setItems(Customer.customers);
-        nameNew.setItems(Customer.customers);
+        StartTime.setItems(times);
+        EndTime.setItems(times);
         Contact.setItems(types);
+        Type.setItems(types);
+        NameNew.setItems(Customer.customers);
         AppointmentUpdate.setItems(Appointments.appointment);
         AppointmentDelete.setItems(Appointments.appointment);
-        }
-        catch (NullPointerException e) {}
         AppointmentUpdate.setPromptText("What to update");
         AppointmentDelete.setPromptText("What to delete");
-
+        try {
+        StartTimeUpdate.setItems(times);
+        EndTimeUpdate.setItems(times);
+        NameUpdate.setItems(Customer.customers);
+        NameDelete.setItems(Customer.customers);
+                }
+        catch (NullPointerException e) {System.out.println(e);}
     }
     
     
@@ -116,14 +117,14 @@ public class AppointmentsController implements Initializable {
             String title = Title.getText();
             String description = Description.getText();
             String location = Location.getText();
-            String aType = type.getSelectionModel().getSelectedItem();
-            Customer newName = nameNew.getSelectionModel().getSelectedItem();
+            String aType = Type.getSelectionModel().getSelectedItem();
+            Customer newName = NameNew.getSelectionModel().getSelectedItem();
             int custID = newName.getCustId();
             String contact = Contact.getSelectionModel().getSelectedItem();
             String dStart = String.valueOf(startDate);
             String dEnd = String.valueOf(endDate);
-            String tStart = startTime.getSelectionModel().getSelectedItem();
-            String tEnd = endTime.getSelectionModel().getSelectedItem();
+            String tStart = StartTime.getSelectionModel().getSelectedItem();
+            String tEnd = EndTime.getSelectionModel().getSelectedItem();
             
             Appointments newAppointment = new Appointments();
             newAppointment.setAptTitle(title);

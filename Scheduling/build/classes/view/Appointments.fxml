@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CustomerController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AppointmentsController">
     <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
         <children>
           <SplitPane dividerPositions="0.3051224944320713, 0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -33,10 +33,10 @@
                         <font>
                            <Font size="21.0" />
                         </font></Button>
-                     <ComboBox fx:id="type" layoutX="61.0" layoutY="210.0" prefWidth="150.0" />
-                     <ComboBox fx:id="startTime" layoutX="153.0" layoutY="245.0" prefHeight="25.0" prefWidth="58.0" />
-                     <ComboBox fx:id="nameNew" layoutX="61.0" layoutY="173.0" prefWidth="150.0" />
-                     <ComboBox fx:id="endTime" layoutX="153.0" layoutY="276.0" prefHeight="25.0" prefWidth="58.0" />
+                     <ComboBox fx:id="Type" layoutX="61.0" layoutY="210.0" prefWidth="150.0" />
+                     <ComboBox fx:id="StartTime" layoutX="153.0" layoutY="245.0" prefHeight="25.0" prefWidth="58.0" />
+                     <ComboBox fx:id="NameNew" layoutX="61.0" layoutY="173.0" prefWidth="150.0" />
+                     <ComboBox fx:id="EndTime" layoutX="153.0" layoutY="276.0" prefHeight="25.0" prefWidth="58.0" />
                      <ComboBox fx:id="Contact" layoutX="61.0" layoutY="309.0" prefWidth="150.0" />
                      <DatePicker fx:id="startDate" layoutX="61.0" layoutY="245.0" prefHeight="25.0" prefWidth="84.0" promptText="Start" />
                      <DatePicker fx:id="endDate" layoutX="61.0" layoutY="276.0" prefHeight="25.0" prefWidth="84.0" promptText="End" />

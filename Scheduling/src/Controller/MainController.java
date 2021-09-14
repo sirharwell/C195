@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import utils.DBCustomer;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -107,9 +108,10 @@ public class MainController implements Initializable {
       
  @FXML
     public void handleNew(ActionEvent event) throws IOException {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/Customer.fxml"));
+            Parent loader = FXMLLoader.load(getClass().getResource("/view/Customer.fxml"));
             Stage stage = new Stage();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(loader);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Customer");
             stage.show();   
@@ -120,6 +122,7 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(root);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Appointments");
             stage.show();   
