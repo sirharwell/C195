@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.Appointments;
+import static Model.Appointments.getAppointmentCount;
 import Model.Customer;
 import java.io.IOException;
 import java.net.URL;
@@ -46,6 +47,7 @@ public class AppointmentsController implements Initializable {
     public ComboBox<Customer> nameUpdate;
     public ComboBox<Customer> nameDelete;
     public ComboBox<Appointments> AppointmentUpdate;
+    public ComboBox<Appointments> AppointmentDelete;
     public DatePicker endDate;
     public DatePicker endDateUpdate;
     public DatePicker startDate;
@@ -77,11 +79,16 @@ public class AppointmentsController implements Initializable {
         endTime.setItems(times);
         endTimeUpdate.setItems(times);
         try {
-        nameUpdate.setItems(Appointments.appointment);
-        nameDelete.setItems(Appointments.appointment);}
+        nameUpdate.setItems(Customer.customers);
+        nameDelete.setItems(Customer.customers);
+        nameNew.setItems(Customer.customers);
+        Contact.setItems(types);
+        AppointmentUpdate.setItems(Appointments.appointment);
+        AppointmentDelete.setItems(Appointments.appointment);
+        }
         catch (NullPointerException e) {}
-        nameUpdate.setPromptText("Who to update");
-        nameDelete.setPromptText("Who to delete");
+        AppointmentUpdate.setPromptText("What to update");
+        AppointmentDelete.setPromptText("What to delete");
 
     }
     
@@ -94,9 +101,8 @@ public class AppointmentsController implements Initializable {
         
         }
     
-
-            public boolean validateEverything(String customerName, String address, String postalCode, String phone, String countryChoice, String stateChoice) {
-        if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phone.isEmpty() || countryChoice == null || stateChoice == null ) {
+            public boolean validateEverything(int aptCustId, String aptDStart, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, String aptContact ) {
+        if(aptCustId == 0 || aptDStart.isEmpty() || aptDEnd.isEmpty() || aptTStart.isEmpty() || aptTEnd.isEmpty() || aptTitle == null || aptDescription == null|| aptLocation == null|| aptContact == null) {
             return false;
         } else {
             return true;
@@ -107,37 +113,43 @@ public class AppointmentsController implements Initializable {
  @FXML
         public void handleNew(ActionEvent event) throws IOException {
             StringBuilder sb = new StringBuilder(" ");
-            String customerName = Customer_Name.getText();
-            String address = Address.getText();
-            String postalCode = Postal_Code.getText();
-            String phone = Phone.getText();
-            String countryChoice = country.getSelectionModel().getSelectedItem();
-            String stateChoice = state.getSelectionModel().getSelectedItem();
+            String title = Title.getText();
+            String description = Description.getText();
+            String location = Location.getText();
+            String aType = type.getSelectionModel().getSelectedItem();
+            Customer newName = nameNew.getSelectionModel().getSelectedItem();
+            int custID = newName.getCustId();
+            String contact = Contact.getSelectionModel().getSelectedItem();
+            String dStart = String.valueOf(startDate);
+            String dEnd = String.valueOf(endDate);
+            String tStart = startTime.getSelectionModel().getSelectedItem();
+            String tEnd = endTime.getSelectionModel().getSelectedItem();
             
-            Customer newCustomer = new Customer();
-            newCustomer.setCustName(customerName);
-            newCustomer.setCustAddress(address);
-            newCustomer.setCustPhone(phone);
-            newCustomer.setCustZip(postalCode);
-            newCustomer.setCustCountry(countryChoice);
-            newCustomer.setCustState(stateChoice);
-                                                    
-            newCustomer.setCustId(Customer.getCustomerCount());
-            
-            
-            if(validateEverything(customerName, address, postalCode, phone, countryChoice, stateChoice)){
-                Customer.addCustomer(newCustomer);
+            Appointments newAppointment = new Appointments();
+            newAppointment.setAptTitle(title);
+            newAppointment.setAptDescription(description);
+            newAppointment.setAptLocation(location);
+            newAppointment.setAptDStart(dStart);
+            newAppointment.setAptDEnd(dEnd);
+            newAppointment.setAptTStart(tStart);
+            newAppointment.setAptTEnd(tEnd);
+            newAppointment.setAptContact(contact);
+            newAppointment.setAptId(getAppointmentCount());
+            newAppointment.setAptCustId(custID);
+
+            if(validateEverything(custID, dStart, dEnd, tStart, tEnd, title, description, location, contact)){
+                Appointments.addAppointments(newAppointment);
                 ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Customer Added");
-                alert.setHeaderText("Customer saved successfully");
+                alert.setTitle("Appointment Added");
+                alert.setHeaderText("Appointment saved successfully");
                 alert.showAndWait();
                 
-                System.out.println(Customer.customers);
+                System.out.println(Appointments.appointment);
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Issue adding a customer");
+                alert.setTitle("Issue adding an Appointment");
                 alert.setHeaderText("Please fill in all prompts");
                 alert.setContentText("Including the drop downs");
                 alert.showAndWait();
@@ -146,12 +158,12 @@ public class AppointmentsController implements Initializable {
             
         }
         
- private Customer editCustomer;
+ private Appointments editAppointment;
         
-  @FXML
-        public void handleUpdate(ActionEvent event) throws IOException {
+ /* @FXML
+        public void handleAppointmentUpdate(ActionEvent event) throws IOException {
             
-            editCustomer = nameUpdate.getSelectionModel().getSelectedItem();
+            editAppointment = AppointmentUpdate.getSelectionModel().getSelectedItem();
 
                 UpdateCID.setText(String.valueOf(editCustomer.getCustId()));
                 UpdateCN.setText(editCustomer.getCustName());
@@ -161,13 +173,14 @@ public class AppointmentsController implements Initializable {
                 UpdatePC.setText(editCustomer.getCustZip());
                 UpdatePh.setText(editCustomer.getCustPhone());
 
-  
+ 
 
             
-        }
+        } */
         
         @FXML
         public void saveUpdate(ActionEvent event) throws IOException {
+            /*
             StringBuilder sb = new StringBuilder(" ");
             String customerName = UpdateCN.getText();
             String address = UpdateAdd.getText();
@@ -190,11 +203,12 @@ public class AppointmentsController implements Initializable {
                 alert.setTitle("Customer Updated");
                 alert.setHeaderText("Customer saved successfully");
                 alert.showAndWait();
-            
+            */
         }
         
   @FXML
         public void handleDelete(ActionEvent event) throws IOException {
+            /*
             editCustomer = nameDelete.getSelectionModel().getSelectedItem();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Customer Delete");
@@ -205,7 +219,7 @@ public class AppointmentsController implements Initializable {
             if (result.get() == ButtonType.OK) {
                 Customer.removeCustomer(editCustomer);
                 ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
-            }
+            }*/
         }
         
         @FXML

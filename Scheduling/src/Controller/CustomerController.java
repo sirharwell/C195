@@ -85,20 +85,18 @@ public class CustomerController implements Initializable {
         
     
     
-    @Override
+    
     public void initialize(URL url, ResourceBundle rb) {
-
+        try {
         country.setItems(countries);
         updateCountry.setItems(countries);
-        try {
         nameUpdate.setItems(Customer.customers);
-        nameDelete.setItems(Customer.customers);}
-        catch (NullPointerException e) {}
+        nameDelete.setItems(Customer.customers);
         country.setPromptText("Country");
         state.setPromptText("State/Territory");
         nameUpdate.setPromptText("Who to update");
-        nameDelete.setPromptText("Who to delete");
-
+        nameDelete.setPromptText("Who to delete");}
+          catch (NullPointerException e) {}
     }
     
     

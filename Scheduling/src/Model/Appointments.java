@@ -18,24 +18,35 @@ import javafx.collections.ObservableList;
  * @author 18018
  */
 public class Appointments {
-    private final SimpleIntegerProperty aptId = new SimpleIntegerProperty();
-    private final SimpleIntegerProperty aptCustId = new SimpleIntegerProperty();
-    private final SimpleStringProperty aptStart = new SimpleStringProperty();
-    private final SimpleStringProperty aptEnd = new SimpleStringProperty();
-    private final SimpleStringProperty aptTitle = new SimpleStringProperty();
-    private final SimpleStringProperty aptDescription = new SimpleStringProperty();
-    private final SimpleStringProperty aptLocation = new SimpleStringProperty();
-    private final SimpleStringProperty aptContact = new SimpleStringProperty();
+    private int aptId;
+    private int aptCustId;
+    private String aptDStart;
+    private String aptDEnd;
+    private String aptTStart;
+    private String aptTEnd;
+    private String aptTitle;
+    private String aptDescription;
+    private String aptLocation;
+    private String aptContact;
     
     public Appointments() {}
     
-    public static final ObservableList<Customer> appointment = FXCollections.observableArrayList();
+    public static final ObservableList<Appointments> appointment = FXCollections.observableArrayList();
     
-    public Appointments(int id, int custId, String start, String end, String title, String description, String location, String contact) {
+    public static void addAppointments(Appointments newAppointment){
+        appointment.add(newAppointment);
+    }
+    public static void removeAppointments(Appointments removeAppointment){
+        appointment.remove(removeAppointment);
+    }
+    
+    public Appointments(int id, int custId, String dStart, String dEnd, String tStart, String tEnd, String title, String description, String location, String contact) {
         setAptId(id);
         setAptCustId(custId);
-        setAptStart(start);
-        setAptEnd(end);
+        setAptDStart(dStart);
+        setAptDEnd(dEnd);
+        setAptTStart(tStart);
+        setAptTEnd(tEnd);
         setAptTitle(title);
         setAptDescription(description);
         setAptLocation(location);
@@ -43,70 +54,86 @@ public class Appointments {
     }
     
     public int getAptId() {
-        return aptId.get();
+        return aptId;
     }
     
     public int getAptCustId() {
-        return aptCustId.get();
+        return aptCustId;
     }
     
-    public String getAptEnd() {
-        return aptEnd.get();
+    public String getAptTEnd() {
+        return aptTEnd;
     }
     
-    public String getAptStart() {
-        return aptStart.get();
+    public String getAptTStart() {
+        return aptTStart;
+    }
+    
+    public String getAptDEnd() {
+        return aptDEnd;
+    }
+    
+    public String getAptDStart() {
+        return aptDStart;
     }
     
     public String getAptTitle() {
-        return aptTitle.get();
+        return aptTitle;
     }
     
     public String getAptDescription() {
-        return aptDescription.get();
+        return aptDescription;
     }
     
     public String getAptLocation() {
-        return aptLocation.get();
+        return aptLocation;
     }
     
     public String getAptContact() {
-        return aptContact.get();
+        return aptContact;
     }
     
     public void setAptId(int aptId) {
-        this.aptId.set(aptId);
+        this.aptId = aptId;
     }
     
     public void setAptCustId(int aptCustId) {
-        this.aptCustId.set(aptCustId);
+        this.aptCustId = aptCustId;
     }
     
-    public void setAptEnd(String aptEnd) {
-        this.aptEnd.set(aptEnd);
+    public void setAptTEnd(String aptTEnd) {
+        this.aptTEnd = aptTEnd;
     }
     
-    public void setAptStart(String aptTimeStart) {
-        this.aptStart.set(aptTimeStart);
+    public void setAptTStart(String aptTStart) {
+        this.aptTStart = aptTStart;
+    } 
+    
+    public void setAptDEnd(String aptDEnd) {
+        this.aptDEnd = aptDEnd;
+    }
+    
+    public void setAptDStart(String aptDStart) {
+        this.aptDStart = aptDStart;
     } 
     
     public void setAptTitle(String aptTitle) {
-        this.aptTitle.set(aptTitle);
+        this.aptTitle = aptTitle;
     }
     
     public void setAptDescription(String aptDescription) {
-        this.aptDescription.set(aptDescription);
+        this.aptDescription = aptDescription;
     }
     
     public void setAptLocation(String aptLocation) {
-        this.aptLocation.set(aptLocation);
+        this.aptLocation = aptLocation;
     }
     
     public void setAptContact(String aptContact) {
-        this.aptContact.set(aptContact);
+        this.aptContact = aptContact;
     }
     
-    public StringProperty getAptEndProperty() {
+    /*  public StringProperty getAptEndProperty() {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
  	LocalDateTime ldt = LocalDateTime.parse(this.aptEnd.getValue(), df);
         ZonedDateTime zdt = ldt.atZone(ZoneId.of("UTC"));
@@ -200,5 +227,13 @@ public class Appointments {
         DateTimeFormatter tFormatter = DateTimeFormatter.ofPattern("kk:mm"); 
 	LocalTime localTime = LocalTime.parse(utcDate.toString().substring(11,16), tFormatter);
         return localTime.toString();
+    }*/
+    
+    public static int getAppointmentCount(){
+        return (appointment.size() + 1); }   
+    
+        @Override
+    public String toString(){
+        return(String.valueOf(aptTitle));
     }
 }

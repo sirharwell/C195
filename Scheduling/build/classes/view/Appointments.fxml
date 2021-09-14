@@ -33,7 +33,7 @@
                         <font>
                            <Font size="21.0" />
                         </font></Button>
-                     <ComboBox fx:id="type" layoutX="61.0" layoutY="210.0" onAction="#onPullType" prefWidth="150.0" />
+                     <ComboBox fx:id="type" layoutX="61.0" layoutY="210.0" prefWidth="150.0" />
                      <ComboBox fx:id="startTime" layoutX="153.0" layoutY="245.0" prefHeight="25.0" prefWidth="58.0" />
                      <ComboBox fx:id="nameNew" layoutX="61.0" layoutY="173.0" prefWidth="150.0" />
                      <ComboBox fx:id="endTime" layoutX="153.0" layoutY="276.0" prefHeight="25.0" prefWidth="58.0" />
@@ -119,7 +119,7 @@
             <Color red="0.624" green="0.624" blue="0.624" fx:id="x21111111" />
             </textFill>
             </Label>
-                     <ComboBox fx:id="AppointmentUpdate" layoutX="112.0" layoutY="50.0" onAction="#handleAppointmentUpdate" prefWidth="150.0" />
+                     <ComboBox fx:id="AppointmentUpdate" layoutX="112.0" layoutY="50.0" prefWidth="150.0" />
                      <ComboBox fx:id="nameUpdate" layoutX="156.0" layoutY="237.0" prefWidth="150.0" />
                      <ComboBox fx:id="endTimeUpdate" layoutX="248.0" layoutY="339.0" prefHeight="25.0" prefWidth="58.0" />
                      <Label alignment="CENTER" layoutX="44.0" layoutY="369.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Contact" textAlignment="CENTER" wrapText="false">
@@ -158,7 +158,7 @@
                            <Font size="27.0" />
                         </font>
                      </Button>
-                     <ComboBox fx:id="nameDelete" layoutX="61.0" layoutY="51.0" prefWidth="150.0" />
+                     <ComboBox fx:id="AppointmentDelete" layoutX="61.0" layoutY="51.0" prefWidth="150.0" />
                      <Button fx:id="Back" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="149.0" prefWidth="245.0" text="Back to Main">
                         <font>
                            <Font size="27.0" />
