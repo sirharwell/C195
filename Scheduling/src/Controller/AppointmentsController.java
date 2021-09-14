@@ -102,7 +102,7 @@ public class AppointmentsController implements Initializable {
         }
     
             public boolean validateEverything(int aptCustId, String aptDStart, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, String aptContact ) {
-        if(aptCustId == 0 || aptDStart.isEmpty() || aptDEnd.isEmpty() || aptTStart.isEmpty() || aptTEnd.isEmpty() || aptTitle == null || aptDescription == null|| aptLocation == null|| aptContact == null) {
+        if(aptCustId == 0 || aptDStart.isEmpty() || aptDEnd.isEmpty() || aptTStart.isEmpty() || aptTEnd.isEmpty() || aptTitle.isEmpty() || aptDescription.isEmpty() || aptLocation.isEmpty() || aptContact.isEmpty()) {
             return false;
         } else {
             return true;
