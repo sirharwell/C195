@@ -109,6 +109,22 @@ public class AppointmentsController implements Initializable {
             return true;
         }
     }
+            public boolean validateOverlap(String dStart, String tStart) {
+        for (int i = 1; i < Appointments.appointment.size(); i++){        
+        for(Appointments apt : Appointments.appointment){
+            if(apt.getAptId() == i){
+                Appointments editAppointment = apt;
+                String exDStart = apt.getAptDStart();
+                String exTStart = apt.getAptTStart();
+            if(tStart == exDStart && tStart == exTStart){
+                return true;}
+            else {
+                return false;}
+                }
+            else {
+            return false;
+            }  }}
+            return false;}
 
     
  @FXML
@@ -138,6 +154,17 @@ public class AppointmentsController implements Initializable {
             newAppointment.setAptId(getAppointmentCount());
             newAppointment.setAptCustId(custID);
 
+            if(validateOverlap(dStart, tStart)){
+                
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Issue adding an Appointment");
+                alert.setHeaderText("You already have an appointment scheduled for this time.");
+                alert.setContentText("Please pick a different time/date.");
+                alert.showAndWait();    
+            }
+            else {
+                System.out.println(Appointments.appointment);}           
+            
             if(validateEverything(custID, dStart, dEnd, tStart, tEnd, title, description, location, contact)){
                 Appointments.addAppointments(newAppointment);
                 ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
