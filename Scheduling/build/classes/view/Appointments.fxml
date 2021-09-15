@@ -26,20 +26,20 @@
                       <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
                     </textFill>
                   </Label>
-                     <TextField fx:id="Title" alignment="CENTER" layoutX="61.0" layoutY="58.0" promptText="Title" />
-                     <TextField fx:id="Description" alignment="CENTER" layoutX="61.0" layoutY="96.0" promptText="Description" />
-                     <TextField fx:id="Location" alignment="CENTER" layoutX="61.0" layoutY="132.0" promptText="Location" />
+                     <TextField fx:id="Title" alignment="CENTER" layoutX="36.0" layoutY="58.0" prefHeight="26.0" prefWidth="195.0" promptText="Title" />
+                     <TextField fx:id="Description" alignment="CENTER" layoutX="36.0" layoutY="96.0" prefHeight="26.0" prefWidth="195.0" promptText="Description" />
+                     <TextField fx:id="Location" alignment="CENTER" layoutX="36.0" layoutY="132.0" prefHeight="26.0" prefWidth="195.0" promptText="Location" />
                      <Button fx:id="New" layoutX="16.0" layoutY="402.0" mnemonicParsing="false" onAction="#handleNew" prefHeight="102.0" prefWidth="237.0" text="Add Appointment">
                         <font>
                            <Font size="21.0" />
                         </font></Button>
-                     <ComboBox fx:id="Type" layoutX="61.0" layoutY="210.0" prefWidth="150.0" />
-                     <ComboBox fx:id="StartTime" layoutX="153.0" layoutY="245.0" prefHeight="25.0" prefWidth="58.0" />
-                     <ComboBox fx:id="NameNew" layoutX="61.0" layoutY="173.0" prefWidth="150.0" />
-                     <ComboBox fx:id="EndTime" layoutX="153.0" layoutY="276.0" prefHeight="25.0" prefWidth="58.0" />
-                     <ComboBox fx:id="Contact" layoutX="61.0" layoutY="309.0" prefWidth="150.0" />
-                     <DatePicker fx:id="startDate" layoutX="61.0" layoutY="245.0" prefHeight="25.0" prefWidth="84.0" promptText="Start" />
-                     <DatePicker fx:id="endDate" layoutX="61.0" layoutY="276.0" prefHeight="25.0" prefWidth="84.0" promptText="End" />
+                     <ComboBox fx:id="Type" layoutX="36.0" layoutY="210.0" prefHeight="26.0" prefWidth="195.0" />
+                     <ComboBox fx:id="StartTime" layoutX="153.0" layoutY="245.0" prefHeight="26.0" prefWidth="77.0" />
+                     <ComboBox fx:id="NameNew" layoutX="36.0" layoutY="173.0" prefHeight="26.0" prefWidth="195.0" />
+                     <ComboBox fx:id="EndTime" layoutX="153.0" layoutY="276.0" prefHeight="26.0" prefWidth="78.0" />
+                     <ComboBox fx:id="Contact" layoutX="36.0" layoutY="309.0" prefHeight="26.0" prefWidth="195.0" />
+                     <DatePicker fx:id="startDate" layoutX="38.0" layoutY="245.0" prefHeight="26.0" prefWidth="107.0" promptText="Start" />
+                     <DatePicker fx:id="endDate" layoutX="38.0" layoutY="276.0" prefHeight="26.0" prefWidth="107.0" promptText="End" />
                      </children>
               </AnchorPane>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="359.0">

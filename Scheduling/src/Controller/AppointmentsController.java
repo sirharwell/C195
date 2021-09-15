@@ -10,6 +10,7 @@ import static Model.Appointments.getAppointmentCount;
 import Model.Customer;
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -109,22 +110,16 @@ public class AppointmentsController implements Initializable {
             return true;
         }
     }
-            public boolean validateOverlap(String dStart, String tStart) {
-        for (int i = 1; i < Appointments.appointment.size(); i++){        
+
+        public boolean overLap(String dStart, String tStart){       
         for(Appointments apt : Appointments.appointment){
-            if(apt.getAptId() == i){
-                Appointments editAppointment = apt;
-                String exDStart = apt.getAptDStart();
-                String exTStart = apt.getAptTStart();
-            if(tStart == exDStart && tStart == exTStart){
-                return true;}
+            if(apt.getAptDStart().contains(dStart) && apt.getAptTStart().contains(tStart)){
+                return true;
+            }
             else {
+                return false;
+            }}
                 return false;}
-                }
-            else {
-            return false;
-            }  }}
-            return false;}
 
     
  @FXML
@@ -137,8 +132,8 @@ public class AppointmentsController implements Initializable {
             Customer newName = NameNew.getSelectionModel().getSelectedItem();
             int custID = newName.getCustId();
             String contact = Contact.getSelectionModel().getSelectedItem();
-            String dStart = String.valueOf(startDate);
-            String dEnd = String.valueOf(endDate);
+            String dStart = startDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String dEnd = endDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));            
             String tStart = StartTime.getSelectionModel().getSelectedItem();
             String tEnd = EndTime.getSelectionModel().getSelectedItem();
             
@@ -153,18 +148,16 @@ public class AppointmentsController implements Initializable {
             newAppointment.setAptContact(contact);
             newAppointment.setAptId(getAppointmentCount());
             newAppointment.setAptCustId(custID);
-
-            if(validateOverlap(dStart, tStart)){
-                
+            System.out.println(dStart);
+            System.out.println(tStart);
+            if(overLap(dStart, tStart)){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Issue adding an Appointment");
                 alert.setHeaderText("You already have an appointment scheduled for this time.");
                 alert.setContentText("Please pick a different time/date.");
                 alert.showAndWait();    
             }
-            else {
-                System.out.println(Appointments.appointment);}           
-            
+            else {                    
             if(validateEverything(custID, dStart, dEnd, tStart, tEnd, title, description, location, contact)){
                 Appointments.addAppointments(newAppointment);
                 ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
@@ -181,7 +174,7 @@ public class AppointmentsController implements Initializable {
                 alert.setHeaderText("Please fill in all prompts");
                 alert.setContentText("Including the drop downs");
                 alert.showAndWait();
-            }
+            }}
             
             
         }
