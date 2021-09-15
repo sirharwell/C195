@@ -10,9 +10,16 @@ import static Model.Appointments.getAppointmentCount;
 import Model.Customer;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -121,6 +128,25 @@ public class AppointmentsController implements Initializable {
             }}
                 return false;}
 
+        public boolean businessHours(String tStart, String tEnd, String dStart, String dEnd){
+            LocalDate easternD = LocalDate.of(2019, 10, 26);
+            LocalTime easternT = LocalTime.of(01, 00);
+            ZoneId easternId = ZoneId.of("America/New_York");
+            ZonedDateTime easternZDT = ZonedDateTime.of(easternD, easternT, easternId);
+            ZoneId localZone = ZoneId.of(TimeZone.getDefault().getID());
+            LocalDateTime now = LocalDateTime.now();
+            ZoneId zid = ZoneId.systemDefault();
+            ZonedDateTime zdt = now.atZone(zid);
+            
+            Instant easternToGMT = easternZDT.toInstant();
+            ZonedDateTime easternToLocal = easternZDT.withZoneSameInstant(localZone);
+            ZonedDateTime gstToLocalZDT = easternToGMT.atZone(localZone);
+            ZonedDateTime localToEastern = zdt.withZoneSameInstant(easternId);
+            
+            
+            
+            
+        return false;}
     
  @FXML
         public void handleNew(ActionEvent event) throws IOException {
@@ -148,8 +174,6 @@ public class AppointmentsController implements Initializable {
             newAppointment.setAptContact(contact);
             newAppointment.setAptId(getAppointmentCount());
             newAppointment.setAptCustId(custID);
-            System.out.println(dStart);
-            System.out.println(tStart);
             if(overLap(dStart, tStart)){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Issue adding an Appointment");
