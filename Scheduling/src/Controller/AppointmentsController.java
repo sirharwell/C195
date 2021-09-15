@@ -10,6 +10,8 @@ import static Model.Appointments.getAppointmentCount;
 import Model.Customer;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +19,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
@@ -128,28 +131,53 @@ public class AppointmentsController implements Initializable {
             }}
                 return false;}
 
-        public boolean businessHours(String tStart, String tEnd, String dStart, String dEnd){
-            LocalDate easternD = LocalDate.of(2019, 10, 26);
-            LocalTime easternT = LocalTime.of(01, 00);
+        public boolean businessHours(String tStart, String tEnd) throws ParseException{
+            DateTimeFormatter tf = DateTimeFormatter.ofPattern("HH:mm");
+            ZoneId zid = ZoneId.systemDefault();
+            LocalTime lts = LocalTime.parse(tStart, tf);
+            LocalDate lds = LocalDate.of(2021, 9, 15);
+            ZonedDateTime tdStart = ZonedDateTime.of(lds, lts, zid);           
+            LocalTime lte = LocalTime.parse(tEnd, tf);
+            LocalDate lde = LocalDate.of(2021, 9, 15);   
+            ZonedDateTime tdEnd = ZonedDateTime.of(lde, lte, zid);
+            LocalDate easternD = LocalDate.of(2021, 9, 15);
+            LocalTime easternT = LocalTime.of(11, 00);
             ZoneId easternId = ZoneId.of("America/New_York");
             ZonedDateTime easternZDT = ZonedDateTime.of(easternD, easternT, easternId);
             ZoneId localZone = ZoneId.of(TimeZone.getDefault().getID());
             LocalDateTime now = LocalDateTime.now();
-            ZoneId zid = ZoneId.systemDefault();
+            
             ZonedDateTime zdt = now.atZone(zid);
             
             Instant easternToGMT = easternZDT.toInstant();
             ZonedDateTime easternToLocal = easternZDT.withZoneSameInstant(localZone);
             ZonedDateTime gstToLocalZDT = easternToGMT.atZone(localZone);
             ZonedDateTime localToEastern = zdt.withZoneSameInstant(easternId);
-            
+            ZonedDateTime startToEastern = tdStart.withZoneSameInstant(easternId);
+            ZonedDateTime endToEastern = tdEnd.withZoneSameInstant(easternId);
+            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+            Date ten = parser.parse("22:00");
+            Date eight = parser.parse("08:00");
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm");
+            String formattedEnd = endToEastern.format(myFormatObj);
+            String formattedStart = startToEastern.format(myFormatObj);
+            Date endTime = parser.parse(formattedEnd);
+            Date startTime = parser.parse(formattedStart);
+            System.out.println(formattedStart);
+            System.out.println(formattedEnd);
+            if(startTime.after(ten) || startTime.before(eight)  ) {
+                return true;
+            }
+            if(endTime.after(ten) || endTime.before(eight)  ) {
+                return true;
+            }
             
             
             
         return false;}
     
  @FXML
-        public void handleNew(ActionEvent event) throws IOException {
+        public void handleNew(ActionEvent event) throws IOException, ParseException {
             StringBuilder sb = new StringBuilder(" ");
             String title = Title.getText();
             String description = Description.getText();
@@ -174,6 +202,14 @@ public class AppointmentsController implements Initializable {
             newAppointment.setAptContact(contact);
             newAppointment.setAptId(getAppointmentCount());
             newAppointment.setAptCustId(custID);
+            if(businessHours(tStart, tEnd)){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Issue adding an Appointment");
+                alert.setHeaderText("Appointment outside busisness hours.");
+                alert.setContentText("Please pick a different time.");
+                alert.showAndWait(); 
+            }
+            else{
             if(overLap(dStart, tStart)){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Issue adding an Appointment");
@@ -201,7 +237,7 @@ public class AppointmentsController implements Initializable {
             }}
             
             
-        }
+        }}
         
  private Appointments editAppointment;
         
