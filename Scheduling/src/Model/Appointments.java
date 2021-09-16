@@ -28,6 +28,7 @@ public class Appointments {
     private String aptDescription;
     private String aptLocation;
     private String aptContact;
+    private String aptType;
     
     public Appointments() {}
     
@@ -40,7 +41,7 @@ public class Appointments {
         appointment.remove(removeAppointment);
     }
     
-    public Appointments(int id, int custId, String dStart, String dEnd, String tStart, String tEnd, String title, String description, String location, String contact) {
+    public Appointments(int id, int custId, String dStart, String dEnd, String tStart, String tEnd, String title, String description, String location, String contact, String type) {
         setAptId(id);
         setAptCustId(custId);
         setAptDStart(dStart);
@@ -51,6 +52,7 @@ public class Appointments {
         setAptDescription(description);
         setAptLocation(location);
         setAptContact(contact);
+        setAptType(type);
     }
     
     public int getAptId() {
@@ -93,6 +95,10 @@ public class Appointments {
         return aptContact;
     }
     
+    public String getAptType() {
+    return aptType;
+    }
+    
     public void setAptId(int aptId) {
         this.aptId = aptId;
     }
@@ -133,6 +139,9 @@ public class Appointments {
         this.aptContact = aptContact;
     }
     
+    public void setAptType(String aptType) {
+    this.aptType = aptType;
+    }
     /*  public StringProperty getAptEndProperty() {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
  	LocalDateTime ldt = LocalDateTime.parse(this.aptEnd.getValue(), df);

@@ -47,15 +47,15 @@ public class AppointmentsController implements Initializable {
 
     @FXML
     public ComboBox<String> Type;
-    public ComboBox<String> TypeUpdate;
+    public ComboBox<String> typeUpdate;
     public ComboBox<String> StartTime;
-    public ComboBox<String> StartTimeUpdate;
+    public ComboBox<String> startTimeUpdate;
     public ComboBox<String> EndTime;
-    public ComboBox<String> EndTimeUpdate;
+    public ComboBox<String> endTimeUpdate;
     public ComboBox<String> Contact;
     public ComboBox<String> ContactUpdate;
     public ComboBox<Customer> NameNew;
-    public ComboBox<Customer> NameUpdate;
+    public ComboBox<Customer> nameUpdate;
     public ComboBox<Customer> NameDelete;
     public ComboBox<Appointments> AppointmentUpdate;
     public ComboBox<Appointments> AppointmentDelete;
@@ -96,9 +96,9 @@ public class AppointmentsController implements Initializable {
         AppointmentUpdate.setPromptText("What to update");
         AppointmentDelete.setPromptText("What to delete");
         try {
-        StartTimeUpdate.setItems(times);
-        EndTimeUpdate.setItems(times);
-        NameUpdate.setItems(Customer.customers);
+        startTimeUpdate.setItems(times);
+        endTimeUpdate.setItems(times);
+        nameUpdate.setItems(Customer.customers);
         NameDelete.setItems(Customer.customers);
                 }
         catch (NullPointerException e) {System.out.println(e);}
@@ -113,8 +113,8 @@ public class AppointmentsController implements Initializable {
         
         }
     
-            public boolean validateEverything(int aptCustId, String aptDStart, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, String aptContact ) {
-        if(aptCustId == 0 || aptDStart.isEmpty() || aptDEnd.isEmpty() || aptTStart.isEmpty() || aptTEnd.isEmpty() || aptTitle.isEmpty() || aptDescription.isEmpty() || aptLocation.isEmpty() || aptContact.isEmpty()) {
+            public boolean validateEverything(int aptCustId, String aptDStart, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, String aptContact, String aptType ) {
+        if(aptCustId == 0 || aptDStart.isEmpty() || aptDEnd.isEmpty() || aptTStart.isEmpty() || aptTEnd.isEmpty() || aptTitle.isEmpty() || aptDescription.isEmpty() || aptLocation.isEmpty() || aptType.isEmpty() || aptContact.isEmpty()) {
             return false;
         } else {
             return true;
@@ -196,6 +196,7 @@ public class AppointmentsController implements Initializable {
             newAppointment.setAptDescription(description);
             newAppointment.setAptLocation(location);
             newAppointment.setAptDStart(dStart);
+            newAppointment.setAptType(aType);
             newAppointment.setAptDEnd(dEnd);
             newAppointment.setAptTStart(tStart);
             newAppointment.setAptTEnd(tEnd);
@@ -218,7 +219,7 @@ public class AppointmentsController implements Initializable {
                 alert.showAndWait();    
             }
             else {                    
-            if(validateEverything(custID, dStart, dEnd, tStart, tEnd, title, description, location, contact)){
+            if(validateEverything(custID, dStart, dEnd, tStart, tEnd, title, description, location, contact, aType)){
                 Appointments.addAppointments(newAppointment);
                 ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -241,23 +242,29 @@ public class AppointmentsController implements Initializable {
         
  private Appointments editAppointment;
         
- /* @FXML
+ @FXML
         public void handleAppointmentUpdate(ActionEvent event) throws IOException {
             
             editAppointment = AppointmentUpdate.getSelectionModel().getSelectedItem();
-
-                UpdateCID.setText(String.valueOf(editCustomer.getCustId()));
-                UpdateCN.setText(editCustomer.getCustName());
-                UpdateAdd.setText(editCustomer.getCustAddress());
-                updateState.getSelectionModel().select(editCustomer.getCustState());
-                updateCountry.getSelectionModel().select(editCustomer.getCustCountry());
-                UpdatePC.setText(editCustomer.getCustZip());
-                UpdatePh.setText(editCustomer.getCustPhone());
+                    Appointments newAppointment = new Appointments();
+                UpdateAID.setText(String.valueOf(editAppointment.getAptId()));
+                UpdateTitle.setText(editAppointment.getAptTitle());
+                UpdateLocation.setText(editAppointment.getAptLocation());
+                LocalDate valS = LocalDate.parse(editAppointment.getAptDStart());
+                startDateUpdate.setValue(valS);
+                LocalDate valE = LocalDate.parse(editAppointment.getAptDEnd());
+                endDateUpdate.setValue(valE);
+                nameUpdate.getSelectionModel().select(editAppointment.getAptCustId());
+                typeUpdate.getSelectionModel().select(editAppointment.getAptType());
+                startTimeUpdate.getSelectionModel().select(editAppointment.getAptTStart());
+                endTimeUpdate.getSelectionModel().select(editAppointment.getAptTEnd());
+                ContactUpdate.getSelectionModel().select(editAppointment.getAptContact());
+                UpdateDescription.setText(editAppointment.getAptDescription());
 
  
 
             
-        } */
+        }
         
         @FXML
         public void saveUpdate(ActionEvent event) throws IOException {
