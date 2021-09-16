@@ -89,6 +89,8 @@ public class AppointmentsController implements Initializable {
         StartTime.setItems(times);
         EndTime.setItems(times);
         Contact.setItems(types);
+        ContactUpdate.setItems(types);
+        typeUpdate.setItems(types);
         Type.setItems(types);
         NameNew.setItems(Customer.customers);
         AppointmentUpdate.setItems(Appointments.appointment);
@@ -114,7 +116,7 @@ public class AppointmentsController implements Initializable {
         }
     
             public boolean validateEverything(int aptCustId, String aptDStart, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, String aptContact, String aptType ) {
-        if(aptCustId == 0 || aptDStart.isEmpty() || aptDEnd.isEmpty() || aptTStart.isEmpty() || aptTEnd.isEmpty() || aptTitle.isEmpty() || aptDescription.isEmpty() || aptLocation.isEmpty() || aptType.isEmpty() || aptContact.isEmpty()) {
+        if(aptCustId == 0 || aptDStart == null || aptDEnd == null || aptTStart == null || aptTEnd == null || aptTitle.isEmpty() || aptDescription.isEmpty() || aptLocation.isEmpty() || aptType == null || aptContact == null) {
             return false;
         } else {
             return true;
@@ -179,6 +181,7 @@ public class AppointmentsController implements Initializable {
  @FXML
         public void handleNew(ActionEvent event) throws IOException, ParseException {
             StringBuilder sb = new StringBuilder(" ");
+            try {
             String title = Title.getText();
             String description = Description.getText();
             String location = Location.getText();
@@ -203,6 +206,7 @@ public class AppointmentsController implements Initializable {
             newAppointment.setAptContact(contact);
             newAppointment.setAptId(getAppointmentCount());
             newAppointment.setAptCustId(custID);
+            
             if(businessHours(tStart, tEnd)){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Issue adding an Appointment");
@@ -239,6 +243,13 @@ public class AppointmentsController implements Initializable {
             
             
         }}
+            catch(NullPointerException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Issue adding an Appointment");
+                alert.setHeaderText("Please fill in all prompts");
+                alert.setContentText("Including the drop downs");
+                alert.showAndWait();
+            };}
         
  private Appointments editAppointment;
         
@@ -267,48 +278,83 @@ public class AppointmentsController implements Initializable {
         }
         
         @FXML
-        public void saveUpdate(ActionEvent event) throws IOException {
-            /*
+        public void saveUpdate(ActionEvent event) throws IOException, ParseException {
+            
             StringBuilder sb = new StringBuilder(" ");
-            String customerName = UpdateCN.getText();
-            String address = UpdateAdd.getText();
-            String postalCode = UpdatePC.getText();
-            String phone = UpdatePh.getText();
-            String countryChoice = updateCountry.getSelectionModel().getSelectedItem();
-            String stateChoice = updateState.getSelectionModel().getSelectedItem();
-            
-            
-            
-            editCustomer.setCustName(customerName);
-            editCustomer.setCustAddress(address);
-            editCustomer.setCustPhone(phone);
-            editCustomer.setCustZip(postalCode);
-            editCustomer.setCustCountry(countryChoice);
-            editCustomer.setCustState(stateChoice);
-            
-            ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+            String title = UpdateTitle.getText();
+            String description = UpdateDescription.getText();
+            String location = UpdateLocation.getText();
+            String aType = typeUpdate.getSelectionModel().getSelectedItem();
+            Customer newName = nameUpdate.getSelectionModel().getSelectedItem();
+            int custID = newName.getCustId();
+            String contact = ContactUpdate.getSelectionModel().getSelectedItem();
+            String dStart = startDateUpdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String dEnd = endDateUpdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));            
+            String tStart = startTimeUpdate.getSelectionModel().getSelectedItem();
+            String tEnd = endTimeUpdate.getSelectionModel().getSelectedItem();
+           
+            if(businessHours(tStart, tEnd)){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Issue adding an Appointment");
+                alert.setHeaderText("Appointment outside busisness hours.");
+                alert.setContentText("Please pick a different time.");
+                alert.showAndWait(); 
+            }
+            else{
+            if(overLap(dStart, tStart)){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Issue adding an Appointment");
+                alert.setHeaderText("You already have an appointment scheduled for this time.");
+                alert.setContentText("Please pick a different time/date.");
+                alert.showAndWait();    
+            }
+            else {                    
+            if(validateEverything(custID, dStart, dEnd, tStart, tEnd, title, description, location, contact, aType)){
+                ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+                editAppointment.setAptTitle(title);
+                editAppointment.setAptDescription(description); 
+                editAppointment.setAptLocation(location);
+                editAppointment.setAptDStart(dStart);
+                editAppointment.setAptType(aType);
+                editAppointment.setAptDEnd(dEnd);
+                editAppointment.setAptTStart(tStart);
+                editAppointment.setAptTEnd(tEnd);
+                editAppointment.setAptContact(contact);
+                editAppointment.setAptCustId(custID);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Customer Updated");
-                alert.setHeaderText("Customer saved successfully");
+                alert.setTitle("Appointment Added");
+                alert.setHeaderText("Appointment saved successfully");
                 alert.showAndWait();
-            */
+                
+                System.out.println(Appointments.appointment);
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Issue adding an Appointment");
+                alert.setHeaderText("Please fill in all prompts");
+                alert.setContentText("Including the drop downs");
+                alert.showAndWait();
+            }}
+            
+            
+        }
         }
         
   @FXML
         public void handleDelete(ActionEvent event) throws IOException {
-            /*
-            editCustomer = nameDelete.getSelectionModel().getSelectedItem();
+            
+            editAppointment = AppointmentDelete.getSelectionModel().getSelectedItem();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Customer Delete");
+            alert.setTitle("Appointment Delete");
             alert.setHeaderText("Confirm deletion");
-            alert.setContentText("Are you sure you want to delete " + editCustomer);
+            alert.setContentText("Are you sure you want to delete " + editAppointment);
             Optional<ButtonType> result = alert.showAndWait();
 
             if (result.get() == ButtonType.OK) {
-                Customer.removeCustomer(editCustomer);
+                Appointments.removeAppointments(editAppointment);
                 ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
-            }*/
-        }
+            
+        }}
         
         @FXML
         public void handleBack(ActionEvent event)throws IOException {

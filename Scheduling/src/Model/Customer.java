@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
  * @author 18018
  */
 public class Customer {
-    private int custId;
+    public int custId;
     private String custName;
     private String custAddress;
     private String custZip;

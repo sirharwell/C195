@@ -21,6 +21,7 @@ import Model.Appointments;
 import utils.DBAppointments;
 import Model.Customer;
 import Model.UserDB;
+import java.util.ConcurrentModificationException;
 import java.util.Objects;
 import java.util.Optional;
 import javafx.collections.FXCollections;
@@ -240,14 +241,20 @@ public class CustomerController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Customer Delete");
             alert.setHeaderText("Confirm deletion");
-            alert.setContentText("Are you sure you want to delete " + editCustomer);
+            alert.setContentText("Are you sure you want to delete " + editCustomer + "? " + '/n' + "This will also delete any appointments the customer has");
             Optional<ButtonType> result = alert.showAndWait();
-
+            
+            try {
             if (result.get() == ButtonType.OK) {
-                Customer.removeCustomer(editCustomer);
+            for(Appointments apt : Appointments.appointment){
+            if(apt.getAptCustId() == editCustomer.custId){
+            Appointments.removeAppointments(apt);
+            }
+            Customer.removeCustomer(editCustomer);
                 ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
             }
         }
+            } catch (ConcurrentModificationException e){}}
         
         @FXML
         public void handleBack(ActionEvent event)throws IOException {
