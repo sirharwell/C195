@@ -241,7 +241,7 @@ public class CustomerController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Customer Delete");
             alert.setHeaderText("Confirm deletion");
-            alert.setContentText("Are you sure you want to delete " + editCustomer + "? " + '/n' + "This will also delete any appointments the customer has");
+            alert.setContentText("Are you sure you want to delete " + editCustomer + "? This will also delete any appointments the customer has scheduled.");
             Optional<ButtonType> result = alert.showAndWait();
             
             try {
