@@ -69,24 +69,29 @@ public class DBAppointments {
             return null;
         }
     }
-    static int s;
-    public static boolean saveCustomer( int id, String customerName, String address, String phone, String postalCode, String stateChoice, String countryChoice) {
+   
+    public static boolean saveAppointments( int aptId, Customer aptCustId, String aptDStarts, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, Contacts aptContact, String aptType) {
         try {
             Connection conn = DBConnection.getConnection();
             DBQuery.setStatement(conn);
             Statement statement = DBQuery.getStatement();
-            String i = stateChoice; 
+             
 
             
             
-            String query = "INSERT INTO customers(Customer_ID, Customer_Name, Address, Phone, Postal_Code, Division_ID)" + 
+            String query = "INSERT INTO appointments(Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID)" + 
                     "VALUES(" +
-                    "'" + id + "'," +
-                    "'" + customerName + "'," +
-                    "'" + address + "'," +
-                    "'" + phone + "'," + 
-                    "'" + postalCode + "'," +
-                    s +
+                    "'" + aptId + "'," +
+                    "'" + aptTitle + "'," +
+                    "'" + aptDescription + "'," + 
+                    "'" + aptLocation + "'," +
+                    "'" + aptType + "'," + 
+                    "'" + aptDStarts + " " + aptTStart + "'," +
+                    "'" + aptDEnd + " " + aptTEnd + "'," +
+                    "'" + aptCustId.custId + "'," +
+                    "'" + "1" + "'," + 
+                    "'" + aptContact.contact_ID + "'," +
+                    
                     ")";
             statement.execute(query);
         } catch (SQLException e) {

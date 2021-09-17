@@ -17,7 +17,7 @@ import javafx.collections.ObservableList;
  */
 public class Contacts {
     
-    private int contact_ID;
+    public int contact_ID;
     private String contact_Name;
     private String email;
     
