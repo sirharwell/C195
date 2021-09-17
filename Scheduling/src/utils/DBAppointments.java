@@ -70,7 +70,7 @@ public class DBAppointments {
         }
     }
    
-    public static boolean saveAppointments( int aptId, Customer aptCustId, String aptDStarts, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, Contacts aptContact, String aptType) {
+    public static boolean saveAppointments( int aptId, String aptTitle, String aptDescription, String aptLocation, String aptType, String aptDStart, String aptTStart, String aptDEnd, String aptTEnd, Customer aptCustId, Contacts aptContact) {
         try {
             Connection conn = DBConnection.getConnection();
             DBQuery.setStatement(conn);
@@ -86,7 +86,7 @@ public class DBAppointments {
                     "'" + aptDescription + "'," + 
                     "'" + aptLocation + "'," +
                     "'" + aptType + "'," + 
-                    "'" + aptDStarts + " " + aptTStart + "'," +
+                    "'" + aptDStart + " " + aptTStart + "'," +
                     "'" + aptDEnd + " " + aptTEnd + "'," +
                     "'" + aptCustId.custId + "'," +
                     "'" + "1" + "'," + 
@@ -103,12 +103,12 @@ public class DBAppointments {
     
     
     // Delete Customer from Database
-    public static boolean deleteCustomer() throws SQLException {
+    public static boolean deleteAppointments() throws SQLException {
         try {
             Connection conn = DBConnection.getConnection();
             DBQuery.setStatement(conn);
             Statement statement = DBQuery.getStatement();
-            String query = "DELETE FROM customers";
+            String query = "DELETE FROM appointments";
             statement.execute(query);
             
         } catch(SQLException e) {

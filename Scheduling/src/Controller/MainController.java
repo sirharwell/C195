@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import Model.Appointments;
+import Model.Contacts;
 import utils.DBAppointments;
 import Model.Customer;
 import Model.UserDB;
@@ -108,6 +109,29 @@ public class MainController implements Initializable {
         };
        
     }
+    
+    private void committedAppointment(){
+        for (int i = 1; i < Appointments.appointment.size(); i++){        
+        for(Appointments cs : Appointments.appointment){
+            if(cs.getAptId() == i){
+                Appointments editAppointment = cs;
+            } 
+        int aptId = cs.getAptId();
+        Customer aptCustId = cs.getAptCustId();
+        String aptDStart = cs.getAptDStart();
+        String aptDEnd = cs.getAptDEnd();
+        String aptTStart = cs.getAptTStart();
+        String aptTEnd = cs.getAptTEnd();
+        String aptTitle = cs.getAptTitle();
+        String aptDescription = cs.getAptDescription();
+        String aptLocation = cs.getAptLocation();
+        Contacts aptContact = cs.getAptContact();
+        String aptType = cs.getAptType();     
+        DBAppointments.saveAppointments( aptId,  aptTitle,  aptDescription,  aptLocation,  aptType,  aptDStart,  aptTStart,  aptDEnd,  aptTEnd,  aptCustId,  aptContact);
+        }
+        };
+       
+    }
       
  @FXML
     public void handleNew(ActionEvent event) throws IOException {
@@ -134,11 +158,14 @@ public class MainController implements Initializable {
          @FXML
     public void onCommit(ActionEvent event) throws IOException {
         try {
+            DBAppointments.deleteAppointments();
             DBCustomer.deleteCustomer();
         } catch (SQLException ex) {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("You done screwed up A-A-Ron" + ex.getMessage());
         }
         committedCustomer();
+        committedAppointment();
+        
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Changes saved");
                 alert.setHeaderText("All changes saved.");

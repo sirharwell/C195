@@ -487,7 +487,7 @@ public class DBCustomer {
                     "'" + address + "'," +
                     "'" + phone + "'," + 
                     "'" + postalCode + "'," +
-                    s +
+                    "'" + s + "'," +
                     ")";
             statement.execute(query);
         } catch (SQLException e) {
