@@ -7,6 +7,7 @@ package Controller;
 
 import Model.Appointments;
 import static Model.Appointments.getAppointmentCount;
+import Model.Contacts;
 import Model.Customer;
 import java.io.IOException;
 import java.net.URL;
@@ -52,8 +53,8 @@ public class AppointmentsController implements Initializable {
     public ComboBox<String> startTimeUpdate;
     public ComboBox<String> EndTime;
     public ComboBox<String> endTimeUpdate;
-    public ComboBox<String> Contact;
-    public ComboBox<String> ContactUpdate;
+    public ComboBox<Contacts> Contact;
+    public ComboBox<Contacts> ContactUpdate;
     public ComboBox<Customer> NameNew;
     public ComboBox<Customer> nameUpdate;
     public ComboBox<Customer> NameDelete;
@@ -88,8 +89,8 @@ public class AppointmentsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         StartTime.setItems(times);
         EndTime.setItems(times);
-        Contact.setItems(types);
-        ContactUpdate.setItems(types);
+        Contact.setItems(Contacts.contact);
+        ContactUpdate.setItems(Contacts.contact);
         typeUpdate.setItems(types);
         Type.setItems(types);
         NameNew.setItems(Customer.customers);
@@ -115,7 +116,7 @@ public class AppointmentsController implements Initializable {
         
         }
     
-            public boolean validateEverything(Customer aptCustId, String aptDStart, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, String aptContact, String aptType ) {
+            public boolean validateEverything(Customer aptCustId, String aptDStart, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, Contacts aptContact, String aptType ) {
         if(aptCustId == null || aptDStart == null || aptDEnd == null || aptTStart == null || aptTEnd == null || aptTitle.isEmpty() || aptDescription.isEmpty() || aptLocation.isEmpty() || aptType == null || aptContact == null) {
             return false;
         } else {
@@ -187,7 +188,7 @@ public class AppointmentsController implements Initializable {
             String location = Location.getText();
             String aType = Type.getSelectionModel().getSelectedItem();
             Customer custID = NameNew.getSelectionModel().getSelectedItem();
-            String contact = Contact.getSelectionModel().getSelectedItem();
+            Contacts contact = Contact.getSelectionModel().getSelectedItem();
             String dStart = startDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             String dEnd = endDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));            
             String tStart = StartTime.getSelectionModel().getSelectedItem();
@@ -285,7 +286,7 @@ public class AppointmentsController implements Initializable {
             String location = UpdateLocation.getText();
             String aType = typeUpdate.getSelectionModel().getSelectedItem();
             Customer custID = nameUpdate.getSelectionModel().getSelectedItem();
-            String contact = ContactUpdate.getSelectionModel().getSelectedItem();
+            Contacts contact = ContactUpdate.getSelectionModel().getSelectedItem();
             String dStart = startDateUpdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             String dEnd = endDateUpdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));            
             String tStart = startTimeUpdate.getSelectionModel().getSelectedItem();

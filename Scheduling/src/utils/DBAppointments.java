@@ -6,6 +6,7 @@
 package utils;
 
 import Model.Appointments;
+import Model.Contacts;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,7 +38,6 @@ public class DBAppointments {
             newAppointment.setAptDescription(rs.getString("Description"));
             newAppointment.setAptLocation(rs.getString("Location"));
             newAppointment.setAptType(rs.getString("Type"));
-            newAppointment.setAptContact(rs.getString("Contact_ID"));
             String start = rs.getString("Start");
             String end = rs.getString("End");
             String[] sStart = start.split(" ");
@@ -52,6 +52,11 @@ public class DBAppointments {
             for(Customer c : Customer.customers){
             if(c.getCustId() == s){
                 newAppointment.setAptCustId(c);}
+            }
+            int con = rs.getInt("Contact_ID");
+            for(Contacts c : Contacts.contact){
+            if(c.getContact_ID() == s){
+                newAppointment.setAptContact(c);}
             }
 
             Appointments.addAppointments(newAppointment);         

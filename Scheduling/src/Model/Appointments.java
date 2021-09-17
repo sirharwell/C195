@@ -27,7 +27,7 @@ public class Appointments {
     private String aptTitle;
     private String aptDescription;
     private String aptLocation;
-    private String aptContact;
+    private Contacts aptContact;
     private String aptType;
     
     public Appointments() {}
@@ -41,7 +41,7 @@ public class Appointments {
         appointment.remove(removeAppointment);
     }
     
-    public Appointments(int id, Customer custId, String dStart, String dEnd, String tStart, String tEnd, String title, String description, String location, String contact, String type) {
+    public Appointments(int id, Customer custId, String dStart, String dEnd, String tStart, String tEnd, String title, String description, String location, Contacts contact, String type) {
         setAptId(id);
         setAptCustId(custId);
         setAptDStart(dStart);
@@ -91,7 +91,7 @@ public class Appointments {
         return aptLocation;
     }
     
-    public String getAptContact() {
+    public Contacts getAptContact() {
         return aptContact;
     }
     
@@ -135,7 +135,7 @@ public class Appointments {
         this.aptLocation = aptLocation;
     }
     
-    public void setAptContact(String aptContact) {
+    public void setAptContact(Contacts aptContact) {
         this.aptContact = aptContact;
     }
     

@@ -32,6 +32,7 @@ import javafx.scene.Node;
 import utils.DBCustomer;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import utils.DBContacts;
 
 
 
@@ -80,6 +81,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         DBCustomer.getAllCustomers();
+        DBContacts.getAllContacts();
         DBAppointments.getAllAppointments();
         
 
