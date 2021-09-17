@@ -79,7 +79,7 @@ public class AppointmentsController implements Initializable {
     public TextField UpdateDescription;
     public TextField UpdateLocation;
 
-    private ObservableList<String> types = FXCollections.observableArrayList("Introductions","Retirement Planning","Portfolio Analysis","Tax Planning");
+    private ObservableList<String> types = FXCollections.observableArrayList("Introductions","Planning Session","Portfolio Analysis","De-Briefing");
     private ObservableList<String> times = FXCollections.observableArrayList("00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00");
     
     
@@ -115,8 +115,8 @@ public class AppointmentsController implements Initializable {
         
         }
     
-            public boolean validateEverything(int aptCustId, String aptDStart, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, String aptContact, String aptType ) {
-        if(aptCustId == 0 || aptDStart == null || aptDEnd == null || aptTStart == null || aptTEnd == null || aptTitle.isEmpty() || aptDescription.isEmpty() || aptLocation.isEmpty() || aptType == null || aptContact == null) {
+            public boolean validateEverything(Customer aptCustId, String aptDStart, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, String aptContact, String aptType ) {
+        if(aptCustId == null || aptDStart == null || aptDEnd == null || aptTStart == null || aptTEnd == null || aptTitle.isEmpty() || aptDescription.isEmpty() || aptLocation.isEmpty() || aptType == null || aptContact == null) {
             return false;
         } else {
             return true;
@@ -186,8 +186,7 @@ public class AppointmentsController implements Initializable {
             String description = Description.getText();
             String location = Location.getText();
             String aType = Type.getSelectionModel().getSelectedItem();
-            Customer newName = NameNew.getSelectionModel().getSelectedItem();
-            int custID = newName.getCustId();
+            Customer custID = NameNew.getSelectionModel().getSelectedItem();
             String contact = Contact.getSelectionModel().getSelectedItem();
             String dStart = startDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             String dEnd = endDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));            
@@ -285,8 +284,7 @@ public class AppointmentsController implements Initializable {
             String description = UpdateDescription.getText();
             String location = UpdateLocation.getText();
             String aType = typeUpdate.getSelectionModel().getSelectedItem();
-            Customer newName = nameUpdate.getSelectionModel().getSelectedItem();
-            int custID = newName.getCustId();
+            Customer custID = nameUpdate.getSelectionModel().getSelectedItem();
             String contact = ContactUpdate.getSelectionModel().getSelectedItem();
             String dStart = startDateUpdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             String dEnd = endDateUpdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));            

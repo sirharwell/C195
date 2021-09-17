@@ -247,7 +247,7 @@ public class CustomerController implements Initializable {
             try {
             if (result.get() == ButtonType.OK) {
             for(Appointments apt : Appointments.appointment){
-            if(apt.getAptCustId() == editCustomer.custId){
+            if(apt.getAptCustId().custId == editCustomer.custId){
             Appointments.removeAppointments(apt);
             }
             Customer.removeCustomer(editCustomer);

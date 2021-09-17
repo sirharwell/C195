@@ -19,7 +19,7 @@ import javafx.collections.ObservableList;
  */
 public class Appointments {
     private int aptId;
-    private int aptCustId;
+    private Customer aptCustId;
     private String aptDStart;
     private String aptDEnd;
     private String aptTStart;
@@ -41,7 +41,7 @@ public class Appointments {
         appointment.remove(removeAppointment);
     }
     
-    public Appointments(int id, int custId, String dStart, String dEnd, String tStart, String tEnd, String title, String description, String location, String contact, String type) {
+    public Appointments(int id, Customer custId, String dStart, String dEnd, String tStart, String tEnd, String title, String description, String location, String contact, String type) {
         setAptId(id);
         setAptCustId(custId);
         setAptDStart(dStart);
@@ -59,7 +59,7 @@ public class Appointments {
         return aptId;
     }
     
-    public int getAptCustId() {
+    public Customer getAptCustId() {
         return aptCustId;
     }
     
@@ -103,7 +103,7 @@ public class Appointments {
         this.aptId = aptId;
     }
     
-    public void setAptCustId(int aptCustId) {
+    public void setAptCustId(Customer aptCustId) {
         this.aptCustId = aptCustId;
     }
     
