@@ -265,7 +265,7 @@ public class AppointmentsController implements Initializable {
                 startDateUpdate.setValue(valS);
                 LocalDate valE = LocalDate.parse(editAppointment.getAptDEnd());
                 endDateUpdate.setValue(valE);
-                nameUpdate.getSelectionModel().select(editAppointment.getAptCustId());
+                nameUpdate.getSelectionModel().select(editAppointment.getAptCustId().custId);
                 typeUpdate.getSelectionModel().select(editAppointment.getAptType());
                 startTimeUpdate.getSelectionModel().select(editAppointment.getAptTStart());
                 endTimeUpdate.getSelectionModel().select(editAppointment.getAptTEnd());

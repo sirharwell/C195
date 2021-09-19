@@ -92,7 +92,8 @@ public class MainController implements Initializable {
     private Customer editCustomer;
     
     private void committedCustomer(){
-        for (int i = 1; i < Customer.customers.size(); i++){        
+        System.out.println("Hi");
+        for (int i = 1; i <= Customer.customers.size(); i++){        
         for(Customer cs : Customer.customers){
             if(cs.getCustId() == i){
                 Customer editCustomer = cs;
@@ -101,10 +102,9 @@ public class MainController implements Initializable {
         String customerName = cs.getCustName();
         String address = cs.getCustAddress();
         String stateChoice = cs.getCustState();
-        String countryChoice = cs.getCustCountry();
         String postalCode = cs.getCustZip();
         String phone = cs.getCustPhone();
-        DBCustomer.saveCustomer(id, customerName, address, phone, postalCode, stateChoice, countryChoice);
+        DBCustomer.saveCustomer(id, customerName, address, stateChoice, phone, postalCode);
         }
         };
        

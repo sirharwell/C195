@@ -241,20 +241,22 @@ public class CustomerController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Customer Delete");
             alert.setHeaderText("Confirm deletion");
-            alert.setContentText("Are you sure you want to delete " + editCustomer + "? This will also delete any appointments the customer has scheduled.");
+            alert.setContentText("This will delete " + editCustomer + "'s appointments too." );
             Optional<ButtonType> result = alert.showAndWait();
             
-            try {
+            try {  
             if (result.get() == ButtonType.OK) {
             for(Appointments apt : Appointments.appointment){
             if(apt.getAptCustId().custId == editCustomer.custId){
             Appointments.removeAppointments(apt);
-            }
             Customer.removeCustomer(editCustomer);
                 ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
             }
+            }
+            Customer.removeCustomer(editCustomer);
+            ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
         }
-            } catch (ConcurrentModificationException e){}}
+            } catch (ConcurrentModificationException e){System.out.println("Mod issue: " + e.getMessage());}}
         
         @FXML
         public void handleBack(ActionEvent event)throws IOException {
