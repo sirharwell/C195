@@ -111,23 +111,21 @@ public class MainController implements Initializable {
     }
     
     private void committedAppointment(){
-        for (int i = 1; i < Appointments.appointment.size(); i++){        
+        for (int i = 1; i <= Appointments.appointment.size(); i++){        
         for(Appointments cs : Appointments.appointment){
             if(cs.getAptId() == i){
                 Appointments editAppointment = cs;
             } 
         int aptId = cs.getAptId();
         Customer aptCustId = cs.getAptCustId();
-        String aptDStart = cs.getAptDStart();
-        String aptDEnd = cs.getAptDEnd();
-        String aptTStart = cs.getAptTStart();
-        String aptTEnd = cs.getAptTEnd();
+        String aptStart = (cs.getAptDStart() + " " + cs.getAptTStart());
+        String aptEnd = (cs.getAptDEnd() + " " + cs.getAptTEnd());
         String aptTitle = cs.getAptTitle();
         String aptDescription = cs.getAptDescription();
         String aptLocation = cs.getAptLocation();
         Contacts aptContact = cs.getAptContact();
         String aptType = cs.getAptType();     
-        DBAppointments.saveAppointments( aptId,  aptTitle,  aptDescription,  aptLocation,  aptType,  aptDStart,  aptTStart,  aptDEnd,  aptTEnd,  aptCustId,  aptContact);
+        DBAppointments.saveAppointments( aptId,  aptTitle,  aptDescription,  aptLocation,  aptType,  aptStart,  aptEnd, aptCustId, aptContact);
         }
         };
        

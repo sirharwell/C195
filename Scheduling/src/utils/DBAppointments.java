@@ -70,15 +70,11 @@ public class DBAppointments {
         }
     }
    
-    public static boolean saveAppointments( int aptId, String aptTitle, String aptDescription, String aptLocation, String aptType, String aptDStart, String aptTStart, String aptDEnd, String aptTEnd, Customer aptCustId, Contacts aptContact) {
+    public static boolean saveAppointments( int aptId, String aptTitle, String aptDescription, String aptLocation, String aptType, String aptStart, String aptEnd, Customer aptCustId, Contacts aptContact) {
         try {
             Connection conn = DBConnection.getConnection();
             DBQuery.setStatement(conn);
             Statement statement = DBQuery.getStatement();
-             
-
-            
-            
             String query = "INSERT INTO appointments(Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID)" + 
                     "VALUES(" +
                     "'" + aptId + "'," +
@@ -86,12 +82,11 @@ public class DBAppointments {
                     "'" + aptDescription + "'," + 
                     "'" + aptLocation + "'," +
                     "'" + aptType + "'," + 
-                    "'" + aptDStart + " " + aptTStart + "'," +
-                    "'" + aptDEnd + " " + aptTEnd + "'," +
+                    "'" + aptStart + "'," +
+                    "'" + aptEnd + "'," +
                     "'" + aptCustId.custId + "'," +
                     "'" + "1" + "'," + 
-                    "'" + aptContact.contact_ID + "'," +
-                    
+                    "'" + aptContact.contact_ID + "'" +
                     ")";
             statement.execute(query);
         } catch (SQLException e) {
