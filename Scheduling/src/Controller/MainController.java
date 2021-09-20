@@ -69,6 +69,28 @@ public class MainController implements Initializable {
     public TextField Address;
     public TextField Postal_Code;
     public TextField Phone;
+    public TableColumn waid;
+    public TableColumn wt;
+    public TableColumn wd;
+    public TableColumn wl;
+    public TableColumn wc;
+    public TableColumn wty;
+    public TableColumn wsdat;
+    public TableColumn wedt;
+    public TableColumn wcid;
+    public TableColumn wuid;
+    public TableColumn maid;
+    public TableColumn mt;
+    public TableColumn md;
+    public TableColumn ml;
+    public TableColumn mc;
+    public TableColumn mty;
+    public TableColumn msdat;
+    public TableColumn medat;
+    public TableColumn mcid;
+    public TableColumn muid;
+        
+    
 
                                     
     
@@ -95,7 +117,22 @@ public class MainController implements Initializable {
         DBCustomer.getAllCustomers();
         DBContacts.getAllContacts();
         DBAppointments.getAllAppointments();
-        
+        StartTime.setItems(times);
+        EndTime.setItems(times);
+        Contact.setItems(Contacts.contact);
+        ContactUpdate.setItems(Contacts.contact);
+        typeUpdate.setItems(types);
+        Type.setItems(types);
+        NameNew.setItems(Customer.customers);
+        AppointmentUpdate.setItems(Appointments.appointment);
+        AppointmentDelete.setItems(Appointments.appointment);
+        AppointmentUpdate.setPromptText("What to update");
+        AppointmentDelete.setPromptText("What to delete");
+        try {
+        startTimeUpdate.setItems(times);
+        endTimeUpdate.setItems(times);
+        nameUpdate.setItems(Customer.customers);
+        NameDelete.setItems(Customer.customers);
 
         }
     
