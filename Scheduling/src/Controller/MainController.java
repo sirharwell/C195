@@ -137,7 +137,7 @@ public class MainController implements Initializable {
         Contacts aptContact = cs.getAptContact();
         String aptType = cs.getAptType();    
         DateTimeFormatter tf = DateTimeFormatter.ofPattern("HH:mm");
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("YYYY-mm-dd");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             ZoneId zid = ZoneId.systemDefault();
             LocalTime lts = LocalTime.parse(cs.getAptTStart(), tf);
             LocalDate lds = LocalDate.parse(cs.getAptDEnd(), df);
@@ -160,10 +160,7 @@ public class MainController implements Initializable {
             ZonedDateTime localToEastern = zdt.withZoneSameInstant(USTID);
             ZonedDateTime startToEastern = tdStart.withZoneSameInstant(USTID);
             ZonedDateTime endToEastern = tdEnd.withZoneSameInstant(USTID);
-            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
-            Date ten = parser.parse("22:00");
-            Date eight = parser.parse("08:00");
-            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:mm");
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String aptEnd = endToEastern.format(myFormatObj);
             String aptStart = startToEastern.format(myFormatObj);
             
