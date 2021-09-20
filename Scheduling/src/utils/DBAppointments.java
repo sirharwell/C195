@@ -14,6 +14,17 @@ import java.sql.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Model.Customer;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+import java.util.Date;
+import java.util.TimeZone;
 /**
  *
  * @author 18018
@@ -40,8 +51,34 @@ public class DBAppointments {
             newAppointment.setAptType(rs.getString("Type"));
             String start = rs.getString("Start");
             String end = rs.getString("End");
-            String[] sStart = start.split(" ");
-            String[] sEnd = end.split(" ");
+            DateTimeFormatter tf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            ZoneId zid = ZoneId.of("Etc/UTC");
+            LocalDateTime lts = LocalDateTime.parse(start, tf);
+            ZonedDateTime tdStart = ZonedDateTime.of(lts, zid);           
+            LocalDateTime lte = LocalDateTime.parse(end, tf);  
+            ZonedDateTime tdEnd = ZonedDateTime.of(lte, zid);
+            LocalDate easternD = LocalDate.of(2021, 9, 15);
+            LocalTime easternT = LocalTime.of(11, 00);
+            ZoneId easternId = ZoneId.of("America/New_York");
+            ZonedDateTime easternZDT = ZonedDateTime.of(easternD, easternT, easternId);
+            ZoneId localZone = ZoneId.of(TimeZone.getDefault().getID());
+            LocalDateTime now = LocalDateTime.now();
+            ZonedDateTime zdt = now.atZone(zid);
+            Instant easternSToGMT = tdStart.toInstant();
+            Instant easternEToGMT = tdEnd.toInstant();
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            ZonedDateTime seasternToLocalS = easternSToGMT.atZone(localZone);
+            ZonedDateTime eeasternToLocalE = easternEToGMT.atZone(localZone);
+            String easternToLocalS = seasternToLocalS.format(myFormatObj);
+            String easternToLocalE = eeasternToLocalE.format(myFormatObj);
+
+            ZonedDateTime localToEastern = zdt.withZoneSameInstant(easternId);
+            ZonedDateTime startToEastern = tdStart.withZoneSameInstant(easternId);
+            ZonedDateTime endToEastern = tdEnd.withZoneSameInstant(easternId);
+            String ssEnd = String.valueOf(easternToLocalE);
+            String ssStart = String.valueOf(easternToLocalS);
+            String[] sStart = ssStart.split(" ");
+            String[] sEnd = ssEnd.split(" ");
             newAppointment.setAptDStart(sStart[0]);
             newAppointment.setAptTStart(sStart[1]);
             newAppointment.setAptDEnd(sEnd[0]);

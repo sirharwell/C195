@@ -166,8 +166,6 @@ public class AppointmentsController implements Initializable {
             String formattedStart = startToEastern.format(myFormatObj);
             Date endTime = parser.parse(formattedEnd);
             Date startTime = parser.parse(formattedStart);
-            System.out.println(formattedStart);
-            System.out.println(formattedEnd);
             if(startTime.after(ten) || startTime.before(eight)  ) {
                 return true;
             }

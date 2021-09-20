@@ -23,7 +23,18 @@ import utils.DBAppointments;
 import Model.Customer;
 import Model.UserDB;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Objects;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -110,7 +121,7 @@ public class MainController implements Initializable {
        
     }
     
-    private void committedAppointment(){
+    private void committedAppointment() throws ParseException{{
         for (int i = 1; i <= Appointments.appointment.size(); i++){        
         for(Appointments cs : Appointments.appointment){
             if(cs.getAptId() == i){
@@ -118,18 +129,49 @@ public class MainController implements Initializable {
             } 
         int aptId = cs.getAptId();
         Customer aptCustId = cs.getAptCustId();
-        String aptStart = (cs.getAptDStart() + " " + cs.getAptTStart());
-        String aptEnd = (cs.getAptDEnd() + " " + cs.getAptTEnd());
+        String aptStartLocal = (cs.getAptDStart() + " " + cs.getAptTStart());
+        String aptEndLocal = (cs.getAptDEnd() + " " + cs.getAptTEnd());
         String aptTitle = cs.getAptTitle();
         String aptDescription = cs.getAptDescription();
         String aptLocation = cs.getAptLocation();
         Contacts aptContact = cs.getAptContact();
-        String aptType = cs.getAptType();     
+        String aptType = cs.getAptType();    
+        DateTimeFormatter tf = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("YYYY-mm-dd");
+            ZoneId zid = ZoneId.systemDefault();
+            LocalTime lts = LocalTime.parse(cs.getAptTStart(), tf);
+            LocalDate lds = LocalDate.parse(cs.getAptDEnd(), df);
+            ZonedDateTime tdStart = ZonedDateTime.of(lds, lts, zid);           
+            LocalTime lte = LocalTime.parse(cs.getAptTEnd(), tf);
+            LocalDate lde = LocalDate.parse(cs.getAptDEnd(), df);   
+            ZonedDateTime tdEnd = ZonedDateTime.of(lde, lte, zid);
+            LocalDate easternD = LocalDate.of(2021, 9, 15);
+            LocalTime easternT = LocalTime.of(11, 00);
+            ZoneId USTID = ZoneId.of("Etc/GMT");
+            ZonedDateTime easternZDT = ZonedDateTime.of(easternD, easternT, USTID);
+            ZoneId localZone = ZoneId.of(TimeZone.getDefault().getID());
+            LocalDateTime now = LocalDateTime.now();
+            
+            ZonedDateTime zdt = now.atZone(zid);
+            
+            Instant easternToGMT = easternZDT.toInstant();
+            ZonedDateTime easternToLocal = easternZDT.withZoneSameInstant(localZone);
+            ZonedDateTime gstToLocalZDT = easternToGMT.atZone(localZone);
+            ZonedDateTime localToEastern = zdt.withZoneSameInstant(USTID);
+            ZonedDateTime startToEastern = tdStart.withZoneSameInstant(USTID);
+            ZonedDateTime endToEastern = tdEnd.withZoneSameInstant(USTID);
+            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+            Date ten = parser.parse("22:00");
+            Date eight = parser.parse("08:00");
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:mm");
+            String aptEnd = endToEastern.format(myFormatObj);
+            String aptStart = startToEastern.format(myFormatObj);
+            
         DBAppointments.saveAppointments( aptId,  aptTitle,  aptDescription,  aptLocation,  aptType,  aptStart,  aptEnd, aptCustId, aptContact);
         }
         };
        
-    }
+    }}
       
  @FXML
     public void handleNew(ActionEvent event) throws IOException {
@@ -154,7 +196,7 @@ public class MainController implements Initializable {
     }
         
          @FXML
-    public void onCommit(ActionEvent event) throws IOException {
+    public void onCommit(ActionEvent event) throws IOException, ParseException {
         try {
             DBAppointments.deleteAppointments();
             DBCustomer.deleteCustomer();
