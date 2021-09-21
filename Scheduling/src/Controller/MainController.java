@@ -44,6 +44,7 @@ import javafx.scene.Node;
 import utils.DBCustomer;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import utils.DBContacts;
 
 
@@ -59,6 +60,7 @@ public class MainController implements Initializable {
     public ComboBox state;
     public ComboBox nameUpdate;
     public ComboBox nameDelete;
+    public Label noAppointments;
     public Button New;
     public Button Update;
     public Button Delete;
@@ -69,63 +71,68 @@ public class MainController implements Initializable {
     public TextField Address;
     public TextField Postal_Code;
     public TextField Phone;
-    public TableColumn waid;
-    public TableColumn wt;
-    public TableColumn wd;
-    public TableColumn wl;
-    public TableColumn wc;
-    public TableColumn wty;
-    public TableColumn wsdat;
-    public TableColumn wedt;
-    public TableColumn wcid;
-    public TableColumn wuid;
-    public TableColumn maid;
-    public TableColumn mt;
-    public TableColumn md;
-    public TableColumn ml;
-    public TableColumn mc;
-    public TableColumn mty;
-    public TableColumn msdat;
-    public TableColumn medat;
-    public TableColumn mcid;
-    public TableColumn muid;
+    public TableView<Appointments> tvMonth;
+    public TableView<Appointments> tvWeek;
+    public TableColumn<Appointments, String> waid;
+    public TableColumn<Appointments, String> wt;
+    public TableColumn<Appointments, String> wd;
+    public TableColumn<Appointments, String> wl;
+    public TableColumn<Appointments, String> wc;
+    public TableColumn<Appointments, String> wty;
+    public TableColumn<Appointments, String> wsdat;
+    public TableColumn<Appointments, String> wedt;
+    public TableColumn<Appointments, String> wcid;
+    public TableColumn<Appointments, String> wuid;
+    public TableColumn<Appointments, String> maid;
+    public TableColumn<Appointments, String> mt;
+    public TableColumn<Appointments, String> md;
+    public TableColumn<Appointments, String> ml;
+    public TableColumn<Appointments, String> mc;
+    public TableColumn<Appointments, String> mty;
+    public TableColumn<Appointments, String> msdat;
+    public TableColumn<Appointments, String> medat;
+    public TableColumn<Appointments, String> mcid;
+    public TableColumn<Appointments, String> muid;
    
     
     
   
-    public ObservableList<Appointments> getMonthlyAppointments = FXCollections.observableArrayList();
-    public ObservableList<Appointments> getWeeklyAppointments = FXCollections.observableArrayList();
-    
-    public void monthly(){
+    public ObservableList<Appointments> getMonthlyAppointments(){
+        ObservableList<Appointments> monthlyAppointments= FXCollections.observableArrayList();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate end = LocalDate.now().plusMonths(1);
+        for(int i = 1; i <= Appointments.appointment.size(); i++){
+        for(Appointments cs : Appointments.appointment){
+            LocalDate start = LocalDate.parse(cs.aptDStart, formatter);
+            if( start.isBefore(end)){
+                monthlyAppointments.add(cs);
+            }
+        } 
+
+        }
+        return monthlyAppointments;
+    }
+    
+    public ObservableList<Appointments> getWeeklyAppointments() {
+        ObservableList<Appointments> weeklyAppointments= FXCollections.observableArrayList();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate end = LocalDate.now().plusWeeks(1);
         for(int i = 1; i <= Appointments.appointment.size(); i++){
             for(Appointments cs : Appointments.appointment){
                 LocalDate start = LocalDate.parse(cs.aptDStart, formatter);
                 if( start.isBefore(end)){
-                    getMonthlyAppointments.add(cs);
-                }
-            } 
+                    weeklyAppointments.add(cs);
+            }
+        } 
             
-        }}
-    
-        public void weekly(){
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate end = LocalDate.now().plusWeeks(1);
-            for(int i = 1; i <= Appointments.appointment.size(); i++){
-                for(Appointments cs : Appointments.appointment){
-                    LocalDate start = LocalDate.parse(cs.aptDStart, formatter);
-                    if( start.isBefore(end)){
-                        getWeeklyAppointments.add(cs);
-                }
-            } 
-            
-        }}
+        }
+        return weeklyAppointments;
+    }
         
         public void appointmentIn15(){
             LocalTime endTime = LocalTime.now().plusMinutes(15);
             LocalDate endDate = LocalDate.now();
-            DateTimeFormatter fr = DateTimeFormatter.ofPattern("hh:mm:ss");
+            DateTimeFormatter fr = DateTimeFormatter.ofPattern("HH:mm");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             for (int i = 1; i <= Appointments.appointment.size(); i++){        
                 for(Appointments cs : Appointments.appointment){
@@ -136,7 +143,8 @@ public class MainController implements Initializable {
                 alert.setTitle("Appointment Soon!");
                 alert.setHeaderText("You have appointment " + cs.aptId + " at "  + cs.aptTStart + " on " + cs.aptDStart );
                 alert.showAndWait();
-            } 
+            }
+                    else{ noAppointments.setText("No appointments upcoming");}
         }}}
     
     @Override
@@ -145,56 +153,23 @@ public class MainController implements Initializable {
         DBContacts.getAllContacts();
         DBAppointments.getAllAppointments();
         appointmentIn15();
-        TableView<Appointments> weeks = new TableView<>();
-        weeks.getItems().addAll(getWeeklyAppointments);
-        weeks.getColumns().addAll(waid, getWeeklyAppointments.getAptId());
-        maid.setCellValueFactory(cellData -> {
-            return cellData.getValue().getAptDescriptionProperty();
-        });
-        monthContact.setCellValueFactory(cellData -> {
-            return cellData.getValue().getAptContactProperty();
-        });
-        monthLocation.setCellValueFactory(cellData -> {
-            return cellData.getValue().getAptLocationProperty();
-        });
-        monthStart.setCellValueFactory(cellData -> {
-            return cellData.getValue().getAptStartProperty();
-        });
-        monthEnd.setCellValueFactory(cellData -> {
-            return cellData.getValue().getAptEndProperty();
-        });
-        weekDescription.setCellValueFactory(cellData -> {
-            return cellData.getValue().getAptDescriptionProperty();
-        });
-        weekContact.setCellValueFactory(cellData -> {
-            return cellData.getValue().getAptContactProperty();
-        });
-        weekLocation.setCellValueFactory(cellData -> {
-            return cellData.getValue().getAptLocationProperty();
-        });
-        weekStart.setCellValueFactory(cellData -> {
-            return cellData.getValue().getAptStartProperty();
-        });
-        weekEnd.setCellValueFactory(cellData -> {
-            return cellData.getValue().getAptEndProperty();
-        });
-        StartTime.setItems(times);
-        EndTime.setItems(times);
-        Contact.setItems(Contacts.contact);
-        ContactUpdate.setItems(Contacts.contact);
-        typeUpdate.setItems(types);
-        Type.setItems(types);
-        NameNew.setItems(Customer.customers);
-        AppointmentUpdate.setItems(Appointments.appointment);
-        AppointmentDelete.setItems(Appointments.appointment);
-        AppointmentUpdate.setPromptText("What to update");
-        AppointmentDelete.setPromptText("What to delete");
-        try {
-        startTimeUpdate.setItems(times);
-        endTimeUpdate.setItems(times);
-        nameUpdate.setItems(Customer.customers);
-        NameDelete.setItems(Customer.customers);
-
+        maid.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptIdP"));
+        mt.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptTypeP"));
+        md.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptDescriptionP"));
+        ml.setCellValueFactory(new PropertyValueFactory<Appointments, String>("AptLocationP"));
+        mc.setCellValueFactory(new PropertyValueFactory<Appointments, String>("AptContactP"));
+        mty.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptTypeP"));
+        msdat.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptDStartP" + " " + "aptTStartP"));
+        medat.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptDEndP" + " " + "aptTEndP"));
+        mcid.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptCustIdP"));
+        muid.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptUserIdP"));
+        
+        try{
+            System.out.println(getMonthlyAppointments());
+            System.out.println(getMonthlyAppointments());
+        tvMonth.setItems(getMonthlyAppointments());
+        tvWeek.setItems(getWeeklyAppointments());
+        }   catch(NullPointerException e){System.out.println(e);}
         }
     
         

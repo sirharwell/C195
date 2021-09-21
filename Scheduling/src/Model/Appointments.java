@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
  * @author 18018
  */
 public class Appointments {
-    private int aptId;
+    public int aptId;
     private Customer aptCustId;
     public String aptDStart;
     private String aptDEnd;
@@ -29,8 +29,22 @@ public class Appointments {
     private String aptLocation;
     private Contacts aptContact;
     private String aptType;
+    private String aptUserId;
+    private final SimpleStringProperty aptIdP = new SimpleStringProperty();
+    private final SimpleStringProperty aptCustIdP = new SimpleStringProperty();
+    private final SimpleStringProperty aptDStartP = new SimpleStringProperty();
+    private final SimpleStringProperty aptDEndP = new SimpleStringProperty();
+    private final SimpleStringProperty aptTStartP = new SimpleStringProperty();
+    private final SimpleStringProperty aptTEndP = new SimpleStringProperty();
+    private final SimpleStringProperty aptTitleP = new SimpleStringProperty();
+    private final SimpleStringProperty aptDescriptionP = new SimpleStringProperty();
+    private final SimpleStringProperty aptLocationP = new SimpleStringProperty();
+    private final SimpleStringProperty aptContactP = new SimpleStringProperty();
+    private final SimpleStringProperty aptTypeP = new SimpleStringProperty();
+    private final SimpleStringProperty aptUserIdP = new SimpleStringProperty();
     
     public Appointments() {}
+    
     
     public static final ObservableList<Appointments> appointment = FXCollections.observableArrayList();
     
@@ -142,22 +156,63 @@ public class Appointments {
     public void setAptType(String aptType) {
     this.aptType = aptType;
     }
-   /*
     
-    
-    public String get15Time() {
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
- 	LocalDateTime ldt = LocalDateTime.parse(this.aptStart.getValue(), df);
-        ZonedDateTime zdt = ldt.atZone(ZoneId.of("UTC"));
-        ZoneId zid = ZoneId.systemDefault();
-        ZonedDateTime utcDate = zdt.withZoneSameInstant(zid); 
-        DateTimeFormatter tFormatter = DateTimeFormatter.ofPattern("kk:mm"); 
-	LocalTime localTime = LocalTime.parse(utcDate.toString().substring(11,16), tFormatter);
-        return localTime.toString();
-    }*/
+    public void setUserId(String userId) {
+    this.aptUserId = "1";
+    }
     
     public static int getAppointmentCount(){
         return (appointment.size() + 1); }   
+
+    public String getAptIdP() {
+        return aptIdP.get();
+    }
+
+    public String getAptCustIdP() {
+        return aptCustIdP.get();
+    }
+
+    public String getAptDStartP() {
+        return aptDStartP.get();
+    }
+
+    public String getAptDEndP() {
+        return aptDEndP.get();
+    }
+
+    public String getAptTStartP() {
+        return aptTStartP.get();
+    }
+
+    public String getAptTEndP() {
+        return aptTEndP.get();
+    }
+
+    public String getAptTitleP() {
+        return aptTitleP.get();
+    }
+
+    public String getAptDescriptionP() {
+        return aptDescriptionP.get();
+    }
+
+    public String getAptLocationP() {
+        return aptLocationP.get();
+    }
+
+    public String getAptContactP() {
+        return aptContactP.get();
+    }
+
+    public String getAptTypeP() {
+        return aptTypeP.get();
+    }
+    
+    public String getUserIdP() {
+        return aptUserIdP.get();
+    }
+    
+    
     
         @Override
     public String toString(){

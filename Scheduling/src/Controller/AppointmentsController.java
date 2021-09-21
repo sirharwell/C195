@@ -323,7 +323,6 @@ public class AppointmentsController implements Initializable {
                 alert.setHeaderText("Appointment saved successfully");
                 alert.showAndWait();
                 
-                System.out.println(Appointments.appointment);
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
