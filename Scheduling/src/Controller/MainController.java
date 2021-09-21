@@ -89,34 +89,62 @@ public class MainController implements Initializable {
     public TableColumn medat;
     public TableColumn mcid;
     public TableColumn muid;
-        
-    
-
-                                    
-    
-    private ObservableList<String> countries = FXCollections.observableArrayList(
-    "USA", "UK", "Canada");
-    
-     private ObservableList<String> allStates = FXCollections.observableArrayList(
-    "Alabama","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming","Hawaii","Alaska","Northwest Territories","Alberta","British Columbia","Manitoba","New Brunswick","Nova Scotia","Prince Edward Island","Ontario","Québec","Saskatchewan","Nunavut","Yukon","Newfoundland and Labrador","England","Wales","Scotland","Northern Ireland");
-    
-    
-    private ObservableList<String> states = FXCollections.observableArrayList(
-    "Alabama","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming","Hawaii","Alaska");
-    
-    private ObservableList<String> canadastates = FXCollections.observableArrayList(
-    "Northwest Territories","Alberta","British Columbia","Manitoba","New Brunswick","Nova Scotia","Prince Edward Island","Ontario","Québec","Saskatchewan","Nunavut","Yukon","Newfoundland and Labrador");
-    
-    private ObservableList<String> ukstates = FXCollections.observableArrayList(
-    "England","Wales","Scotland","Northern Ireland");
    
     
+    
+  
+    public ObservableList<Appointments> getMonthlyAppointments = FXCollections.observableArrayList();
+    public ObservableList<Appointments> getWeeklyAppointments = FXCollections.observableArrayList();
+    
+    public void monthly(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate end = LocalDate.now().plusMonths(1);
+        for(int i = 1; i <= Appointments.appointment.size(); i++){
+            for(Appointments cs : Appointments.appointment){
+                LocalDate start = LocalDate.parse(cs.aptDStart, formatter);
+                if( start.isBefore(end)){
+                    getMonthlyAppointments.add(cs);
+                }
+            } 
+            
+        }}
+    
+        public void weekly(){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate end = LocalDate.now().plusWeeks(1);
+            for(int i = 1; i <= Appointments.appointment.size(); i++){
+                for(Appointments cs : Appointments.appointment){
+                    LocalDate start = LocalDate.parse(cs.aptDStart, formatter);
+                    if( start.isBefore(end)){
+                        getWeeklyAppointments.add(cs);
+                }
+            } 
+            
+        }}
+        
+        public void appointmentIn15(){
+            LocalTime endTime = LocalTime.now().plusMinutes(15);
+            LocalDate endDate = LocalDate.now();
+            DateTimeFormatter fr = DateTimeFormatter.ofPattern("hh:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            for (int i = 1; i <= Appointments.appointment.size(); i++){        
+                for(Appointments cs : Appointments.appointment){
+                    LocalTime time = LocalTime.parse(cs.aptTStart, fr);
+                    LocalDate date = LocalDate.parse(cs.aptDStart, formatter);
+                    if((time.isBefore(endTime)) && (endDate.isEqual(date))){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Appointment Soon!");
+                alert.setHeaderText("You have an appointment starting within 15 minutes");
+                alert.showAndWait();
+            } 
+        }}}
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         DBCustomer.getAllCustomers();
         DBContacts.getAllContacts();
         DBAppointments.getAllAppointments();
+        appointmentIn15();
         StartTime.setItems(times);
         EndTime.setItems(times);
         Contact.setItems(Contacts.contact);

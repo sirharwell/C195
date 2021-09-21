@@ -20,9 +20,9 @@ import javafx.collections.ObservableList;
 public class Appointments {
     private int aptId;
     private Customer aptCustId;
-    private String aptDStart;
+    public String aptDStart;
     private String aptDEnd;
-    private String aptTStart;
+    public String aptTStart;
     private String aptTEnd;
     private String aptTitle;
     private String aptDescription;
