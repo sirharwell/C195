@@ -41,16 +41,16 @@
                                           <children>
                                              <TableView layoutX="12.0" layoutY="14.0" prefHeight="419.0" prefWidth="839.0">
                                                <columns>
-                                                 <TableColumn prefWidth="115.0" text="Appointment_ID" />
-                                                 <TableColumn prefWidth="35.0" text="Title" />
-                                                   <TableColumn prefWidth="79.0" text="Description" />
-                                                   <TableColumn minWidth="0.0" prefWidth="57.0" text="Location" />
-                                                   <TableColumn minWidth="0.0" prefWidth="65.0" text="Contact" />
-                                                   <TableColumn minWidth="0.0" prefWidth="53.0" text="Type" />
-                                                   <TableColumn minWidth="0.0" prefWidth="140.0" text="Start Date and Time" />
-                                                   <TableColumn minWidth="0.0" prefWidth="153.0" text="End Date and Time" />
-                                                   <TableColumn minWidth="0.0" prefWidth="85.0" text="Customer_ID" />
-                                                   <TableColumn minWidth="0.0" prefWidth="56.0" text="User_ID" />
+                                                 <TableColumn fx:id="waid" prefWidth="115.0" text="Appointment_ID" />
+                                                 <TableColumn fx:id="wt" prefWidth="35.0" text="Title" />
+                                                   <TableColumn fx:id="wd" prefWidth="79.0" text="Description" />
+                                                   <TableColumn fx:id="wl" minWidth="0.0" prefWidth="57.0" text="Location" />
+                                                   <TableColumn fx:id="wc" minWidth="0.0" prefWidth="65.0" text="Contact" />
+                                                   <TableColumn fx:id="wty" minWidth="0.0" prefWidth="53.0" text="Type" />
+                                                   <TableColumn fx:id="wsdat" minWidth="0.0" prefWidth="140.0" text="Start Date and Time" />
+                                                   <TableColumn fx:id="wedt" minWidth="0.0" prefWidth="153.0" text="End Date and Time" />
+                                                   <TableColumn fx:id="wcid" minWidth="0.0" prefWidth="85.0" text="Customer_ID" />
+                                                   <TableColumn fx:id="wuid" minWidth="0.0" prefWidth="56.0" text="User_ID" />
                                                </columns>
                                              </TableView>
                                           </children>
@@ -63,16 +63,16 @@
                                           <children>
                                              <TableView layoutX="11.0" layoutY="14.0" prefHeight="419.0" prefWidth="839.0">
                                                 <columns>
-                                                   <TableColumn prefWidth="115.0" text="Appointment_ID" />
-                                                   <TableColumn prefWidth="35.0" text="Title" />
-                                                   <TableColumn prefWidth="79.0" text="Description" />
-                                                   <TableColumn minWidth="0.0" prefWidth="57.0" text="Location" />
-                                                   <TableColumn minWidth="0.0" prefWidth="65.0" text="Contact" />
-                                                   <TableColumn minWidth="0.0" prefWidth="53.0" text="Type" />
-                                                   <TableColumn minWidth="0.0" prefWidth="140.0" text="Start Date and Time" />
-                                                   <TableColumn minWidth="0.0" prefWidth="153.0" text="End Date and Time" />
-                                                   <TableColumn minWidth="0.0" prefWidth="85.0" text="Customer_ID" />
-                                                   <TableColumn minWidth="0.0" prefWidth="56.0" text="User_ID" />
+                                                   <TableColumn fx:id="maid" prefWidth="115.0" text="Appointment_ID" />
+                                                   <TableColumn fx:id="mt" prefWidth="35.0" text="Title" />
+                                                   <TableColumn fx:id="md" prefWidth="79.0" text="Description" />
+                                                   <TableColumn fx:id="ml" minWidth="0.0" prefWidth="57.0" text="Location" />
+                                                   <TableColumn fx:id="mc" minWidth="0.0" prefWidth="65.0" text="Contact" />
+                                                   <TableColumn fx:id="mty" minWidth="0.0" prefWidth="53.0" text="Type" />
+                                                   <TableColumn fx:id="msdat" minWidth="0.0" prefWidth="140.0" text="Start Date and Time" />
+                                                   <TableColumn fx:id="medat" minWidth="0.0" prefWidth="153.0" text="End Date and Time" />
+                                                   <TableColumn fx:id="mcid" minWidth="0.0" prefWidth="85.0" text="Customer_ID" />
+                                                   <TableColumn fx:id="muid" minWidth="0.0" prefWidth="56.0" text="User_ID" />
                                                 </columns>
                                              </TableView>
                                           </children>
@@ -81,6 +81,11 @@
                                </Tab>
                              </tabs>
                            </TabPane>
+                           <Label fx:id="noAppointments" alignment="CENTER" layoutX="24.0" layoutY="14.0" style="&#10;" textAlignment="CENTER" wrapText="false">
+                              <font>
+                                 <Font size="10.0" fx:id="x11" />
+                              </font>
+                           </Label>
                     </children>
                   </AnchorPane>
                 </content>

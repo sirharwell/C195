@@ -134,7 +134,7 @@ public class MainController implements Initializable {
                     if((time.isBefore(endTime)) && (endDate.isEqual(date))){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Appointment Soon!");
-                alert.setHeaderText("You have an appointment starting within 15 minutes");
+                alert.setHeaderText("You have appointment " + cs.aptId + " at "  + cs.aptTStart + " on " + cs.aptDStart );
                 alert.showAndWait();
             } 
         }}}
@@ -145,6 +145,39 @@ public class MainController implements Initializable {
         DBContacts.getAllContacts();
         DBAppointments.getAllAppointments();
         appointmentIn15();
+        TableView<Appointments> weeks = new TableView<>();
+        weeks.getItems().addAll(getWeeklyAppointments);
+        weeks.getColumns().addAll(waid, getWeeklyAppointments.getAptId());
+        maid.setCellValueFactory(cellData -> {
+            return cellData.getValue().getAptDescriptionProperty();
+        });
+        monthContact.setCellValueFactory(cellData -> {
+            return cellData.getValue().getAptContactProperty();
+        });
+        monthLocation.setCellValueFactory(cellData -> {
+            return cellData.getValue().getAptLocationProperty();
+        });
+        monthStart.setCellValueFactory(cellData -> {
+            return cellData.getValue().getAptStartProperty();
+        });
+        monthEnd.setCellValueFactory(cellData -> {
+            return cellData.getValue().getAptEndProperty();
+        });
+        weekDescription.setCellValueFactory(cellData -> {
+            return cellData.getValue().getAptDescriptionProperty();
+        });
+        weekContact.setCellValueFactory(cellData -> {
+            return cellData.getValue().getAptContactProperty();
+        });
+        weekLocation.setCellValueFactory(cellData -> {
+            return cellData.getValue().getAptLocationProperty();
+        });
+        weekStart.setCellValueFactory(cellData -> {
+            return cellData.getValue().getAptStartProperty();
+        });
+        weekEnd.setCellValueFactory(cellData -> {
+            return cellData.getValue().getAptEndProperty();
+        });
         StartTime.setItems(times);
         EndTime.setItems(times);
         Contact.setItems(Contacts.contact);
