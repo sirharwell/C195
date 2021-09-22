@@ -39,7 +39,7 @@
                                  <content>
                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                           <children>
-                                             <TableView layoutX="12.0" layoutY="14.0" prefHeight="419.0" prefWidth="839.0">
+                                             <TableView fx:id="tvWeek" layoutX="12.0" layoutY="14.0" prefHeight="419.0" prefWidth="839.0">
                                                <columns>
                                                  <TableColumn fx:id="waid" prefWidth="115.0" text="Appointment_ID" />
                                                  <TableColumn fx:id="wt" prefWidth="35.0" text="Title" />
@@ -61,7 +61,7 @@
                                  <content>
                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                           <children>
-                                             <TableView layoutX="11.0" layoutY="14.0" prefHeight="419.0" prefWidth="839.0">
+                                             <TableView fx:id="tvMonth" layoutX="11.0" layoutY="14.0" prefHeight="419.0" prefWidth="839.0">
                                                 <columns>
                                                    <TableColumn fx:id="maid" prefWidth="115.0" text="Appointment_ID" />
                                                    <TableColumn fx:id="mt" prefWidth="35.0" text="Title" />

@@ -45,6 +45,7 @@ public class DBAppointments {
             while(rs.next()) {
 
             Appointments newAppointment = new Appointments();
+            newAppointment.setAptId(rs.getInt("Appointment_ID"));
             newAppointment.setAptTitle(rs.getString("Title"));
             newAppointment.setAptDescription(rs.getString("Description"));
             newAppointment.setAptLocation(rs.getString("Location"));

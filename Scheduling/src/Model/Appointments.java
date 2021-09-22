@@ -165,54 +165,60 @@ public class Appointments {
         return (appointment.size() + 1); }   
 
     public String getAptIdP() {
-        return aptIdP.get();
+        return String.valueOf(aptId);
     }
 
     public String getAptCustIdP() {
-        return aptCustIdP.get();
+        return String.valueOf(aptCustId);
     }
 
     public String getAptDStartP() {
-        return aptDStartP.get();
+        return aptDStart;
     }
 
     public String getAptDEndP() {
-        return aptDEndP.get();
+        return aptDEnd;
     }
 
     public String getAptTStartP() {
-        return aptTStartP.get();
+        return aptTStart;
     }
 
     public String getAptTEndP() {
-        return aptTEndP.get();
+        return aptTEnd;
     }
 
     public String getAptTitleP() {
-        return aptTitleP.get();
+        return aptTitle;
     }
 
     public String getAptDescriptionP() {
-        return aptDescriptionP.get();
+        return aptDescription;
     }
 
     public String getAptLocationP() {
-        return aptLocationP.get();
+        return aptLocation;
     }
 
     public String getAptContactP() {
-        return aptContactP.get();
+        return String.valueOf(aptContact);
     }
 
     public String getAptTypeP() {
-        return aptTypeP.get();
+        return aptType;
     }
     
     public String getUserIdP() {
-        return aptUserIdP.get();
+        return "1";
     }
-    
-    
+
+    public String getAptStart() {
+            return (aptDStart + " " + aptTStart);
+        }    
+ 
+    public String getAptEnd() {
+        return (aptDEnd + " " + aptTEnd);
+    }   
     
         @Override
     public String toString(){

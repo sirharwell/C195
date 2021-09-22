@@ -37,6 +37,9 @@ import java.util.Objects;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -97,11 +100,14 @@ public class MainController implements Initializable {
     
     
   
-    public ObservableList<Appointments> getMonthlyAppointments(){
-        ObservableList<Appointments> monthlyAppointments= FXCollections.observableArrayList();
+   
+        public ObservableList<Appointments> monthlyAppointments= FXCollections.observableArrayList();
+        
+        @FXML
+        void getMonthly() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate end = LocalDate.now().plusMonths(1);
-        for(int i = 1; i <= Appointments.appointment.size(); i++){
+        for(int i = 1; i < Appointments.appointment.size(); i++){
         for(Appointments cs : Appointments.appointment){
             LocalDate start = LocalDate.parse(cs.aptDStart, formatter);
             if( start.isBefore(end)){
@@ -110,14 +116,17 @@ public class MainController implements Initializable {
         } 
 
         }
-        return monthlyAppointments;
+       
     }
     
-    public ObservableList<Appointments> getWeeklyAppointments() {
-        ObservableList<Appointments> weeklyAppointments= FXCollections.observableArrayList();
+    
+        public ObservableList<Appointments> weeklyAppointments= FXCollections.observableArrayList();
+        
+        @FXML
+        void getWeekly() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate end = LocalDate.now().plusWeeks(1);
-        for(int i = 1; i <= Appointments.appointment.size(); i++){
+        for(int i = 1; i < Appointments.appointment.size(); i++){
             for(Appointments cs : Appointments.appointment){
                 LocalDate start = LocalDate.parse(cs.aptDStart, formatter);
                 if( start.isBefore(end)){
@@ -126,7 +135,7 @@ public class MainController implements Initializable {
         } 
             
         }
-        return weeklyAppointments;
+        
     }
         
         public void appointmentIn15(){
@@ -153,25 +162,35 @@ public class MainController implements Initializable {
         DBContacts.getAllContacts();
         DBAppointments.getAllAppointments();
         appointmentIn15();
-        maid.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptIdP"));
-        mt.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptTypeP"));
-        md.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptDescriptionP"));
-        ml.setCellValueFactory(new PropertyValueFactory<Appointments, String>("AptLocationP"));
-        mc.setCellValueFactory(new PropertyValueFactory<Appointments, String>("AptContactP"));
-        mty.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptTypeP"));
-        msdat.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptDStartP" + " " + "aptTStartP"));
-        medat.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptDEndP" + " " + "aptTEndP"));
-        mcid.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptCustIdP"));
-        muid.setCellValueFactory(new PropertyValueFactory<Appointments, String>("aptUserIdP"));
+        maid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        mt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        md.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        ml.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptLocationP()));
+        mc.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptContactP()));
+        mty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        msdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        medat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        mcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));
+        muid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUserIdP()));
+        waid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        wt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        wd.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        wl.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptLocationP()));
+        wc.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptContactP()));
+        wty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        wsdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        wedt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        wcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));
+        wuid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUserIdP()));
+        getMonthly();
+        getWeekly();
         
         try{
-            System.out.println(getMonthlyAppointments());
-            System.out.println(getMonthlyAppointments());
-        tvMonth.setItems(getMonthlyAppointments());
-        tvWeek.setItems(getWeeklyAppointments());
+
+        tvMonth.setItems(monthlyAppointments);    
+        tvWeek.setItems(weeklyAppointments);
         }   catch(NullPointerException e){System.out.println(e);}
         }
-    
         
     private Customer editCustomer;
     
