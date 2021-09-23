@@ -63,7 +63,10 @@ public class MainController implements Initializable {
     public ComboBox state;
     public ComboBox nameUpdate;
     public ComboBox nameDelete;
+    public Label weeklyNumber;
     public Label noAppointments;
+    public Label monthlyNumber;
+    public Label totalNumber;
     public Button New;
     public Button Update;
     public Button Delete;
@@ -77,6 +80,9 @@ public class MainController implements Initializable {
     public TextField Phone;
     public TableView<Appointments> tvMonth;
     public TableView<Appointments> tvWeek;
+    public TableView<Appointments> anCost;
+    public TableView<Appointments> danGarc;
+    public TableView<Appointments> liLee;
     public TableColumn<Appointments, String> waid;
     public TableColumn<Appointments, String> wt;
     public TableColumn<Appointments, String> wd;
@@ -97,7 +103,27 @@ public class MainController implements Initializable {
     public TableColumn<Appointments, String> medat;
     public TableColumn<Appointments, String> mcid;
     public TableColumn<Appointments, String> muid;
-   
+    public TableColumn<Appointments, String> aaid;
+    public TableColumn<Appointments, String> at;
+    public TableColumn<Appointments, String> ad;
+    public TableColumn<Appointments, String> aty;
+    public TableColumn<Appointments, String> asdat;
+    public TableColumn<Appointments, String> aedat;
+    public TableColumn<Appointments, String> acid;
+    public TableColumn<Appointments, String> daid;
+    public TableColumn<Appointments, String> dt;
+    public TableColumn<Appointments, String> dd;
+    public TableColumn<Appointments, String> dty;
+    public TableColumn<Appointments, String> dsdat;
+    public TableColumn<Appointments, String> dedat;
+    public TableColumn<Appointments, String> dcid;
+    public TableColumn<Appointments, String> laid;
+    public TableColumn<Appointments, String> lt;
+    public TableColumn<Appointments, String> ld;
+    public TableColumn<Appointments, String> lty;
+    public TableColumn<Appointments, String> lsdat;
+    public TableColumn<Appointments, String> ledat;
+    public TableColumn<Appointments, String> lcid;
     
     
   
@@ -129,6 +155,37 @@ public class MainController implements Initializable {
                 LocalDate start = LocalDate.parse(cs.aptDStart, formatter);
                 if( start.isBefore(end)){
                     weeklyAppointments.add(cs);
+            }
+        } 
+    }
+        public ObservableList<Appointments> anCosta= FXCollections.observableArrayList();
+        
+        @FXML
+        void getAnika() {
+            for(Appointments cs : Appointments.appointment){
+                if( cs.getAptContact().getContact_Name().contains("ika")){
+                    anCosta.add(cs);
+            }
+        } 
+    }
+        
+        public ObservableList<Appointments> danGarcia= FXCollections.observableArrayList();
+        
+        @FXML
+        void getDaniel() {
+            for(Appointments cs : Appointments.appointment){
+                if( cs.getAptContact().getContact_Name().contains("nie")){
+                    danGarcia.add(cs);
+            }
+        } 
+    }
+        public ObservableList<Appointments> li= FXCollections.observableArrayList();
+        
+        @FXML
+        void getLi() {
+            for(Appointments cs : Appointments.appointment){
+                if( cs.getAptContact().getContact_Name().contains("Li")){
+                    li.add(cs);
             }
         } 
     }
@@ -179,13 +236,41 @@ public class MainController implements Initializable {
         wedt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
         wcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));
         wuid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUserIdP()));
+        aaid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        at.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        ad.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        aty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        asdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        aedat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        dcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));
+        daid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        dt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        dd.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        dty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        dsdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        dedat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        dcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP())); 
+        laid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        lt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        ld.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        lty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        lsdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        ledat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        lcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));     
         getMonthly();
         getWeekly();
+        getDaniel();
+        getLi();
+        getAnika();
         
         try{
 
         tvMonth.setItems(monthlyAppointments);    
         tvWeek.setItems(weeklyAppointments);
+        liLee.setItems(li);
+        danGarc.setItems(danGarcia);
+        anCost.setItems(anCosta);
+        
         }   catch(NullPointerException e){System.out.println(e);}
         }
         
@@ -304,6 +389,9 @@ public class MainController implements Initializable {
         appointmentIn15();
         tvMonth.getItems().clear();    
         tvWeek.getItems().clear();
+        liLee.getItems().clear();
+        danGarc.getItems().clear();
+        anCost.getItems().clear();
         maid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
         mt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
         md.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
@@ -324,13 +412,60 @@ public class MainController implements Initializable {
         wedt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
         wcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));
         wuid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUserIdP()));
+        maid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        mt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        md.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        ml.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptLocationP()));
+        mc.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptContactP()));
+        mty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        msdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        medat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        mcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));
+        muid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUserIdP()));
+        waid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        wt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        wd.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        wl.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptLocationP()));
+        wc.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptContactP()));
+        wty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        wsdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        wedt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        wcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));
+        wuid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUserIdP()));
+        aaid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        at.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        ad.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        aty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        asdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        aedat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        dcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));
+        daid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        dt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        dd.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        dty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        dsdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        dedat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        dcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP())); 
+        laid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        lt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        ld.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        lty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        lsdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        ledat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        lcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));  
         getMonthly();
         getWeekly();
+        getAnika();
+        getDaniel();
+        getLi();
         
         try{
 
         tvMonth.setItems(monthlyAppointments);    
         tvWeek.setItems(weeklyAppointments);
+        liLee.setItems(li);
+        danGarc.setItems(danGarcia);
+        anCost.setItems(anCosta);
         }   catch(NullPointerException e){System.out.println(e);}
                
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

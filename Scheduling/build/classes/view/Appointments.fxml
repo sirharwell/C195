@@ -33,13 +33,37 @@
                         <font>
                            <Font size="21.0" />
                         </font></Button>
-                     <ComboBox fx:id="Type" layoutX="36.0" layoutY="210.0" prefHeight="26.0" prefWidth="195.0" promptText="Type" />
+                     <ComboBox fx:id="Type" layoutX="124.0" layoutY="210.0" prefHeight="26.0" prefWidth="107.0" />
                      <ComboBox fx:id="StartTime" layoutX="153.0" layoutY="245.0" prefHeight="26.0" prefWidth="77.0" promptText="24 hr" />
-                     <ComboBox fx:id="NameNew" layoutX="36.0" layoutY="173.0" prefHeight="26.0" prefWidth="195.0" promptText="Customer" />
+                     <ComboBox fx:id="NameNew" layoutX="124.0" layoutY="173.0" prefHeight="26.0" prefWidth="107.0" />
                      <ComboBox fx:id="EndTime" layoutX="153.0" layoutY="276.0" prefHeight="26.0" prefWidth="78.0" promptText="24 hr" />
-                     <ComboBox fx:id="Contact" layoutX="36.0" layoutY="309.0" prefHeight="26.0" prefWidth="195.0" promptText="Contact" />
+                     <ComboBox fx:id="Contact" layoutX="124.0" layoutY="309.0" prefHeight="26.0" prefWidth="107.0" />
                      <DatePicker fx:id="startDate" layoutX="38.0" layoutY="245.0" prefHeight="26.0" prefWidth="107.0" promptText="Start" />
                      <DatePicker fx:id="endDate" layoutX="38.0" layoutY="276.0" prefHeight="26.0" prefWidth="107.0" promptText="End" />
+                     <Label alignment="CENTER" layoutX="48.0" layoutY="309.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Contact" textAlignment="CENTER" wrapText="false">
+                        <font>
+                           <Font size="18.0" fx:id="x1111111111" />
+                        </font>
+                        <textFill>
+                           <Color red="0.624" green="0.624" blue="0.624" fx:id="x2111111111" />
+                        </textFill>
+                     </Label>
+                     <Label alignment="CENTER" layoutX="53.0" layoutY="210.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Type" textAlignment="CENTER" wrapText="false">
+                        <font>
+                           <Font size="18.0" fx:id="x11111112" />
+                        </font>
+                        <textFill>
+                           <Color red="0.624" green="0.624" blue="0.624" fx:id="x21111112" />
+                        </textFill>
+                     </Label>
+                     <Label alignment="CENTER" layoutX="41.0" layoutY="172.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Customer" textAlignment="CENTER" wrapText="false">
+                        <font>
+                           <Font size="18.0" fx:id="x1111112" />
+                        </font>
+                        <textFill>
+                           <Color red="0.624" green="0.624" blue="0.624" fx:id="x2111112" />
+                        </textFill>
+                     </Label>
                      </children>
               </AnchorPane>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="359.0">

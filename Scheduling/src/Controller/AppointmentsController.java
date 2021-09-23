@@ -152,9 +152,7 @@ public class AppointmentsController implements Initializable {
             ZonedDateTime easternZDT = ZonedDateTime.of(easternD, easternT, easternId);
             ZoneId localZone = ZoneId.of(TimeZone.getDefault().getID());
             LocalDateTime now = LocalDateTime.now();
-            
             ZonedDateTime zdt = now.atZone(zid);
-            
             Instant easternToGMT = easternZDT.toInstant();
             ZonedDateTime easternToLocal = easternZDT.withZoneSameInstant(localZone);
             ZonedDateTime gstToLocalZDT = easternToGMT.atZone(localZone);
