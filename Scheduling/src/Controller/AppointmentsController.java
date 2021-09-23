@@ -57,7 +57,6 @@ public class AppointmentsController implements Initializable {
     public ComboBox<Contacts> ContactUpdate;
     public ComboBox<Customer> NameNew;
     public ComboBox<Customer> nameUpdate;
-    public ComboBox<Customer> NameDelete;
     public ComboBox<Appointments> AppointmentUpdate;
     public ComboBox<Appointments> AppointmentDelete;
     public DatePicker endDate;
@@ -102,7 +101,6 @@ public class AppointmentsController implements Initializable {
         startTimeUpdate.setItems(times);
         endTimeUpdate.setItems(times);
         nameUpdate.setItems(Customer.customers);
-        NameDelete.setItems(Customer.customers);
                 }
         catch (NullPointerException e) {System.out.println(e);}
     }
@@ -124,14 +122,19 @@ public class AppointmentsController implements Initializable {
         }
     }
 
-        public boolean overLap(String dStart, String tStart){       
+        public boolean overLap(String dStart, String tStart, String tEnd) throws ParseException{
+        for (int i = 1; i < Appointments.appointment.size(); i++){
         for(Appointments apt : Appointments.appointment){
-            if(apt.getAptDStart().contains(dStart) && apt.getAptTStart().contains(tStart)){
+            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+            String formattedStart = apt.getAptTStart();
+            String formattedEnd = apt.getAptTEnd();
+            Date endTime = parser.parse(formattedEnd);
+            Date startTime = parser.parse(formattedStart);
+            Date dtStart = parser.parse(tStart);
+            Date dtEnd = parser.parse(tEnd);
+            if((apt.getAptDStart().contains(dStart) && (((dtStart.after(startTime) || dtStart.equals(startTime)) && dtStart.before(endTime)) || (dtStart.before(startTime) && dtEnd.after(startTime))))) {
                 return true;
-            }
-            else {
-                return false;
-            }}
+                        }}}
                 return false;}
 
         public boolean businessHours(String tStart, String tEnd) throws ParseException{
@@ -159,7 +162,7 @@ public class AppointmentsController implements Initializable {
             ZonedDateTime startToEastern = tdStart.withZoneSameInstant(easternId);
             ZonedDateTime endToEastern = tdEnd.withZoneSameInstant(easternId);
             SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
-            Date ten = parser.parse("22:00");
+            Date ten = parser.parse("24:00");
             Date eight = parser.parse("08:00");
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm");
             String formattedEnd = endToEastern.format(myFormatObj);
@@ -213,7 +216,7 @@ public class AppointmentsController implements Initializable {
                 alert.showAndWait(); 
             }
             else{
-            if(overLap(dStart, tStart)){
+            if(overLap(dStart, tStart, tEnd)){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Issue adding an Appointment");
                 alert.setHeaderText("You already have an appointment scheduled for this time.");
@@ -298,7 +301,7 @@ public class AppointmentsController implements Initializable {
                 alert.showAndWait(); 
             }
             else{
-            if(overLap(dStart, tStart)){
+            if(overLap(dStart, tStart, tEnd)){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Issue adding an Appointment");
                 alert.setHeaderText("You already have an appointment scheduled for this time.");

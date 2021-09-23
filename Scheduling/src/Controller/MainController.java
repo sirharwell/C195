@@ -107,16 +107,13 @@ public class MainController implements Initializable {
         void getMonthly() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate end = LocalDate.now().plusMonths(1);
-        for(int i = 1; i < Appointments.appointment.size(); i++){
+        
         for(Appointments cs : Appointments.appointment){
             LocalDate start = LocalDate.parse(cs.aptDStart, formatter);
             if( start.isBefore(end)){
                 monthlyAppointments.add(cs);
             }
         } 
-
-        }
-       
     }
     
     
@@ -126,16 +123,13 @@ public class MainController implements Initializable {
         void getWeekly() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate end = LocalDate.now().plusWeeks(1);
-        for(int i = 1; i < Appointments.appointment.size(); i++){
+        
             for(Appointments cs : Appointments.appointment){
                 LocalDate start = LocalDate.parse(cs.aptDStart, formatter);
                 if( start.isBefore(end)){
                     weeklyAppointments.add(cs);
             }
         } 
-            
-        }
-        
     }
         
         public void appointmentIn15(){
@@ -143,7 +137,7 @@ public class MainController implements Initializable {
             LocalDate endDate = LocalDate.now();
             DateTimeFormatter fr = DateTimeFormatter.ofPattern("HH:mm");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            for (int i = 1; i <= Appointments.appointment.size(); i++){        
+                    
                 for(Appointments cs : Appointments.appointment){
                     LocalTime time = LocalTime.parse(cs.aptTStart, fr);
                     LocalDate date = LocalDate.parse(cs.aptDStart, formatter);
@@ -152,9 +146,11 @@ public class MainController implements Initializable {
                 alert.setTitle("Appointment Soon!");
                 alert.setHeaderText("You have appointment " + cs.aptId + " at "  + cs.aptTStart + " on " + cs.aptDStart );
                 alert.showAndWait();
+                noAppointments.setText("Appointments upcoming");
             }
                     else{ noAppointments.setText("No appointments upcoming");}
-        }}}
+        }
+        }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
