@@ -67,6 +67,7 @@ public class MainController implements Initializable {
     public Button New;
     public Button Update;
     public Button Delete;
+    public Button Refresh;
     public TableColumn idCol;
     public TableColumn nameCol;
     public TableView dataTable;
@@ -297,7 +298,46 @@ public class MainController implements Initializable {
                 alert.showAndWait();
     }
         
+@FXML
+    public void onRefresh(ActionEvent event) throws IOException {
+        
+        appointmentIn15();
+        tvMonth.getItems().clear();    
+        tvWeek.getItems().clear();
+        maid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        mt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        md.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        ml.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptLocationP()));
+        mc.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptContactP()));
+        mty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        msdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        medat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        mcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));
+        muid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUserIdP()));
+        waid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptIdP()));
+        wt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTitleP()));
+        wd.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptDescriptionP()));
+        wl.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptLocationP()));
+        wc.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptContactP()));
+        wty.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptTypeP()));
+        wsdat.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptStart()));
+        wedt.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptEnd()));
+        wcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));
+        wuid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUserIdP()));
+        getMonthly();
+        getWeekly();
+        
+        try{
 
+        tvMonth.setItems(monthlyAppointments);    
+        tvWeek.setItems(weeklyAppointments);
+        }   catch(NullPointerException e){System.out.println(e);}
+               
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Refreshed");
+                alert.setHeaderText("All up to date.");
+                alert.showAndWait();
+    }
         
 
 }

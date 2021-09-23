@@ -102,7 +102,7 @@ public class AppointmentsController implements Initializable {
         endTimeUpdate.setItems(times);
         nameUpdate.setItems(Customer.customers);
                 }
-        catch (NullPointerException e) {System.out.println(e);}
+        catch (NullPointerException e) {}
     }
     
     
@@ -162,7 +162,7 @@ public class AppointmentsController implements Initializable {
             ZonedDateTime startToEastern = tdStart.withZoneSameInstant(easternId);
             ZonedDateTime endToEastern = tdEnd.withZoneSameInstant(easternId);
             SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
-            Date ten = parser.parse("24:00");
+            Date ten = parser.parse("22:00");
             Date eight = parser.parse("08:00");
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm");
             String formattedEnd = endToEastern.format(myFormatObj);
@@ -231,8 +231,6 @@ public class AppointmentsController implements Initializable {
                 alert.setTitle("Appointment Added");
                 alert.setHeaderText("Appointment saved successfully");
                 alert.showAndWait();
-                
-                System.out.println(Appointments.appointment);
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
