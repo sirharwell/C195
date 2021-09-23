@@ -42,10 +42,14 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class AppointmentsController implements Initializable {
-
+    /**
+     * Add FXML components.
+     *
+     * 
+     */
     @FXML
     public ComboBox<String> Type;
     public ComboBox<String> typeUpdate;
@@ -78,12 +82,20 @@ public class AppointmentsController implements Initializable {
     public TextField UpdateTitle;
     public TextField UpdateDescription;
     public TextField UpdateLocation;
-
+    
+    /**
+     * Create the lists to populate my drop-downs.
+     *
+     * 
+     */
     private ObservableList<String> types = FXCollections.observableArrayList("Introductions","Planning Session","Portfolio Analysis","De-Briefing");
     private ObservableList<String> times = FXCollections.observableArrayList("00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00");
     
-    
-   
+    /**
+     * Populate everything.
+     *
+     * 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         StartTime.setItems(times);
@@ -105,15 +117,11 @@ public class AppointmentsController implements Initializable {
         catch (NullPointerException e) {}
     }
     
-    
-    public void onPull(ActionEvent actionEvent){
-        
-        }
-    
-        public void onUpdatePull(ActionEvent actionEvent){
-        
-        }
-    
+    /**
+     * Checks to see if we left any black spaces in the add/edit sections.
+     *
+     * 
+     */
             public boolean validateEverything(Customer aptCustId, String aptDStart, String aptDEnd, String aptTStart, String aptTEnd, String aptTitle, String aptDescription, String aptLocation, Contacts aptContact, String aptType ) {
         if(aptCustId == null || aptDStart == null || aptDEnd == null || aptTStart == null || aptTEnd == null || aptTitle.isEmpty() || aptDescription.isEmpty() || aptLocation.isEmpty() || aptType == null || aptContact == null) {
             return false;
@@ -121,7 +129,12 @@ public class AppointmentsController implements Initializable {
             return true;
         }
     }
-
+            
+    /**
+     * Checks to see if there are appointment overlaps.
+     *
+     * 
+     */
         public boolean overLap(String dStart, String tStart, String tEnd) throws ParseException{
         for (int i = 1; i < Appointments.appointment.size(); i++){
         for(Appointments apt : Appointments.appointment){
@@ -136,7 +149,12 @@ public class AppointmentsController implements Initializable {
                 return true;
                         }}}
                 return false;}
-
+        
+    /**
+     * Checks to see appointment time is within business hours.
+     *
+     * 
+     */
         public boolean businessHours(String tStart, String tEnd) throws ParseException{
             DateTimeFormatter tf = DateTimeFormatter.ofPattern("HH:mm");
             ZoneId zid = ZoneId.systemDefault();
@@ -177,8 +195,13 @@ public class AppointmentsController implements Initializable {
             
             
         return false;}
-    
- @FXML
+
+    /**
+     * Adding a new Appointment.
+     *
+     *@param event 
+     */
+        @FXML
         public void handleNew(ActionEvent event) throws IOException, ParseException {
             StringBuilder sb = new StringBuilder(" ");
             try {
@@ -247,9 +270,17 @@ public class AppointmentsController implements Initializable {
                 alert.setContentText("Including the drop downs");
                 alert.showAndWait();
             };}
-        
+    /**
+     * initializing editAppointment. 
+     *
+     * 
+     */    
  private Appointments editAppointment;
-        
+    /**
+     * Populating the update appointment fields.
+     *
+     *@param event 
+     */    
  @FXML
         public void handleAppointmentUpdate(ActionEvent event) throws IOException {
             
@@ -273,7 +304,12 @@ public class AppointmentsController implements Initializable {
 
             
         }
-        
+    
+     /**
+     * updating an Appointment.
+     *
+     *@param event 
+     */
         @FXML
         public void saveUpdate(ActionEvent event) throws IOException, ParseException {
             
@@ -335,6 +371,11 @@ public class AppointmentsController implements Initializable {
         }
         }
         
+    /**
+     * Delete an Appointment.
+     *
+     *@param event 
+     */    
   @FXML
         public void handleDelete(ActionEvent event) throws IOException {
             
@@ -351,6 +392,11 @@ public class AppointmentsController implements Initializable {
             
         }}
         
+    /**
+     * Return to home.
+     *
+     *@param event 
+     */      
         @FXML
         public void handleBack(ActionEvent event)throws IOException {
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close(); 

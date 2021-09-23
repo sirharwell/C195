@@ -21,7 +21,7 @@ import Model.Appointments;
 import Model.Contacts;
 import utils.DBAppointments;
 import Model.Customer;
-import Model.UserDB;
+import utils.UserDB;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,10 +54,15 @@ import utils.DBContacts;
 
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class MainController implements Initializable {
     
+    /**
+     * Sets FXML links. 
+     *
+     * 
+     */
     @FXML
     public ComboBox country;
     public ComboBox state;
@@ -134,6 +139,11 @@ public class MainController implements Initializable {
    
         public ObservableList<Appointments> monthlyAppointments= FXCollections.observableArrayList();
         
+    /**
+     * Populates the corresponding list. 
+     *
+     * 
+     */
         @FXML
         void getMonthly() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -149,7 +159,12 @@ public class MainController implements Initializable {
     
     
         public ObservableList<Appointments> weeklyAppointments= FXCollections.observableArrayList();
-        
+            
+    /**
+     * Populates the corresponding list. 
+     *
+     * 
+     */
         @FXML
         void getWeekly() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -163,7 +178,12 @@ public class MainController implements Initializable {
         } 
     }
         public ObservableList<Appointments> anCosta= FXCollections.observableArrayList();
-        
+            
+    /**
+     * Populates the corresponding list. 
+     *
+     * 
+     */
         @FXML
         void getAnika() {
             for(Appointments cs : Appointments.appointment){
@@ -174,7 +194,12 @@ public class MainController implements Initializable {
     }
         
         public ObservableList<Appointments> danGarcia= FXCollections.observableArrayList();
-        
+            
+    /**
+     * Populates the corresponding list. 
+     *
+     * 
+     */
         @FXML
         void getDaniel() {
             for(Appointments cs : Appointments.appointment){
@@ -184,7 +209,12 @@ public class MainController implements Initializable {
         } 
     }
         public ObservableList<Appointments> li= FXCollections.observableArrayList();
-        
+            
+    /**
+     * Populates the corresponding list. 
+     *
+     * 
+     */
         @FXML
         void getLi() {
             for(Appointments cs : Appointments.appointment){
@@ -195,7 +225,12 @@ public class MainController implements Initializable {
     }
         
         public ObservableList<Appointments> introductions= FXCollections.observableArrayList();
-        
+            
+    /**
+     * Populates the corresponding list. 
+     *
+     * 
+     */
         @FXML
         void getIntro() {
             introductions.clear();
@@ -207,7 +242,12 @@ public class MainController implements Initializable {
     }
         
         public ObservableList<Appointments> portfolioAnalysis= FXCollections.observableArrayList();
-        
+            
+    /**
+     * Populates the corresponding list. 
+     *
+     * 
+     */
         @FXML
         void getPA() {
             portfolioAnalysis.clear();
@@ -219,7 +259,12 @@ public class MainController implements Initializable {
     }
         
         public ObservableList<Appointments> planningSession= FXCollections.observableArrayList();
-        
+            
+    /**
+     * Populates the corresponding list. 
+     *
+     * 
+     */
         @FXML
         void getPlan() {
             planningSession.clear();
@@ -231,7 +276,12 @@ public class MainController implements Initializable {
     }
 
         public ObservableList<Appointments> deBriefing= FXCollections.observableArrayList();
-        
+            
+    /**
+     * Populates the corresponding list. 
+     *
+     * 
+     */
         @FXML
         void getDebrief() {
             deBriefing.clear();
@@ -240,7 +290,13 @@ public class MainController implements Initializable {
                     deBriefing.add(cs);
             }
         } 
-    }    
+    }   
+            
+    /**
+     * Checks for appointment in 15 minutes or less. 
+     *
+     * 
+     */
         public void appointmentIn15(){
             LocalTime endTime = LocalTime.now().plusMinutes(15);
             LocalDate endDate = LocalDate.now();
@@ -260,7 +316,12 @@ public class MainController implements Initializable {
                     else{ noAppointments.setText("No appointments upcoming");}
         }
         }
-    
+        
+    /**
+     * Brings in info from DB, sets table values, converts customers and appointments to objects. 
+     *
+     * 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         DBCustomer.getAllCustomers();
@@ -336,7 +397,12 @@ public class MainController implements Initializable {
         }
         
     private Customer editCustomer;
-    
+        
+    /**
+     * Saves customer to db. 
+     *
+     * 
+     */
     private void committedCustomer(){
         System.out.println("Hi");
         for (int i = 1; i <= Customer.customers.size(); i++){        
@@ -355,7 +421,12 @@ public class MainController implements Initializable {
         };
        
     }
-    
+        
+    /**
+     * Saves appointments to DB. 
+     *
+     * 
+     */
     private void committedAppointment() throws ParseException{{
         for (int i = 1; i <= Appointments.appointment.size(); i++){        
         for(Appointments cs : Appointments.appointment){
@@ -404,7 +475,12 @@ public class MainController implements Initializable {
         };
        
     }}
-      
+        
+    /**
+     * Opens customer page. 
+     *
+     * @param event
+     */  
  @FXML
     public void handleNew(ActionEvent event) throws IOException {
             Parent loader = FXMLLoader.load(getClass().getResource("/view/Customer.fxml"));
@@ -415,7 +491,12 @@ public class MainController implements Initializable {
             stage.setTitle("Customer");
             stage.show();   
     }
-    
+        
+    /**
+     * Opens appointment page. 
+     *
+     * @param event
+     */  
 @FXML
     public void handleAppointments(ActionEvent event) throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
@@ -426,14 +507,18 @@ public class MainController implements Initializable {
             stage.setTitle("Appointments");
             stage.show();   
     }
-        
+            
+    /**
+     * Deletes old DB info and saves new info. 
+     *
+     * @param event
+     */  
          @FXML
     public void onCommit(ActionEvent event) throws IOException, ParseException {
         try {
             DBAppointments.deleteAppointments();
             DBCustomer.deleteCustomer();
         } catch (SQLException ex) {
-            System.out.println("You done screwed up A-A-Ron" + ex.getMessage());
         }
         committedCustomer();
         committedAppointment();
@@ -443,7 +528,12 @@ public class MainController implements Initializable {
                 alert.setHeaderText("All changes saved.");
                 alert.showAndWait();
     }
-        
+    
+    /**
+     * Refreshes calendars and counters. 
+     *
+     * @param event
+     */          
 @FXML
     public void onRefresh(ActionEvent event) throws IOException {
         

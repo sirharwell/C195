@@ -32,6 +32,11 @@ public class DBConnection {
     private static final String username = "U06LeB"; //Username
     private static final String password = "53688796364"; //password
     
+    /**
+     * Connects to DB
+     *
+     * 
+     */
     public static Connection startConnection() {
        try{
            Class.forName(MYSQLJDBCDriver);

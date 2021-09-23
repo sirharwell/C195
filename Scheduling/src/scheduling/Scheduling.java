@@ -6,7 +6,6 @@
 package scheduling;
 
 import Model.Customer;
-import utils.DBCountries;
 import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +37,7 @@ import utils.DBCustomer;
 
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class Scheduling extends Application {
 
@@ -51,7 +50,12 @@ public class Scheduling extends Application {
         launch(args); 
         DBConnection.closeConnetion();
     }
-
+    
+    /**
+     * Starter
+     *
+     * @param stage
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Locale locale = Locale.getDefault();

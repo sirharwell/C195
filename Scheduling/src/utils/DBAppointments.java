@@ -27,14 +27,16 @@ import java.util.Date;
 import java.util.TimeZone;
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class DBAppointments {
     private static ObservableList<Appointments> appointment = FXCollections.observableArrayList();
     
- 
-    
-    // Returns all Customers in Database
+    /**
+     * Gets all appointments from DB and converts time zones
+     *
+     * 
+     */
     public static ObservableList<Appointments> getAllAppointments() {
         try {
             Connection conn = DBConnection.getConnection();
@@ -108,6 +110,11 @@ public class DBAppointments {
         }
     }
    
+    /**
+     * Saves all appointments to DB
+     *
+     * 
+     */
     public static boolean saveAppointments( int aptId, String aptTitle, String aptDescription, String aptLocation, String aptType, String aptStart, String aptEnd, Customer aptCustId, Contacts aptContact) {
         try {
             Connection conn = DBConnection.getConnection();
@@ -135,7 +142,12 @@ public class DBAppointments {
     
     
     
-    // Delete Customer from Database
+    
+    /**
+     * Deletes all appointments from DB
+     *
+     * 
+     */
     public static boolean deleteAppointments() throws SQLException {
         try {
             Connection conn = DBConnection.getConnection();

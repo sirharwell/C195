@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import Model.Appointments;
 import utils.DBAppointments;
 import Model.Customer;
-import Model.UserDB;
+import utils.UserDB;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
 import java.util.Optional;
@@ -34,10 +34,15 @@ import static java.util.Objects.isNull;
 
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class CustomerController implements Initializable {
     
+    /**
+     * Adding FXML links.
+     *
+     * 
+     */      
     @FXML
     public ComboBox<String> country;
     public ComboBox<String> state;
@@ -65,6 +70,11 @@ public class CustomerController implements Initializable {
 
                                     
     
+    /**
+     * Populating lists.
+     *
+     * 
+     */ 
     private ObservableList<String> countries = FXCollections.observableArrayList(
     "USA", "UK", "Canada");
     
@@ -86,7 +96,12 @@ public class CustomerController implements Initializable {
         
     
     
-    
+
+    /**
+     * Setting up updates and prompts text.
+     *
+     * 
+     */     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -102,6 +117,11 @@ public class CustomerController implements Initializable {
     }
     
     
+    /**
+     * Sets which list to display. 
+     *
+     * @param actionEvent
+     */ 
     public void onPull(ActionEvent actionEvent){
         StringBuilder sb = new StringBuilder(" ");
         
@@ -119,6 +139,11 @@ public class CustomerController implements Initializable {
                     }
         }
     
+    /**
+     * Sets which list to display. 
+     *
+     * @param actionEvent
+     */
         public void onUpdatePull(ActionEvent actionEvent){
         StringBuilder sb = new StringBuilder(" ");
         
@@ -136,7 +161,11 @@ public class CustomerController implements Initializable {
                     }
         }
     
-
+    /**
+     * Makes sure all fields are filled. 
+     *
+     * 
+     */
             public boolean validateEverything(String customerName, String address, String postalCode, String phone, String countryChoice, String stateChoice) {
         if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phone.isEmpty() || countryChoice == null || stateChoice == null ) {
             return false;
@@ -146,6 +175,11 @@ public class CustomerController implements Initializable {
     }
 
     
+    /**
+     * Sets new customer. 
+     *
+     * @param event
+     */
  @FXML
         public void handleNew(ActionEvent event) throws IOException {
             StringBuilder sb = new StringBuilder(" ");
@@ -189,7 +223,12 @@ public class CustomerController implements Initializable {
         }
         
  private Customer editCustomer;
-        
+    
+    /**
+     * populates update customer fields. 
+     *
+     * @param event
+     */    
   @FXML
         public void handleUpdate(ActionEvent event) throws IOException {
             
@@ -207,7 +246,12 @@ public class CustomerController implements Initializable {
 
             
         }
-        
+    
+    /**
+     * Updates customer. 
+     *
+     * @param event
+     */    
         @FXML
         public void saveUpdate(ActionEvent event) throws IOException {
             StringBuilder sb = new StringBuilder(" ");
@@ -234,7 +278,12 @@ public class CustomerController implements Initializable {
                 alert.showAndWait();
             
         }
-        
+     
+    /**
+     * Deletes customer and maybe corresponding appointment. 
+     *
+     * @param event
+     */   
   @FXML
         public void handleDelete(ActionEvent event) throws IOException {
             editCustomer = nameDelete.getSelectionModel().getSelectedItem();
@@ -258,6 +307,11 @@ public class CustomerController implements Initializable {
         }
             } catch (ConcurrentModificationException e){System.out.println("Mod issue: " + e.getMessage());}}
         
+    /**
+     * Back to home.  
+     *
+     * @param event
+     */
         @FXML
         public void handleBack(ActionEvent event)throws IOException {
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close(); 

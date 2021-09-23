@@ -5,9 +5,7 @@
  */
 package Controller;
 
-import utils.DBCountries;
-import Model.Countries;
-import Model.UserDB;
+import utils.UserDB;
 import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,9 +32,15 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class LoginController implements Initializable {
+    
+    /**
+     * Adds FXML links 
+     *
+     * 
+     */
     
     @FXML
     public TableColumn idCol;
@@ -64,6 +68,11 @@ public class LoginController implements Initializable {
         Location.setText("You are in " + String.valueOf(TimeZone.getDefault().getID()));
     }  
 
+    /**
+     * tests username/password and logs in if correct, rejects if incorrect. Makes a log. 
+     *
+     * @param event
+     */
     @FXML
         private void handleLogin(ActionEvent event) throws IOException {
             String username = usernameText.getText();

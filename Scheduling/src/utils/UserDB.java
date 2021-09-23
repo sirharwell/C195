@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package utils;
 
+import Model.User;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ import utils.Logger;
 
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class UserDB {
     
@@ -25,7 +26,12 @@ public class UserDB {
         return currentUser;
     }
     
-    //try to login
+    
+    /**
+     * Tries to login
+     *
+     * 
+     */
     public static Boolean login(String username, String password) {
      try {  
             Connection conn = DBConnection.getConnection();
@@ -34,8 +40,6 @@ public class UserDB {
             String query = "SELECT * FROM users WHERE User_Name='" + username + "' AND Password='" + password + "'";
             ResultSet results = statement.executeQuery(query);
             if(results.next()) {
-                currentUser = new User();
-                currentUser.setUsername(results.getString("User_Name"));
                 statement.close();
                 Logger.log(username, true);
                 return true;

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class DBQuery {
     

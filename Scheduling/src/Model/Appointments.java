@@ -15,7 +15,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class Appointments {
     public int aptId;
@@ -47,10 +47,20 @@ public class Appointments {
     
     
     public static final ObservableList<Appointments> appointment = FXCollections.observableArrayList();
-    
+        
+    /**
+     * Adds appointments to the list 
+     *
+     * 
+     */  
     public static void addAppointments(Appointments newAppointment){
         appointment.add(newAppointment);
-    }
+    }    
+    /**
+     * Removes appointments from the list 
+     *
+     * 
+     */
     public static void removeAppointments(Appointments removeAppointment){
         appointment.remove(removeAppointment);
     }
@@ -68,158 +78,353 @@ public class Appointments {
         setAptContact(contact);
         setAptType(type);
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public int getAptId() {
         return aptId;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public Customer getAptCustId() {
         return aptCustId;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptTEnd() {
         return aptTEnd;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptTStart() {
         return aptTStart;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptDEnd() {
         return aptDEnd;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptDStart() {
         return aptDStart;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptTitle() {
         return aptTitle;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptDescription() {
         return aptDescription;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptLocation() {
         return aptLocation;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public Contacts getAptContact() {
         return aptContact;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptType() {
     return aptType;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setAptId(int aptId) {
         this.aptId = aptId;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setAptCustId(Customer aptCustId) {
         this.aptCustId = aptCustId;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setAptTEnd(String aptTEnd) {
         this.aptTEnd = aptTEnd;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setAptTStart(String aptTStart) {
         this.aptTStart = aptTStart;
     } 
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setAptDEnd(String aptDEnd) {
         this.aptDEnd = aptDEnd;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setAptDStart(String aptDStart) {
         this.aptDStart = aptDStart;
     } 
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setAptTitle(String aptTitle) {
         this.aptTitle = aptTitle;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setAptDescription(String aptDescription) {
         this.aptDescription = aptDescription;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setAptLocation(String aptLocation) {
         this.aptLocation = aptLocation;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setAptContact(Contacts aptContact) {
         this.aptContact = aptContact;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setAptType(String aptType) {
     this.aptType = aptType;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setUserId(String userId) {
     this.aptUserId = "1";
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public static int getAppointmentCount(){
         return (appointment.size() + 1); }   
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptIdP() {
         return String.valueOf(aptId);
     }
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptCustIdP() {
         return String.valueOf(aptCustId);
     }
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptDStartP() {
         return aptDStart;
     }
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptDEndP() {
         return aptDEnd;
     }
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptTStartP() {
         return aptTStart;
     }
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptTEndP() {
         return aptTEnd;
     }
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptTitleP() {
         return aptTitle;
     }
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptDescriptionP() {
         return aptDescription;
     }
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptLocationP() {
         return aptLocation;
     }
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptContactP() {
         return String.valueOf(aptContact);
     }
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptTypeP() {
         return aptType;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getUserIdP() {
         return "1";
     }
-
+    
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptStart() {
             return (aptDStart + " " + aptTStart);
         }    
- 
+     
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getAptEnd() {
         return (aptDEnd + " " + aptTEnd);
     }   
-    
+        
+    /**
+     * Fixes displayed name 
+     *
+     * 
+     */
         @Override
     public String toString(){
         return(String.valueOf(aptTitle));

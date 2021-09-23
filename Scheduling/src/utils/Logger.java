@@ -13,13 +13,18 @@ import java.time.ZonedDateTime;
 
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class Logger {
     private static final String FILENAME = "login_activity.txt";
     
     public Logger() {}
     
+    /**
+     * Saves a login log
+     *
+     * 
+     */
     public static void log (String username, boolean success) {
         try (FileWriter fwVariable = new FileWriter(FILENAME, true);
              BufferedWriter bwVariable = new BufferedWriter(fwVariable);

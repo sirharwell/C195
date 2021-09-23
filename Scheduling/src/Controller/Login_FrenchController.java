@@ -5,9 +5,7 @@
  */
 package Controller;
 
-import utils.DBCountries;
-import Model.Countries;
-import Model.UserDB;
+import utils.UserDB;
 import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,20 +32,27 @@ import javax.tools.DocumentationTool.Location;
 
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class Login_FrenchController {
 
+    
+    /**
+     * Sets FXML links. 
+     *
+     * 
+     */
     
     @FXML
     public TableColumn idCol;
     public TableColumn nameCol;
     public TableView dataTable;
-    public Text Location;
 
     @FXML
     private Button Login;
     
+    @FXML
+    private Text Location;
     @FXML
     private TextField usernameText;
     
@@ -64,6 +69,11 @@ public class Login_FrenchController {
         Location.setText("Tu es dans " + String.valueOf(TimeZone.getDefault().getID()));
     }  
 
+    /**
+     * Handles Login. 
+     *
+     * @param event
+     */
     @FXML
         private void handleLogin(ActionEvent event) throws Exception {
             String username = usernameText.getText();

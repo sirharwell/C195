@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class Customer {
     public int custId;
@@ -43,68 +43,147 @@ public class Customer {
     public static void removeCustomer(Customer editCustomer){
         customers.remove(editCustomer);
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public int getCustId() {
         return custId;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getCustName() {
         return custName;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getCustAddress() {
         return custAddress;
     }
-    
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getCustPhone() {
         return custPhone;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getCustZip() {
         return custZip;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getCustCountry() {
         return custCountry;
     }
-        
+           
+    /**
+     * getter 
+     *
+     * 
+     */ 
     public String getCustState() {
         return custState;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setCustId(int custId) {
         this.custId = custId;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setCustName(String custName) {
         this.custName = custName;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setCustAddress(String custAddress) {
         this.custAddress = custAddress;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setCustPhone(String custPhone) {
         this.custPhone = custPhone;
     }   
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setCustZip(String custZip) {
         this.custZip = custZip;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public void setCustCountry(String custCountry) {
         this.custCountry = custCountry;
     }
-        
+           
+    /**
+     * setter 
+     *
+     * 
+     */ 
     public void setCustState(String custState) {
         this.custState =  custState;
     }
-    
+        
+    /**
+     * setter 
+     *
+     * 
+     */
     public static int getCustomerCount(){
         return (customers.size() + 1);
     }
-    
+        
+    /**
+     * Fixes display name 
+     *
+     * 
+     */
     @Override
     public String toString(){
         return(String.valueOf(custName));

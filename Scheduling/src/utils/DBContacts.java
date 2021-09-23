@@ -15,15 +15,17 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class DBContacts {
     
         private static ObservableList<Contacts> contact = FXCollections.observableArrayList();
     
- 
-    
-    // Returns all Customers in Database
+    /**
+     * Gets all Contacts from DB
+     *
+     * 
+     */
     public static ObservableList<Contacts> getAllContacts() {
         try {
             Connection conn = DBConnection.getConnection();

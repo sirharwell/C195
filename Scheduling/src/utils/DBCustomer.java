@@ -15,15 +15,17 @@ import javafx.collections.ObservableList;
 import Model.Customer;
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class DBCustomer {
     
     private static ObservableList<Customer> customers = FXCollections.observableArrayList();
-    
- 
-    
-    // Returns all Customers in Database
+
+    /**
+     * Gets all customers from DB
+     *
+     * 
+     */
     public static ObservableList<Customer> getAllCustomers() {
         try {
             Connection conn = DBConnection.getConnection();
@@ -267,6 +269,12 @@ public class DBCustomer {
         }
     }
     static int s;
+    
+    /**
+     * Saves all Customers to DB
+     *
+     * 
+     */
     public static boolean saveCustomer( int id, String customerName, String address, String stateChoice, String phone, String postalCode) {
         try {
             Connection conn = DBConnection.getConnection();
@@ -1163,9 +1171,11 @@ public class DBCustomer {
         return false;
     }
     
-    
-    
-    // Delete Customer from Database
+    /**
+     * Deletes all customers from DB
+     *
+     * 
+     */
     public static boolean deleteCustomer() throws SQLException {
         try {
             Connection conn = DBConnection.getConnection();

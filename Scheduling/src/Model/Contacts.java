@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author 18018
+ * @author Ian Harwell
  */
 public class Contacts {
     
@@ -34,31 +34,66 @@ public class Contacts {
         setContact_Name(contact_Name);
         setEmail(email);
         }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public int getContact_ID() {
         return contact_ID;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getContact_Name() {
         return contact_Name;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public String getEmail() {
         return email;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public void setContact_ID(int contact_ID) {
         this.contact_ID = contact_ID;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public void setContact_Name(String contact_Name) {
         this.contact_Name = contact_Name;
     }
-    
+        
+    /**
+     * getter 
+     *
+     * 
+     */
     public void setEmail(String email) {
         this.email = email;
     }
-    
+        
+    /**
+     * Fixed display
+     *
+     * 
+     */
             @Override
     public String toString(){
         return(String.valueOf(contact_Name));
