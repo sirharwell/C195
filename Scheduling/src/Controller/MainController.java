@@ -67,6 +67,10 @@ public class MainController implements Initializable {
     public Label noAppointments;
     public Label monthlyNumber;
     public Label totalNumber;
+    public Label Introductions;
+    public Label DeBriefing;
+    public Label PlanningSession;
+    public Label PortfolioAnalysis;
     public Button New;
     public Button Update;
     public Button Delete;
@@ -190,6 +194,53 @@ public class MainController implements Initializable {
         } 
     }
         
+        public ObservableList<Appointments> introductions= FXCollections.observableArrayList();
+        
+        @FXML
+        void getIntro() {
+            introductions.clear();
+            for(Appointments cs : Appointments.appointment){
+                if( cs.getAptType().contains("rodu")){
+                    introductions.add(cs);
+            }
+        } 
+    }
+        
+        public ObservableList<Appointments> portfolioAnalysis= FXCollections.observableArrayList();
+        
+        @FXML
+        void getPA() {
+            portfolioAnalysis.clear();
+            for(Appointments cs : Appointments.appointment){
+                if( cs.getAptType().contains("naly")){
+                    portfolioAnalysis.add(cs);
+            }
+        } 
+    }
+        
+        public ObservableList<Appointments> planningSession= FXCollections.observableArrayList();
+        
+        @FXML
+        void getPlan() {
+            planningSession.clear();
+            for(Appointments cs : Appointments.appointment){
+                if( cs.getAptType().contains("ess")){
+                    planningSession.add(cs);
+            }
+        } 
+    }
+
+        public ObservableList<Appointments> deBriefing= FXCollections.observableArrayList();
+        
+        @FXML
+        void getDebrief() {
+            deBriefing.clear();
+            for(Appointments cs : Appointments.appointment){
+                if( cs.getAptType().contains("ief")){
+                    deBriefing.add(cs);
+            }
+        } 
+    }    
         public void appointmentIn15(){
             LocalTime endTime = LocalTime.now().plusMinutes(15);
             LocalDate endDate = LocalDate.now();
@@ -262,7 +313,17 @@ public class MainController implements Initializable {
         getDaniel();
         getLi();
         getAnika();
-        
+        getIntro();
+        getPA();
+        getPlan();
+        getDebrief();
+        weeklyNumber.setText("Weekly Appointments: " + weeklyAppointments.size());
+        monthlyNumber.setText("Monthly Appointments: " + monthlyAppointments.size());
+        totalNumber.setText("Total Appointments: " + Appointments.appointment.size());
+        Introductions.setText("Introductions: " + introductions.size());
+        PlanningSession.setText("Planning Session: " + planningSession.size());
+        PortfolioAnalysis.setText("Portfolio Analysis " + portfolioAnalysis.size());
+        DeBriefing.setText("De-Briefing: " + deBriefing.size());
         try{
 
         tvMonth.setItems(monthlyAppointments);    
@@ -455,9 +516,20 @@ public class MainController implements Initializable {
         lcid.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAptCustIdP()));  
         getMonthly();
         getWeekly();
-        getAnika();
         getDaniel();
         getLi();
+        getAnika();
+        getIntro();
+        getPA();
+        getPlan();
+        getDebrief();
+        weeklyNumber.setText("Weekly Appointments: " + weeklyAppointments.size());
+        monthlyNumber.setText("Monthly Appointments: " + monthlyAppointments.size());
+        totalNumber.setText("Total Appointments: " + Appointments.appointment.size());
+        Introductions.setText("Introductions: " + introductions.size());
+        PlanningSession.setText("Planning Session: " + planningSession.size());
+        PortfolioAnalysis.setText("Portfolio Analysis " + portfolioAnalysis.size());
+        DeBriefing.setText("De-Briefing: " + deBriefing.size());
         
         try{
 
